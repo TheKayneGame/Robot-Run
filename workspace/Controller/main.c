@@ -5,13 +5,10 @@
  *      Author: Kayne
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
-#include "kayneLib.h"
 
-#define TRUE 1
-#define FALSE 0
+#include "kayneLib.h"
+#include "manualcontrol.h"
+
 
 int main() {
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -27,7 +24,7 @@ int main() {
 
 		switch (selection) {
 		case 1:
-
+			manualControl();
 			break;
 		case 2:
 
@@ -49,7 +46,7 @@ int main() {
 			printfln("Enter Valid Option");
 			break;
 		}
-		system("cls");
+		//system("cls");
 	}
 }
 

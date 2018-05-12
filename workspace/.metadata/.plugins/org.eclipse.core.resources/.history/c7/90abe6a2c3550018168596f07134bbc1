@@ -1,0 +1,57 @@
+/*
+ * manualcontrol.c
+ *
+ *  Created on: May 12, 2018
+ *      Author: Kayne
+ */
+#include "kayneLib.h"
+
+void manualControl() {
+	printf("inpunt234234234");
+	int b, key;
+	while (TRUE) {
+	if (b != 0) {
+		key = getch();
+		switch (key) {			// Returns a workable char when a key is pressed
+			case ESC:
+				printfln("no");
+
+			case UP:
+				printfln("no");
+
+			case LEFT:
+				printfln("no");
+
+			case DOWN:
+				printfln("no");
+			case RIGHT:
+				printfln("no");
+			default:
+			printfln("no");
+		}
+	}
+
+		/*while (TRUE) {
+		 if (getch() == '\033') {
+		 getch();
+		 switch (getch()) {
+		 case 'A':
+		 printfln("up");
+		 break;
+		 case 'B':
+		 printfln("up");
+		 break;
+		 case 'C':
+		 printfln("up");
+		 break;
+		 case 'D':
+		 printfln("up");
+		 break;
+		 }
+		 }
+
+		 if (getch() == 'E') {
+		 break;
+		 }
+		 }*/
+	}

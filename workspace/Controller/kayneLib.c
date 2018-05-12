@@ -5,8 +5,6 @@
  *      Author: Kayne
  */
 #include "kayneLib.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int leesInteger() {
 	char text[80];
@@ -14,7 +12,13 @@ int leesInteger() {
 	return input;
 }
 
-void printfln(const char *input){
-	printf(input);
+void printfln(const char *format, ...) {
+	va_list arg;
+	int done;
+
+	va_start(arg, format);
+	done = vfprintf(stdout, format, arg);
+	va_end(arg);
 	printf("\n");
+	//return done;
 }

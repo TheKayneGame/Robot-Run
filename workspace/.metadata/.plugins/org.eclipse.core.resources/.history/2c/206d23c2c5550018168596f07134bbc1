@@ -1,0 +1,30 @@
+/*
+ * kayneLibs.h
+ *
+ *  Created on: May 11, 2018
+ *      Author: Kayne
+ */
+
+#ifndef KAYNELIB_H_
+#define KAYNELIB_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <conio.h>
+#include <Windows.h>
+
+#define TRUE 1
+#define FALSE 0
+
+#define ESC		27
+#define UP		72
+#define DOWN	80
+#define LEFT	75
+#define RIGHT	77
+
+int leesInteger();
+void printfln(const char*);
+
+
+#endif /* KAYNELIB_H_ */

@@ -1,0 +1,45 @@
+/*
+ * manualcontrol.c
+ *
+ *  Created on: May 12, 2018
+ *      Author: Kayne
+ */
+#include "kayneLib.h"
+
+void manualControl() {
+	printf("inpunt234234234");
+	int ch;
+	while (TRUE) {
+		ch = getch();
+		if (ch == 0) {
+			/* This is a special key. Get the second byte */
+			ch = getch();
+			printf("The second byte is %d\n", chb);
+		}
+	}
+
+
+/*while (TRUE) {
+ if (getch() == '\033') {
+ getch();
+ switch (getch()) {
+ case 'A':
+ printfln("up");
+ break;
+ case 'B':
+ printfln("up");
+ break;
+ case 'C':
+ printfln("up");
+ break;
+ case 'D':
+ printfln("up");
+ break;
+ }
+ }
+
+ if (getch() == 'E') {
+ break;
+ }
+ }*/
+}

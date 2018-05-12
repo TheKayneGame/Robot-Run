@@ -7,3 +7,527 @@ gcc -o Controller.exe kayneLib.o main.o manualcontrol.o
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
 gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+10:36:48 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:11:6: warning: implicit declaration of function 'getch' [-Wimplicit-function-declaration]
+  if (getch() == '\033') {
+      ^~~~~
+..\manualcontrol.c:29:22: error: break statement not within loop or switch
+  if (getch() == 'E') break;
+                      ^~~~~
+10:37:38 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:30:3: error: break statement not within loop or switch
+   break;
+   ^~~~~
+10:37:53 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+10:41:15 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+10:44:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+..\main.c: In function 'main':
+..\main.c:27:4: error: 'm' undeclared (first use in this function)
+    m
+    ^
+..\main.c:27:4: note: each undeclared identifier is reported only once for each function it appears in
+..\main.c:28:4: error: expected ';' before 'break'
+    break;
+    ^~~~~
+10:45:18 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+10:46:41 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+10:53:54 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:9:0:
+..\kayneLib.h:14:21: fatal error: ncurses.h: No such file or directory
+ #include <ncurses.h>
+                     ^
+compilation terminated.
+10:54:00 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c:45:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+10:54:09 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c:45:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+10:54:28 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+10:55:11 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:25: warning: unknown conversion type character '$' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                         ^
+..\manualcontrol.c:10:28: warning: unknown conversion type character '^' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                            ^
+..\manualcontrol.c:10:30: warning: spurious trailing '%' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                              ^
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+10:56:18 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:25: warning: unknown conversion type character '$' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                         ^
+..\manualcontrol.c:10:28: warning: unknown conversion type character '^' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                            ^
+..\manualcontrol.c:10:30: warning: spurious trailing '%' in format [-Wformat=]
+  printf("inpunt!!#!@##@%$$%^^%");
+                              ^
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+10:56:42 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:17:38: error: 'chb' undeclared (first use in this function)
+    printf("The second byte is %d\n", chb);
+                                      ^~~
+..\manualcontrol.c:17:38: note: each undeclared identifier is reported only once for each function it appears in
+10:56:50 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+10:58:39 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+10:58:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:04:32 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:17:10: error: 'ESC' undeclared (first use in this function)
+     case ESC:
+          ^~~
+..\manualcontrol.c:17:10: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:18:13: warning: 'return' with a value, in function returning void
+      return 'p';
+             ^~~
+..\manualcontrol.c:9:6: note: declared here
+ void manualControl() {
+      ^~~~~~~~~~~~~
+..\manualcontrol.c:20:10: error: 'UP' undeclared (first use in this function)
+     case UP:
+          ^~
+..\manualcontrol.c:21:13: warning: 'return' with a value, in function returning void
+      return 'w';
+             ^~~
+..\manualcontrol.c:9:6: note: declared here
+ void manualControl() {
+      ^~~~~~~~~~~~~
+..\manualcontrol.c:23:10: error: 'LEFT' undeclared (first use in this function)
+     case LEFT:
+          ^~~~
+..\manualcontrol.c:24:13: warning: 'return' with a value, in function returning void
+      return 'a';
+             ^~~
+..\manualcontrol.c:9:6: note: declared here
+ void manualControl() {
+      ^~~~~~~~~~~~~
+..\manualcontrol.c:26:10: error: 'DOWN' undeclared (first use in this function)
+     case DOWN:
+          ^~~~
+..\manualcontrol.c:27:13: warning: 'return' with a value, in function returning void
+      return 's';
+             ^~~
+..\manualcontrol.c:9:6: note: declared here
+ void manualControl() {
+      ^~~~~~~~~~~~~
+..\manualcontrol.c:29:10: error: 'RIGHT' undeclared (first use in this function)
+     case RIGHT:
+          ^~~~~
+..\manualcontrol.c:30:13: warning: 'return' with a value, in function returning void
+      return 'd';
+             ^~~
+..\manualcontrol.c:9:6: note: declared here
+ void manualControl() {
+      ^~~~~~~~~~~~~
+..\manualcontrol.c:59:1: error: expected declaration or statement at end of input
+ }
+ ^
+..\manualcontrol.c:59:1: error: expected declaration or statement at end of input
+..\manualcontrol.c:11:6: warning: unused variable 'ch' [-Wunused-variable]
+  int ch;
+      ^~
+11:05:05 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:58:2: error: expected declaration or statement at end of input
+  }
+  ^
+..\manualcontrol.c:11:6: warning: unused variable 'ch' [-Wunused-variable]
+  int ch;
+      ^~
+11:05:15 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:57:2: error: expected declaration or statement at end of input
+  }
+  ^
+11:05:38 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:13:6: warning: 'b' is used uninitialized in this function [-Wuninitialized]
+   if (b != 0) {
+      ^
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+11:06:05 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:13:6: warning: 'b' is used uninitialized in this function [-Wuninitialized]
+   if (b != 0) {
+      ^
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:06:38 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:07:03 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:08:02 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:08:26 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:33:14: warning: unknown conversion type character 'b' in format [-Wformat=]
+     printf("%b", key);
+              ^
+..\manualcontrol.c:33:12: warning: too many arguments for format [-Wformat-extra-args]
+     printf("%b", key);
+            ^~~~
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:08:31 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:09:24 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+11:11:21 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:11:29 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:11:30 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:11:32 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+Info: Nothing to build for Controller
+11:12:42 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:11:9: warning: unused variable 'key' [-Wunused-variable]
+  int b, key;
+         ^~~
+..\manualcontrol.c:11:6: warning: unused variable 'b' [-Wunused-variable]
+  int b, key;
+      ^
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:14:17 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:15:47 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:16:19: error: expected ':' or '...' before '{' token
+    case (getch()) {
+                   ^
+..\manualcontrol.c:17:8: error: expected expression before ':' token
+    case:
+        ^
+..\manualcontrol.c:17:4: error: case label not within a switch statement
+    case:
+    ^~~~
+11:16:23 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:16:19: error: expected ':' or '...' before '{' token
+    case (getch()) {
+                   ^
+..\manualcontrol.c:17:4: error: case label not within a switch statement
+    case 224:
+    ^~~~
+11:16:39 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:16:19: error: expected ':' or '...' before '{' token
+    case (getch()) {
+                   ^
+..\manualcontrol.c:17:4: error: case label not within a switch statement
+    case 224:
+    ^~~~
+11:16:51 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:18:06 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:42:4: error: case label not within a switch statement
+    case 27:
+    ^~~~
+11:18:45 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:42:4: error: case label not within a switch statement
+    case 27:
+    ^~~~
+11:19:09 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:20:49 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:22:58 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'readKey':
+..\kayneLib.c:27:6: error: 'key' undeclared (first use in this function)
+      key = getch();
+      ^~~
+..\kayneLib.c:27:6: note: each undeclared identifier is reported only once for each function it appears in
+..\kayneLib.c:55:1: error: expected declaration or statement at end of input
+ }
+ ^
+11:23:13 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'readKey':
+..\kayneLib.c:26:4: error: 'key' undeclared (first use in this function)
+    key = getch();
+    ^~~
+..\kayneLib.c:26:4: note: each undeclared identifier is reported only once for each function it appears in
+11:23:20 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+11:48:29 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c: In function 'initSerial':
+..\serial.c:27:48: warning: format '%d' expects argument of type 'int', but argument 2 has type 'DWORD {aka long unsigned int}' [-Wformat=]
+         printf ("CreateFile failed with error %d.\n", GetLastError());
+                                                ^
+..\serial.c:32:5: warning: implicit declaration of function 'SecureZeroMemory' [-Wimplicit-function-declaration]
+     SecureZeroMemory(&dcb, sizeof(DCB));
+     ^~~~~~~~~~~~~~~~
+..\serial.c:42:49: warning: format '%d' expects argument of type 'int', but argument 2 has type 'DWORD {aka long unsigned int}' [-Wformat=]
+        printf ("GetCommState failed with error %d.\n", GetLastError());
+                                                 ^
+..\serial.c:46:5: warning: implicit declaration of function 'PrintCommState' [-Wimplicit-function-declaration]
+     PrintCommState(dcb);       //  Output to console
+     ^~~~~~~~~~~~~~
+..\serial.c:60:49: warning: format '%d' expects argument of type 'int', but argument 2 has type 'DWORD {aka long unsigned int}' [-Wformat=]
+        printf ("SetCommState failed with error %d.\n", GetLastError());
+                                                 ^
+..\serial.c:70:49: warning: format '%d' expects argument of type 'int', but argument 2 has type 'DWORD {aka long unsigned int}' [-Wformat=]
+        printf ("GetCommState failed with error %d.\n", GetLastError());
+                                                 ^
+..\serial.c:76:5: warning: implicit declaration of function '_tprintf' [-Wimplicit-function-declaration]
+     _tprintf (TEXT("Serial port %s successfully reconfigured.\n"), pcCommPort);
+     ^~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Controller.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:52:20 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c: In function 'initSerial':
+..\serial.c:52:4: error: too many arguments to function 'printfln'
+    printfln("       Baudrate = %lu", dcbSerialParams.BaudRate);
+    ^~~~~~~~
+In file included from ..\serial.c:7:0:
+..\kayneLib.h:29:6: note: declared here
+ void printfln(const char*);
+      ^~~~~~~~
+..\serial.c:53:4: error: too many arguments to function 'printfln'
+    printfln("       ByteSize = %d", dcbSerialParams.ByteSize);
+    ^~~~~~~~
+In file included from ..\serial.c:7:0:
+..\kayneLib.h:29:6: note: declared here
+ void printfln(const char*);
+      ^~~~~~~~
+..\serial.c:54:4: error: too many arguments to function 'printfln'
+    printfln("       StopBits = %d", dcbSerialParams.StopBits);
+    ^~~~~~~~
+In file included from ..\serial.c:7:0:
+..\kayneLib.h:29:6: note: declared here
+ void printfln(const char*);
+      ^~~~~~~~
+..\serial.c:55:4: error: too many arguments to function 'printfln'
+    printfln("       Parity   = %d", dcbSerialParams.Parity);
+    ^~~~~~~~
+In file included from ..\serial.c:7:0:
+..\kayneLib.h:29:6: note: declared here
+ void printfln(const char*);
+      ^~~~~~~~
+..\serial.c: At top level:
+..\serial.c:74:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+11:56:30 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c:18:6: error: conflicting types for 'printfln'
+ void printfln(const char *input){
+      ^~~~~~~~
+In file included from ..\kayneLib.c:7:0:
+..\kayneLib.h:29:6: note: previous declaration of 'printfln' was here
+ void printfln(const char*,...);
+      ^~~~~~~~
+11:56:32 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c:18:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ printfln (const char *format, ...)
+ ^~~~~~~~
+..\kayneLib.c:18:1: warning: conflicting types for 'printfln'
+In file included from ..\kayneLib.c:7:0:
+..\kayneLib.h:29:6: note: previous declaration of 'printfln' was here
+ void printfln(const char*,...);
+      ^~~~~~~~
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:27:10: warning: 'return' with a value, in function returning void
+   return done;
+          ^~~~
+..\kayneLib.c:18:1: note: declared here
+ printfln (const char *format, ...)
+ ^~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:76:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+11:56:38 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:76:1: error: expected identifier or '(' before '}' token
+ }
+ ^
+11:56:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+Info: Nothing to build for Controller
+Info: Nothing to build for Controller
+11:57:41 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c:15:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ printfln(const char *format, ...) {
+ ^~~~~~~~
+..\kayneLib.c:15:1: warning: conflicting types for 'printfln'
+In file included from ..\kayneLib.c:7:0:
+..\kayneLib.h:29:6: note: previous declaration of 'printfln' was here
+ void printfln(const char*,...);
+      ^~~~~~~~
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:23:9: warning: 'return' with a value, in function returning void
+  return done;
+         ^~~~
+..\kayneLib.c:15:1: note: declared here
+ printfln(const char *format, ...) {
+ ^~~~~~~~
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+11:58:03 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:17:6: warning: variable 'done' set but not used [-Wunused-but-set-variable]
+  int done;
+      ^~~~
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+12:12:06 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 

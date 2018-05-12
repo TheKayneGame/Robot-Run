@@ -8,6 +8,6 @@
 #ifndef MANUALCONTROL_H_
 #define MANUALCONTROL_H_
 
-
+void manualControl();
 
 #endif /* MANUALCONTROL_H_ */
