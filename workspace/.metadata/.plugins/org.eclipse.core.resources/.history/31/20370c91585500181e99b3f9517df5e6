@@ -1,0 +1,14 @@
+/*
+ * main.c
+ *
+ *  Created on: May 11, 2018
+ *      Author: Kayne
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+	setvbuf(stdout, NULL, _IONBF, 0);
+}
+

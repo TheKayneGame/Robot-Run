@@ -1,0 +1,27 @@
+/*
+ * manualcontrol.c
+ *
+ *  Created on: May 12, 2018
+ *      Author: Kayne
+ */
+
+void manualControl(){
+	while()
+	if (getch() == '\033') {
+	    getch();
+	    switch(getch()) {
+	        case 'A':
+	        	printfln("up");
+	            break;
+	        case 'B':
+	        	printfln("up");
+	            break;
+	        case 'C':
+	        	printfln("up");
+	            break;
+	        case 'D':
+	        	printfln("up");
+	            break;
+	    }
+	}
+}

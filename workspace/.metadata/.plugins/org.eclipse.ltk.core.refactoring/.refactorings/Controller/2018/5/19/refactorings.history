@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Controller/kayneLibs.c&apos; to &apos;kayneLib.c&apos;" description="Rename resource &apos;kayneLibs.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="kayneLibs.c" name="kayneLib.c" stamp="1526068679462" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Controller/kayneLibs.h&apos; to &apos;kayneLib.h&apos;" description="Rename resource &apos;kayneLibs.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="kayneLibs.h" name="kayneLib.h" stamp="1526068686337" updateReferences="true"/>
+</session>
