@@ -1,0 +1,9 @@
+00:37:00 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
+00:37:05 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o 
