@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include <math.h>
 
 void swapTwo( int *a, int *b, int *c, int *d){
 	int temp;
@@ -12,38 +13,38 @@ void swapTwo( int *a, int *b, int *c, int *d){
 	*c = temp;
 }
 
-void sortOrder(int X[], int Y[]) {
-	int check = 0, orderCorrect, toggle = 0;
+void swapOne(float *a, float *b) {
+	float temp;
 
-	while (check != 1) {                                                                     //sort on Y-coordinates (ascending)
-		orderCorrect = 1;
-		for (int i = 0; i < (sizeOfOrder - 1); i++) {
-			if (Y[i] > Y[i + 1]) {
-				swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
-				orderCorrect = 0;
-			}
-		}
-		if (orderCorrect == 1) {
-			check = 1;
-		}
-	}
-	check = 0;
+	temp = *b;
+	*b = *a;
+	*a = temp;
+}
+
+void sortOrder(int X[], int Y[]) {
+	int a, b, check = 0, orderCorrect;
+	float D[sizeOfOrder];
+
 	while (check != 1) {
 		orderCorrect = 1;
-		for (int i = 0; i < (sizeOfOrder - 1); i++) {                                       //check if Y is even or odd
-			if (Y[i] % 2 == 0) {
-				toggle = 0;
-			}
-			else {
-				toggle = 1;
-			}
-			if ((toggle == 1) && (Y[i] == Y[i + 1]) && (X[i] < X[i + 1])) {                 //if Y is odd put X-coordinates in descending order
+
+		for (int i = 0; i < (sizeOfOrder - 1); i++) {
+			D[i] = sqrt((pow(X[i], 2)) + (pow(Y[i], 2)));      //phytagoras
+			a = D[i];
+			b = D[i + 1];
+
+			if (D[i] > D[i + 1]) {
+				swapOne(&D[i], &D[i + 1]);
 				swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
 				orderCorrect = 0;
-			}
-			else if((toggle == 0) && (Y[i] == Y[i + 1]) && (X[i] > X[i + 1])){              //if Y is even put X-coordinates in ascending order
-				swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
-				orderCorrect = 0;
+				} else if ((a == b) && (Y[i] == Y[i + 1])) {
+				if (X[i] < X[i + 1]) {
+					swapOne(&D[i], &D[i + 1]);
+					swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
+					} else if (Y[i] > Y[i + 1]) {
+					swapOne(&D[i], &D[i + 1]);
+					swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
+				}
 			}
 		}
 		if (orderCorrect == 1) {

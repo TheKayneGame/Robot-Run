@@ -6,5 +6,6 @@
 
 void swapTwo( int *a, int *b, int *c, int *d);
 void sortOrder(int X[], int Y[]);
+void swapOne(float *a, float *b);
 
 #endif
