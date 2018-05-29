@@ -14,7 +14,7 @@
 #include "sensoren.h"
 
 #define lastError 0
-#define speedMax 0
+#define speedMax 50
 #define highRange 700
 #define lowRange 1800
 #define KD 0.01
