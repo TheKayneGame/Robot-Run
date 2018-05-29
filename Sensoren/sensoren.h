@@ -11,4 +11,4 @@
 
 int followLine();
 void calibrate();
-checkAfslag();
+int checkAfslag();
