@@ -52,3 +52,91 @@ void sortOrder(int X[], int Y[]) {
 		}
 	}
 }
+void followLine(){}                  //junkdef
+void moveTurnRight(){}
+void moveTurnLeft(){}
+void moveForward(){}
+	
+void readRoutes(int routes[4][20]){
+	int i = 0, checkintersect = 0, grid = 0;
+	int resultTemp;
+	do{
+		if(checkintersect == 1){
+			//call intersect detect function
+			switch(resultTemp){
+				case 1:
+				routes[1][i] = 1;
+				i++;
+				break;
+				case 2:
+				routes[1][i] = 2;
+				i++;
+				break;
+				case 3:
+				routes[1][i] = 3;
+				i++;
+				break;
+				case 4:
+				routes[1][i] = 4;
+				i++;
+				break;
+				case 5:
+				grid = 1;
+				routes[1][i] = 5;
+				break;
+			}
+		}
+	}while(grid == 0);
+}
+	
+void gotoGrid(int routeFromHome[], int routeFromChargepoint[], int flagBegin){                             //go to grid from home position or chargingpoint
+	int intersection, intersectnum = 0;
+	
+Next:	
+	if(flagBegin == 1){                       //from home point
+		do{
+			followLine();
+		}while(intersection != 1);
+		
+		if(intersection == 1){
+			switch(routeFromHome[intersectnum]){
+				case 1:
+				moveTurnRight();
+				intersectnum++;
+				goto Next;
+				case 2:
+				moveTurnLeft();
+				intersectnum++;
+				goto Next;
+				case 3:
+				moveForward();
+				intersectnum++;
+				goto Next;
+			}
+		}
+		else if(flagBegin == 0){            // from charging point
+			moveTurnRight();     			//draai 180 graden
+			moveTurnRight();
+			do{
+				followLine();
+			}while(intersection != 1);
+			
+			if(intersection == 1){
+				switch(routeFromChargepoint[intersectnum]){
+					case 1:
+					moveTurnRight();
+					intersectnum++;
+					goto Next;
+					case 2:
+					moveTurnLeft();
+					intersectnum++;
+					goto Next;
+					case 3:
+					moveForward();
+					intersectnum++;
+					goto Next;
+				}
+			}
+		}
+	}
+}

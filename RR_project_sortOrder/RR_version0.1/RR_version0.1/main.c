@@ -21,9 +21,11 @@
 #include "Grid.h"
 
 int main(){
-	
+	int routes[4][20];
+    readRoutes(routes);
 	int orderX[sizeOfOrder] = { 2, 5, 3, 4};    // replace with user input
 	int orderY[sizeOfOrder] = { 3, 1, 4, 2};    // replace with user input
 	sortOrder(orderX, orderY);
+	
 				
 }

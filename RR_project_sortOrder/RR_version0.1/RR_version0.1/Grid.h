@@ -7,5 +7,7 @@
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue);
 void sortOrder(int X[], int Y[]);
 void swapOne(float *firstValue, float *secondValue);
+void gotoGrid(int routeFromHome[], int routeFromChargepoint[], int flagBegin);
+void readRoutes(int routes[4][20]);
 
 #endif
