@@ -1,5 +1,6 @@
 #include "Grid.h"
 #include <math.h>
+#include <pololu/3pi.h>
 
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue){
 	int temp;
@@ -23,26 +24,26 @@ void swapOne(float *firstValue, float *secondValue) {
 
 void sortOrder(int X[], int Y[]) {
 	int firstDistanceValue, secondDistanceValue, check = 0, orderCorrect;
-	float D[sizeOfOrder];
+	float Distance[sizeOfOrder];
 
 	while (check != 1) {
 		orderCorrect = 1;
 
 		for (int i = 0; i < (sizeOfOrder - 1); i++) {
-			D[i] = sqrt((pow(X[i], 2)) + (pow(Y[i], 2)));      //phytagoras
-			firstDistanceValue = D[i];
-			secondDistanceValue = D[i + 1];
+			Distance[i] = sqrt((pow(X[i], 2)) + (pow(Y[i], 2)));      //phytagoras
+			firstDistanceValue =  Distance[i];
+			secondDistanceValue =  Distance[i + 1];
 
-			if (D[i] > D[i + 1]) {
-				swapOne(&D[i], &D[i + 1]);
+			if ( Distance[i] >  Distance[i + 1]) {
+				swapOne(& Distance[i], & Distance[i + 1]);
 				swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
 				orderCorrect = 0;
 				} else if ((firstDistanceValue == secondDistanceValue) && (Y[i] == Y[i + 1])) {
 				if (X[i] < X[i + 1]) {
-					swapOne(&D[i], &D[i + 1]);
+					swapOne(& Distance[i], & Distance[i + 1]);
 					swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
 					} else if (Y[i] > Y[i + 1]) {
-					swapOne(&D[i], &D[i + 1]);
+					swapOne(& Distance[i], & Distance[i + 1]);
 					swapTwo(&X[i], &X[i + 1], &Y[i], &Y[i + 1]);
 				}
 			}
@@ -56,10 +57,11 @@ void followLine(){}                  //junkdef
 void moveTurnRight(){}
 void moveTurnLeft(){}
 void moveForward(){}
-	
-void readRoutes(int routes[4][20]){
-	int i = 0, checkintersect = 0, grid = 0;
+
+int readGrid(int routes[4][20]){
+	int i = 1, checkintersect = 0, grid = 0;
 	int resultTemp;
+	routes[1][0] = 5;
 	do{
 		if(checkintersect == 1){
 			//call intersect detect function
@@ -87,19 +89,30 @@ void readRoutes(int routes[4][20]){
 			}
 		}
 	}while(grid == 0);
+	return i;                                                                                     //returns intersect count, so amount of intersects on route
 }
+
+void driveRoute(int route[4][20], int flag, int flagReturn, int max){                             //go to or return from, grid or chargepoint
+	int intersection, intersectnum = 1;                                                           // flag 1 =  from or to home, flag 2 is from or to chargepoint
 	
-void gotoGrid(int routeFromHome[], int routeFromChargepoint[], int flagBegin){                             //go to grid from home position or chargingpoint
-	int intersection, intersectnum = 0;
+	if(flagReturn == 1){
+		intersectnum = max;
+	}
 	
-Next:	
-	if(flagBegin == 1){                       //from home point
-		do{
-			followLine();
-		}while(intersection != 1);
+	if(flag == 2){
+		moveTurnRight();    //turn around 180 degrees
+		moveTurnRight();
+	}
+	
+	Next:
+	do{
+		followLine();
+	}while(intersection != 1);
+	
+	if(intersection == 1){
 		
-		if(intersection == 1){
-			switch(routeFromHome[intersectnum]){
+		if(flagReturn == 0){
+			switch(route[flag][intersectnum]){
 				case 1:
 				moveTurnRight();
 				intersectnum++;
@@ -112,30 +125,30 @@ Next:
 				moveForward();
 				intersectnum++;
 				goto Next;
+				case 5:
+				//stop
+				play_from_program_space(PSTR(">g32>>c32"));
+				break;
 			}
 		}
-		else if(flagBegin == 0){            // from charging point
-			moveTurnRight();     			//draai 180 graden
-			moveTurnRight();
-			do{
-				followLine();
-			}while(intersection != 1);
-			
-			if(intersection == 1){
-				switch(routeFromChargepoint[intersectnum]){
-					case 1:
-					moveTurnRight();
-					intersectnum++;
-					goto Next;
-					case 2:
-					moveTurnLeft();
-					intersectnum++;
-					goto Next;
-					case 3:
-					moveForward();
-					intersectnum++;
-					goto Next;
-				}
+		else if (flagReturn == 1){
+			switch(route[flag][intersectnum]){
+				case 1:
+				moveTurnLeft();
+				intersectnum--;
+				goto Next;
+				case 2:
+				moveTurnRight();
+				intersectnum--;
+				goto Next;
+				case 3:
+				moveForward();
+				intersectnum--;
+				goto Next;
+				case 5:
+				//stop
+				play_from_program_space(PSTR(">g32>>c32"));
+				break;
 			}
 		}
 	}
