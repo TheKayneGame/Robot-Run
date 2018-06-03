@@ -1,14 +1,40 @@
-/* sensoren - an application for the Pololu 3pi Robot
+/*
+ * sensoren.h
  *
- * This application uses the Pololu AVR C/C++ Library.  For help, see:
- * -User's guide: http://www.pololu.com/docs/0J20
- * -Command reference: http://www.pololu.com/docs/0J18
- *
- * Created: 5/1/2018 8:55:52 PM
+ * Created: 3-6-2018 23:15:57
  *  Author: 2125228
- */
+ */ 
 
 
-int followLine();
-void calibrate();
-int checkAfslag();
+#ifndef SENSOREN_H_
+#define SENSOREN_H_
+
+
+
+#define STRAIGHT 0
+#define T_LEFT 1
+#define T_RIGHT 2
+#define T_LEFT_RIGHT 3
+#define FOUR_WAY_JOINT 4
+#define LEFT 5
+#define RIGHT 6
+
+#define highRange
+#define lowRange
+
+#define SENSOR_L sensors[0]
+#define SENSOR_C_L sensors[1]
+#define SENSOR_C_C sensors[2]
+#define SENSOR_C_R sensors[3]
+#define SENSOR_R sensors[4]
+
+#define SPEED 60
+#define ALTER 15
+#define SLOW SPEED - ALTER
+#define FAST SPEED + ALTER
+
+
+
+
+
+#endif /* SENSOREN_H_ */
