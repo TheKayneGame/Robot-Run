@@ -58,7 +58,58 @@ void moveTurnRight(){}
 void moveTurnLeft(){}
 void moveForward(){}
 
-int readGrid(int routes[4][20]){
+void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
+	int crossCountX = 0, crossCountY = 0, flagY = 0, flagX = 0, endX = 5, endY = 0, endFlag = 0;
+	int amountOfIntersects = readGrid(route);
+	driveRoute(route, 1, 0, amountOfIntersects);    //Drive to grid entrance
+	moveTurnRight();
+	for(int i = 0; i < sizeOfOrder + 1; i ++){
+		if(i == sizeOfOrder){
+			endFlag = 1;
+		}
+		if((crossCountX > OrderX[i]) || (endFlag == 1 && (crossCountX > endX))){
+			moveTurnLeft();
+			flagX = 1;
+		}
+		else if((crossCountX < OrderX[i]) || (endFlag == 1 && (crossCountX < endX))){
+			moveTurnRight();
+			flagX = 2;
+		}
+		while((crossCountX != OrderX[i]) || (endFlag == 1 && (crossCountX != endX))){
+			if(flagX == 1){
+				//if intersection detected crossCountX++
+			}
+			else if(flagX == 2){
+				//if intersection detected crossCountX--
+			}
+			moveForward();
+			// if intersection detected crossCountX++
+		}
+		if((crossCountY > orderY[i]) || (endFlag == 1 && (crossCountY > endY))){
+			moveTurnLeft();
+			flagY = 1;
+		}
+		else if((crossCountY < orderY[i]) || (endFlag == 1 && (crossCountY < endY))){
+			moveTurnRight();
+			flagY = 2;
+		}
+		while((crossCountY != orderY[i]) || (endFlag == 1 && (crossCountY != endY))){
+			if(flagY == 1){
+				//if intersection detected crossCountY++
+			}
+			else if(flagY == 2){
+				//if intersection detected crossCountY--
+			}
+			moveForward();
+		}
+		play_from_program_space(PSTR(">g32>>c32"));
+		delay(200);
+	}
+	driveRoute(route, 1, 1, amountOfIntersects);    //Drive back to home
+	play_from_program_space(PSTR(">g32>>c32"));
+}
+
+int readGrid(int routes[2][20]){
 	int i = 1, checkintersect = 0, grid = 0;
 	int resultTemp;
 	routes[1][0] = 5;
@@ -66,34 +117,40 @@ int readGrid(int routes[4][20]){
 		if(checkintersect == 1){
 			//call intersect detect function
 			switch(resultTemp){
-				case 1:
+				case 1:                  //It is a corner to the right
 				routes[1][i] = 1;
+				moveTurnRight();
 				i++;
 				break;
-				case 2:
+				case 2:                 //It is corner to the left
 				routes[1][i] = 2;
+				moveTurnLeft();
 				i++;
 				break;
-				case 3:
+				case 3:                 //It is a T-crossing
+				moveTurnLeft();
 				routes[1][i] = 3;
 				i++;
 				break;
 				case 4:
-				routes[1][i] = 4;
-				i++;
+				routes[1][i] = 4;      //It is a crossing
 				break;
-				case 5:
+				case 5:                //All sensors are HIGH start of grid
 				grid = 1;
 				routes[1][i] = 5;
 				break;
 			}
 		}
+		do{
+			followLine();
+		}while(checkintersect != 1);
+		
 	}while(grid == 0);
 	return i;                                                                                     //returns intersect count, so amount of intersects on route
 }
 
-void driveRoute(int route[4][20], int flag, int flagReturn, int max){                             //go to or return from, grid or chargepoint
-	int intersection, intersectnum = 1;                                                           // flag 1 =  from or to home, flag 2 is from or to chargepoint
+void driveRoute(int route[2][20], int flag, int flagReturn, int max){                             //go to or return from, grid or chargepoint
+	int intersection = 0, intersectnum = 1;                                                           // flag 1 =  from or to home, flag 2 is from or to chargepoint
 	
 	if(flagReturn == 1){
 		intersectnum = max;
@@ -107,6 +164,8 @@ void driveRoute(int route[4][20], int flag, int flagReturn, int max){           
 	Next:
 	do{
 		followLine();
+		//if an intersection is detected
+		intersection = 1;
 	}while(intersection != 1);
 	
 	if(intersection == 1){

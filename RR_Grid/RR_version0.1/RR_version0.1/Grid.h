@@ -6,7 +6,8 @@
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue);
 void sortOrder(int X[], int Y[]);
 void swapOne(float *firstValue, float *secondValue);
-void driveRoute(int route[4][20], int flag, int flagReturn, int max);
-int readGrid(int routes[4][20]);
+void driveRoute(int route[2][20], int flag, int flagReturn, int max);
+void fetchOrder(int OrderX[], int orderY[], int route[2][20]);
+int readGrid(int routes[2][20]);
 
 #endif
