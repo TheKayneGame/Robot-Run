@@ -38,7 +38,8 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Grid.c \
-../main.c
+../main.c \
+../sensoren.c
 
 
 PREPROCESSING_SRCS += 
@@ -49,19 +50,23 @@ ASM_SRCS +=
 
 OBJS +=  \
 Grid.o \
-main.o
+main.o \
+sensoren.o
 
 OBJS_AS_ARGS +=  \
 Grid.o \
-main.o
+main.o \
+sensoren.o
 
 C_DEPS +=  \
 Grid.d \
-main.d
+main.d \
+sensoren.d
 
 C_DEPS_AS_ARGS +=  \
 Grid.d \
-main.d
+main.d \
+sensoren.d
 
 OUTPUT_FILE_PATH +=RobotRunGrid.elf
 
@@ -77,6 +82,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
