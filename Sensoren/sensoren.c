@@ -11,6 +11,12 @@
 
 
 
+void followLine();
+int checkAfslag();
+void load_custom_characters();
+void display_readings();
+void display_reading();
+void initialize();
 
 const char welcome_line1[] PROGMEM = " Pololu";
 const char welcome_line2[] PROGMEM = "3\xf7 Robot";
@@ -19,6 +25,8 @@ const char demo_name_line2[] PROGMEM = "follower";
 const char welcome[] PROGMEM = ">g32>>c32";
 const char go[] PROGMEM = "L16 cdegreg4";
 unsigned int sensors[5];
+
+
 
 const char levels[] PROGMEM =
 {
@@ -77,7 +85,6 @@ void display_reading(const unsigned int *calibrated_values)
 void initialize()
 {
 	unsigned int counter;
-	unsigned int sensors[5];
 	pololu_3pi_init(2000);
 	load_custom_characters();
 	print_from_program_space(welcome_line1);
@@ -206,27 +213,27 @@ void followLine()
 int checkAfslag()
 {
 	
-	if(SENSOR_L > highRange && SENSOR_C_L < lowRange && SENSOR_C_C < lowRange && SENSOR_C_R < lowRange && SENSOR_R < lowRange)
+	if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
 	{
 		return LEFT; //afslag naar links
 	}
-	else if(SENSOR_L < lowRange && SENSOR_C_L < lowRange && SENSOR_C_C < lowRange && SENSOR_C_R < lowRange && SENSOR_R > highRange)
+	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
 	{
 		return RIGHT; //afslag naar rechts
 	}
-	else if(SENSOR_L highRange && SENSOR_C_L < lowRange && SENSOR_C_C > highRange && SENSOR_C_R < lowRange && SENSOR_R > highRange)
+	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
 	{
 		return FOUR_WAY_JOINT; //kruispunt
 	}
-	else if(SENSOR_L > highRange && SENSOR_C_L > highRange && SENSOR_C_C < lowRange && SENSOR_C_R > highRange && SENSOR_R > highRange)
+	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C < low_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
 	{
 		return T_LEFT_RIGHT; //t-splitsing rechtdoor
 	}
-	else if(SENSOR_L > highRange && SENSOR_C_L < lowRange && SENSOR_C_C > highRange && SENSOR_C_R < lowRange && SENSOR_R < lowRange)
+	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
 	{
 		return T_LEFT; //t-splitsing linksaf
 	}
-	else if(SENSOR_L < lowRange && SENSOR_C_L < lowRange && SENSOR_C_C > highRange && SENSOR_C_R < lowRange && SENSOR_C_R > highRange)
+	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_C_R > high_range)
 	{
 		return T_RIGHT; //t-splitsing rechtsaf
 	}

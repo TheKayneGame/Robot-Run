@@ -9,6 +9,8 @@
 #ifndef SENSOREN_H_
 #define SENSOREN_H_
 
+#define high_range 1000
+#define low_range 500
 
 
 #define STRAIGHT 0
@@ -19,8 +21,6 @@
 #define LEFT 5
 #define RIGHT 6
 
-#define highRange
-#define lowRange
 
 #define SENSOR_L sensors[0]
 #define SENSOR_C_L sensors[1]
