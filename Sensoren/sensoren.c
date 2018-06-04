@@ -144,14 +144,14 @@ void followLine()
 	clear();
 	display_reading(sensors);
 	
-	if(checkAfslag() != 7)
+	if(checkAfslag() != 0)
 	{
 		//verwerken van kruising/t-splitsing/afslag etc
 		set_motors(0,0);
 		
 	}
 	
-	else if(checkAfslag() == 7)
+	else if(checkAfslag() == 0)
 	{
 		if(pos < 1950)
 		{
