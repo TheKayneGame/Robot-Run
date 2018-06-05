@@ -17,13 +17,25 @@ void display_readings();
 void display_reading();
 void initialize();
 
+int checkDistance();
+
 
 
 unsigned int sensors[5];
-unsigned char sensorDistance[1];
+unsigned int sensorValues[20];
+unsigned int sensorValues2[20];
+int distance;
+int distance2;
+int sensorDistance;
+int sensorDistance2;
+
+
 
 #define high_range 1800
 #define low_range 750
+
+#define dichtbij 20
+#define heelDichtbij 10
 
 #define STRAIGHT 0
 #define T_LEFT 1
@@ -38,8 +50,6 @@ unsigned char sensorDistance[1];
 #define SENSOR_C_C sensors[2]
 #define SENSOR_C_R sensors[3]
 #define SENSOR_R sensors[4]
-
-#define SENSOR_DIS sensorDistance[1]
 
 #define SPEED 60
 #define ALTER 15

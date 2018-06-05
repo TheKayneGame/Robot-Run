@@ -9,83 +9,11 @@
 #include <stdio.h>
 #include "sensoren.h"
 
-const char welcome_line1[] PROGMEM = " Pololu";
-const char welcome_line2[] PROGMEM = "3\xf7 Robot";
-const char demo_name_line1[] PROGMEM = "Line";
-const char demo_name_line2[] PROGMEM = "follower";
-const char welcome[] PROGMEM = ">g32>>c32";
-const char go[] PROGMEM = "L16 cdegreg4";
-
-
-const char levels[] PROGMEM =
-{
-	0b00000,
-	0b00000,
-	0b00000,
-	0b00000,
-	0b00000,
-	0b00000,
-	0b00000,
-	0b11111,
-	0b11111,
-	0b11111,
-	0b11111,
-	0b11111,
-	0b11111,
-	0b11111
-};
-// This function loads custom characters into the LCD. Up to 8
-// characters can be loaded; we use them for 7 levels of a bar graph.
-void load_custom_characters()
-{
-	lcd_load_custom_character(levels+0,0); // no offset, e.g. one bar
-	lcd_load_custom_character(levels+1,1); // two bars
-	lcd_load_custom_character(levels+2,2); // etc...
-	lcd_load_custom_character(levels+3,3);
-	lcd_load_custom_character(levels+4,4);
-	lcd_load_custom_character(levels+5,5);
-	lcd_load_custom_character(levels+6,6);
-	clear(); // the LCD must be cleared for the characters to take effect
-}
-// This function displays the sensor readings using a bar graph.
-void display_readings(const unsigned int *calibrated_values)
-{
-	unsigned char i;
-	for(i=0;i<5;i++)
-	{
-		
-		const char display_characters[10] = {' ',0,0,1,2,3,4,5,6,255};
-		char c = display_characters[calibrated_values[i]/101];
-		print_character(c);
-	}
-}
-
-void display_reading(const unsigned int *calibrated_values)
-{
-	unsigned char i;
-	for(i=0;i<5;i++)
-	{
-		const char display_characters[10] = {' ',0,0,1,2,3,4,5,6,255};
-		char c = display_characters[calibrated_values[i]/101];
-		print_character(c);
-	}
-}
 
 void initialize()
 {
 	unsigned int counter;
 	pololu_3pi_init(2000);
-	load_custom_characters();
-	print_from_program_space(welcome_line1);
-	lcd_goto_xy(0,1);
-	print_from_program_space(welcome_line2);
-	play_from_program_space(welcome);
-	delay_ms(1000);
-	clear();
-	print_from_program_space(demo_name_line1);
-	lcd_goto_xy(0,1);
-	print_from_program_space(demo_name_line2);
-	delay_ms(1000);
 	
 	while(!button_is_pressed(BUTTON_B))
 	{
@@ -226,11 +154,50 @@ int checkAfslag()
 	{
 		return T_RIGHT; //t-splitsing rechtsaf
 	}
+	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
+	{
+		return DEAD_END;
+	}
 	return 0;
 }
 
 int checkDistance()
 {
 	
-	return 0;
+	sensorDistance = analog_read(ADCH7);
+	sensorDistance2 = analog_read(ADCH5);
+	
+	distance = (2076/(sensorDistance - 11));
+	distance2 = (2076/(sensorDistance2 - 11));
+	
+	clear();
+	
+	
+	
+	
+	
+	if(distance < dichtbij && distance > heelDichtbij)
+	{
+		clear();
+		play_from_program_space(PSTR(">g32>>c32"));
+		print("dichtbij");
+		delay_ms(200);
+	}
+	else if(distance < heelDichtbij)
+	{
+		clear();
+		play_from_program_space(PSTR(">f32>>a32"));
+		print("heeeel");
+		lcd_goto_xy(0,1);
+		print("dichtbij");
+		delay_ms(100);
+	}
+	else
+	{
+		clear();
+		print_long(distance);
+	}
+
+return 0;
+
 }
