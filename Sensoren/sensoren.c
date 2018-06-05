@@ -9,23 +9,12 @@
 #include <stdio.h>
 #include "sensoren.h"
 
-
-
-void followLine();
-int checkAfslag();
-void load_custom_characters();
-void display_readings();
-void display_reading();
-void initialize();
-
 const char welcome_line1[] PROGMEM = " Pololu";
 const char welcome_line2[] PROGMEM = "3\xf7 Robot";
 const char demo_name_line1[] PROGMEM = "Line";
 const char demo_name_line2[] PROGMEM = "follower";
 const char welcome[] PROGMEM = ">g32>>c32";
 const char go[] PROGMEM = "L16 cdegreg4";
-unsigned int sensors[5];
-
 
 
 const char levels[] PROGMEM =
@@ -237,5 +226,11 @@ int checkAfslag()
 	{
 		return T_RIGHT; //t-splitsing rechtsaf
 	}
+	return 0;
+}
+
+int checkDistance()
+{
+	
 	return 0;
 }

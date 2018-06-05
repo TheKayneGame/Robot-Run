@@ -9,9 +9,21 @@
 #ifndef SENSOREN_H_
 #define SENSOREN_H_
 
+
+void followLine();
+int checkAfslag();
+void load_custom_characters();
+void display_readings();
+void display_reading();
+void initialize();
+
+
+
+unsigned int sensors[5];
+unsigned char sensorDistance[1];
+
 #define high_range 1800
 #define low_range 750
-
 
 #define STRAIGHT 0
 #define T_LEFT 1
@@ -21,12 +33,13 @@
 #define LEFT 5
 #define RIGHT 6
 
-
 #define SENSOR_L sensors[0]
 #define SENSOR_C_L sensors[1]
 #define SENSOR_C_C sensors[2]
 #define SENSOR_C_R sensors[3]
 #define SENSOR_R sensors[4]
+
+#define SENSOR_DIS sensorDistance[1]
 
 #define SPEED 60
 #define ALTER 15
