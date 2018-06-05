@@ -44,6 +44,7 @@ int sensorDistance2;
 #define FOUR_WAY_JOINT 4
 #define LEFT 5
 #define RIGHT 6
+#define DEAD_END 7
 
 #define SENSOR_L sensors[0]
 #define SENSOR_C_L sensors[1]
