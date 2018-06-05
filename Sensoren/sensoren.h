@@ -9,8 +9,8 @@
 #ifndef SENSOREN_H_
 #define SENSOREN_H_
 
-#define high_range 1000
-#define low_range 500
+#define high_range 1800
+#define low_range 750
 
 
 #define STRAIGHT 0

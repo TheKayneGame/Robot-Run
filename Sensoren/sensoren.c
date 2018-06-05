@@ -237,4 +237,5 @@ int checkAfslag()
 	{
 		return T_RIGHT; //t-splitsing rechtsaf
 	}
+	return 0;
 }
