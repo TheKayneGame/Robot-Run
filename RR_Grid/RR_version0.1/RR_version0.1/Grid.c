@@ -1,3 +1,10 @@
+/*
+ * Grid.c
+ *
+ * Created: 8-5-2018 18:29:21
+ *  Author: Madita
+ */ 
+
 #include "Grid.h"
 #include "sensoren.h"
 #include <math.h>
@@ -54,11 +61,10 @@ void sortOrder(int X[], int Y[]) {
 		}
 	}
 }
-void motorControl(int speed, char direction){} //junkdef
-	
+
 void turn(char direction){
 	motorControl(70, direction);
-	delay(50);
+	delay_ms(50);
 	motorControl(0, direction);
 }
 
@@ -87,8 +93,8 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 			}
 			else if(flagX == 2){
 				//if intersection detected crossCountX--
-		}
-		motorControl(90, 'F');
+			}
+			motorControl(90, 'F');
 			// if intersection detected crossCountX++
 		}
 		motorControl(0, 'F');
@@ -117,45 +123,108 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 }
 
 int readGrid(int routes[2][20]){
-	int i = 1, checkintersect = 0, grid = 0, route = 1;
+	int i = 1, grid = 0, tCrossing = 0, numOfIntersects, crossing = 0, routeNum = 1;
 	char resultTemp;
 	routes[1][0] = 5;                    //Marks beginning of route
 	do{
 		resultTemp = checkAfslag();
 		if(resultTemp == 3 || resultTemp == 4 || resultTemp == 5){    //It is a T-crossing
-			resultTemp = 3;
-		}
+			tCrossing = 1;
+		}		
 		switch(resultTemp){
 			case 1:                  //It is a corner to the right
-			routes[route][i] = 1;
+			routes[0][i] = 1;
 			turn('R');
 			i++;
 			break;
-			case 2:                 //It is corner to the left
-			routes[route][i] = 2;
+			case 2:                 //It is a corner to the left
+			routes[0][i] = 2;
 			turn('L');
 			i++;
 			break;
-			case 3:                 //It is a T-crossing
+			case 3:                 //It is a T-crossing    L R
 			turn('L');
-			routes[route][i] = 3;
+			routes[0][i] = 3;
 			i++;
+			break;
+			case 4:                //R
+			routes[0][i] = 4;
+			motorControl(80, 'F');
+			break;
+			case 5:               //L
+			routes[0][i] = 5;
+			motorControl(80, 'F');
+			break;
+			case 6:              //It is a crossing
+			turn('L');
+			i++;
+			routes[0][i] = 6;
+			break;
+			case 7:         //Dead end
+			routes[0][i] = 7;
+			turn('R');
+			turn('R');
+			break;
+			case 8:
+			grid = 1;
+			routes[0][i] = 8; //Marks end of route
+		}
+	}while(grid == 0);
+	numOfIntersects = i;
+	
+	for(i = 0; i < numOfIntersects; i++){   //Writing route towards grid
+		switch(routes[0][i]){
+			case 1:
+			routes[routeNum][i] = 1;
+			break;
+			case 2:
+			routes[routeNum][i] = 2;
+			break;
+			case 3:
+			if(routes[0][i + 1] == 7){
+				routes[routeNum][i] = 1;
+			}
+			else if(routes[0][i + 1] != 7){
+				routes[routeNum[i] = 2;
+			}
 			break;
 			case 4:
-			routes[route][i] = 4;  //It is a crossing
+			if(routes[0][i + 1] == 7){
+				routes[routeNum][i] = 1;
+			}
+			else if(routes[0][i] != 7){
+				routes[routeNum][i] = 3;
+			}
 			break;
-			case 5:                //All sensors are HIGH start of grid
-			grid = 1;
-			routes[route][i] = 5;  //Marks end of route
+			case 5:
+			if(routes[0][i + 1] == 7){
+				routes[routeNum][i] = 1;
+			}
+			else if(routes[0][i] != 7){
+				routes[routeNum][i] = 2;
+			}
 			break;
+			case 6:
+			crossing++;
+			routes[routeNum][i] = 6;
+			if((crossing == 2) && (routes[routeNum][i - 1] == 6)){
+				crossing = 0;
+				routes[1][i - 1] = 3;
+			}
+			break;
+			case 8:                                                      //case 7 isn't part of a route
+			routes[1][i] = 8;  //Marks end of route
+			routeNum++;
+			break;
+			
 		}
-		
-	}while(grid == 0);
-	return i;                                                       //returns intersect count, so amount of intersects on route
+	}
+	
+	return numOfIntersects;                                                       //returns intersect count, so amount of intersects on route
 }
 
-void driveRoute(int route[2][20], int flag, int flagReturn, int max){                             //go to or return from, grid or chargepoint
-	int intersection = 0, intersectnum = 1;                                                       // flag 1 =  from or to home, flag 2 is from or to chargepoint
+void driveRoute(int route[2][20], int flag, int flagReturn, int max){             //go to or return from, grid or chargepoint
+	int intersectnum = 1;                                       // flag 1 =  from or to home, flag 2 is from or to chargepoint
 	
 	if(flagReturn == 1){
 		intersectnum = max;
@@ -168,11 +237,9 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 	Next:
 	do{
 		followLine();
-		//if an intersection is detected
-		intersection = 1;
-	}while(intersection != 1);
+	}while(checkAfslag() == 0);
 	
-	if(intersection == 1){
+	if(checkAfslag() != 0){
 		
 		if(flagReturn == 0){
 			switch(route[flag][intersectnum]){
@@ -185,33 +252,14 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 				intersectnum++;
 				goto Next;
 				case 3:
-				motorControl(90, 'F');
+				motorControl(80, 'F');
 				intersectnum++;
 				goto Next;
-				case 5:
-				//stop
-				play_from_program_space(PSTR(">g32>>c32"));
+				case 5:                  
+				motorControl(0, 'F');    //stop
 				break;
-			}
-		}
-		else if (flagReturn == 1){
-			switch(route[flag][intersectnum]){
-				case 1:
-				turn('L');
-				intersectnum--;
-				goto Next;
-				case 2:
-				turn('R');
-				intersectnum--;
-				goto Next;
-				case 3:
-				motorControl(90, 'F');
-				intersectnum--;
-				goto Next;
-				case 5:
-				//stop
 				play_from_program_space(PSTR(">g32>>c32"));
-				break;
+
 			}
 		}
 	}
