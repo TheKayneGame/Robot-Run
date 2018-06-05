@@ -24,6 +24,7 @@ int checkDistance();
 unsigned int sensors[5];
 unsigned int sensorValues[20];
 unsigned int sensorValues2[20];
+
 int distance;
 int distance2;
 int sensorDistance;
@@ -45,6 +46,7 @@ int sensorDistance2;
 #define LEFT 5
 #define RIGHT 6
 #define DEAD_END 7
+#define GRID_HOME 8
 
 #define SENSOR_L sensors[0]
 #define SENSOR_C_L sensors[1]

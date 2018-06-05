@@ -158,6 +158,10 @@ int checkAfslag()
 	{
 		return DEAD_END;
 	}
+	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C > high_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
+	{
+		return GRID_HOME;
+	}
 	return 0;
 }
 
@@ -171,9 +175,6 @@ int checkDistance()
 	distance2 = (2076/(sensorDistance2 - 11));
 	
 	clear();
-	
-	
-	
 	
 	
 	if(distance < dichtbij && distance > heelDichtbij)
@@ -198,6 +199,6 @@ int checkDistance()
 		print_long(distance);
 	}
 
-return 0;
+	return 0;
 
 }
