@@ -19,8 +19,9 @@ int main() {
 				">1< Handmatige besturing\n"
 				">2< Orders invoeren\n"
 				">3< Orders inladen\n"
-				">4< COM Port\n"
-				">5< Exit program\n"
+				">4< Selecteer COM Port\n"
+				">5< Open command centre\n"
+				">6< Verlaat programma\n"
 				"=======================================================\n\n");
 		if (status != OK) {
 			printf("Foute Actie\n");
@@ -42,11 +43,15 @@ int main() {
 			break;
 		case 4:
 			status = OK;
-			commSetup();
+			setupCOM(currPort);
 			break;
-
 		case 5:
+			//commandCentre();
+			status = OK;
+			break;
+		case 6:
 			system("cls");
+
 			active = FALSE;
 			break;
 		default:

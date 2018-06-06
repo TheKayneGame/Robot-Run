@@ -20,13 +20,13 @@ BOOL portAlive(char port[16]);
 
 BOOL sendByte(char bytes_to_send[8], HANDLE hComm);
 
-BOOL readByte(void *dataString, int *length, HANDLE hComm);
+BOOL readData(void *dataString, int *length, HANDLE hComm);
 
 HANDLE openPort(char port[16]);
 
 void getComm();
 
-void commSetup();
+void setupCOM();
 
 extern char currPort[16];
 

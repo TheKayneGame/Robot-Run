@@ -64,8 +64,8 @@ BOOL sendByte(char buffByte[8], HANDLE hComm) {
 	}
 }
 
-//function to read bytes
-BOOL readByte(void *dataString, int *length, HANDLE hComm) {
+//function to read bytes NOT IN USE
+BOOL readData(void *dataString, int *length, HANDLE hComm) {
 	BOOL active = TRUE;
 	byte dataout[2048] = { 0 };
 	byte buffer = 0;
@@ -89,7 +89,7 @@ BOOL readByte(void *dataString, int *length, HANDLE hComm) {
 	return TRUE;
 }
 
-void getComm() {
+void getCOM() {
 	char port[7];
 	char buffer[7];
 	status = getLine("Voer COM Poort in: ", port, sizeof(port));
@@ -113,34 +113,34 @@ void getComm() {
 	}
 }
 
-void commSetup() {
+void setupCOM() {
 	BOOL setupComplete = FALSE;
 
 	system("cls");
-	printf("CommPort instellingen\n"
+	printf("COM Port instellingen\n"
 			"\n=======================================================\n\n");
 	while (!setupComplete) {
-		getComm();
+		getCOM();
 		if (status != 0) {
-			//Clear console and show found error;
+			//Clear and declare error;
 			system("cls");
 			printf(
-					"Er was een error gevonden bij het invoeren van de port.\n"
-							"De gevonde error was >%d<\n"
+					"Fout bij invoer COM port.\n"
+							"De gevonden fout is >%d<\n"
 							"\n=======================================================\n"
-							">1< Er was geen input gevonden.\n"
-							">2< De ingevoerde was te lang.\n"
-							">3< De input was niet gegeven volgens de juiste format\n"
+							">1< Geen Invoer.\n"
+							">2< Invoer te lang.\n"
+							">3< Invoer voldoet niet aan eisen\n"
 							"=======================================================\n\n",
 					status);
 		} else {
-			//ComPort gets checked, if it is able to be opend the program is allowed to proceed.
-			printf("De port wordt gecheckt .....\n");
+			//Verifies if COM port was openened correctly
+			printf("COM port wordt gecontroleerd\n");
 			setupComplete = portAlive(currPort);
 			Sleep(1000);
 		}
 		if (setupComplete) {
-			printf("De port is succesvol gecheckt.");
+			printf("COM Port ingesteld en geinitialiseerd");
 			Sleep(2000);
 			system("cls");
 		}

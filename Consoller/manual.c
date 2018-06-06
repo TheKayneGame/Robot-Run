@@ -51,7 +51,14 @@ BOOL manual(char port[16]) {
 	BOOL active = TRUE;
 	HANDLE hComm;
 	char buffer[2] = { '0', '\0' };
+	buffer[1] = 2;
 	char sleep = '1';
+	if (portAlive(port)) {
+		hComm = openPort(port);
+		sendByte("1", hComm);
+		closePort(hComm);
+	}
+
 
 	printf("Handmatige besturing\n"
 			"\n=======================================================\n"
@@ -59,7 +66,7 @@ BOOL manual(char port[16]) {
 			">2< Gebruik ESC om het terug te keren naar de selector\n"
 			"=======================================================\n\n");
 	while (active) {
-		buffer[0] = keyboard();
+		buffer[1] = keyboard();
 		if (buffer[0] == 'p') {
 			system("cls");
 			hComm = openPort(port);
@@ -70,7 +77,7 @@ BOOL manual(char port[16]) {
 
 		else if (buffer[0] == 'w' || buffer[0] == 'a' || buffer[0] == 's'
 				|| buffer[0] == 'd') {
-			//position to send the bytes and check connection;
+
 			if (portAlive(port)) {
 				hComm = openPort(port);
 				sendByte(buffer, hComm);
