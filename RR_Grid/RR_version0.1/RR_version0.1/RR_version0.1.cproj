@@ -152,6 +152,14 @@
     <OutputFileExtension>.elf</OutputFileExtension>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\motoren.c">
+      <SubType>compile</SubType>
+      <Link>motoren.c</Link>
+    </Compile>
+    <Compile Include="..\motoren.h">
+      <SubType>compile</SubType>
+      <Link>motoren.h</Link>
+    </Compile>
     <Compile Include="Grid.c">
       <SubType>compile</SubType>
       <Link>Grid.c</Link>

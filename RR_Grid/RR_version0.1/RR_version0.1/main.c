@@ -19,6 +19,8 @@
  */
 
 #include "Grid.h"
+#include <pololu/3pi.h>
+#include <avr/pgmspace.h>
 
 int main(){
 	int amountOfIntersects = 0;
