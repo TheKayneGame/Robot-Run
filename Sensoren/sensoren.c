@@ -65,7 +65,7 @@ void followLine()
 	
 	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);
 	clear();
-	checkDistance();
+	checkDistance(ADCH5);
 	
 	if(checkAfslag() == 0)
 	{
@@ -108,10 +108,7 @@ void followLine()
 		
 		}
 	}
-	else if(checkAfslag()!= 0 || )
-	{
-		motorControl(0,F,0.89);
-	}
+	
 	
 }
 
@@ -152,6 +149,10 @@ int checkAfslag()
 	{
 		return GRID_HOME; //entry grid/home
 	}
+	else
+	{
+		return STRAIGHT;
+	}
 	return 0;
 }
 
@@ -171,7 +172,7 @@ int checkDistance(int sensor)
 		clear();
 		play_from_program_space(PSTR(">g32>>c32"));
 		print("dichtbij");
-		delay_ms(200)';
+		delay_ms(200);
 	}
 	else if(distance < heelDichtbij && distance > 0)
 	{
