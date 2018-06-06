@@ -14,7 +14,8 @@ void followLine();
 void objectOmzeilen();
 void load_custom_characters();
 void initialize();
-int checkDistance();
+void wachtenOpMedewerker();
+int checkDistance(int sensor);
 int checkAfslag();
 
 unsigned int sensors[5];

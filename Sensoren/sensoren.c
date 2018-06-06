@@ -57,8 +57,6 @@ void initialize()
 	wait_for_button_release(BUTTON_B);
 	clear();
 	print("Go!");
-	red_led(1);
-
 }
 
 
@@ -67,7 +65,10 @@ void followLine()
 	
 	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);
 	clear();
+	checkDistance();
 	
+	if(checkAfslag() == 0)
+	{
 		if(pos < 1950)
 		{
 			// We are far to the right of the line: turn left.
@@ -92,7 +93,7 @@ void followLine()
 			
 			if(pos > 2200)
 			{
-				set_motors(SPEED,0)
+				set_motors(SPEED,0);
 			}
 			else
 			{
@@ -103,10 +104,14 @@ void followLine()
 		{
 			red_led(0);
 			green_led(0);
-			motorControl(SPEED,SPEED);
+			set_motors(SPEED,SPEED);
 		
 		}
-
+	}
+	else if(checkAfslag()!= 0 || )
+	{
+		motorControl(0,F,0.89);
+	}
 	
 }
 
@@ -151,14 +156,12 @@ int checkAfslag()
 }
 
 
-int checkDistance()
+int checkDistance(int sensor)
 {
 	
-	sensorDistance = analog_read(ADCH5);
-	sensorDistance2 = analog_read(ADCH7);
+	sensorDistance = analog_read(sensor);
 	
 	distance = (2076/(sensorDistance - 11));
-	distance2 = (2076/(sensorDistance2 - 11));
 	
 	clear();
 	
@@ -168,7 +171,7 @@ int checkDistance()
 		clear();
 		play_from_program_space(PSTR(">g32>>c32"));
 		print("dichtbij");
-		delay_ms(200);
+		delay_ms(200)';
 	}
 	else if(distance < heelDichtbij && distance > 0)
 	{
@@ -177,7 +180,7 @@ int checkDistance()
 		print("heeeel");
 		lcd_goto_xy(0,1);
 		print("dichtbij");
-		motorControl(STOP,F,0.89);
+		delay_ms(100);
 		wachtenOpMedewerker();
 	}
 	else
@@ -204,7 +207,7 @@ void objectOmzeilen()
 	{
 		motorControl(SLOW,F,0.89);
 		delay(100);
-		motorControl(SLOW,R,0.89)
+		motorControl(SLOW,R,0.89);
 	}
 	
 };
@@ -213,12 +216,13 @@ void wachtenOpMedewerker()
 {
 	while(!button_is_pressed(BUTTON_B))
 	{
-		red_led(1);
-		clear();
-		print("druk op");
-		lcd_goto_xy(0,1);
-		print("B knop");
+		play_from_program_space(PSTR(">f32>>a32"));
+		lcd_goto_xy(1,0);
+		print("druk B");
 		delay_ms(100);
+		clear();
 	}
+	
 	wait_for_button_release(BUTTON_B);
+	delay_ms(1000);
 }
