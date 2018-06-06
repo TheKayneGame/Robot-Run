@@ -152,6 +152,14 @@
     <OutputFileExtension>.elf</OutputFileExtension>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\..\wireless.c">
+      <SubType>compile</SubType>
+      <Link>wireless.c</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\wireless.h">
+      <SubType>compile</SubType>
+      <Link>wireless.h</Link>
+    </Compile>
     <Compile Include="Grid.c">
       <SubType>compile</SubType>
       <Link>Grid.c</Link>
