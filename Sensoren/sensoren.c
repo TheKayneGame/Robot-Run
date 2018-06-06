@@ -75,34 +75,35 @@ void followLine()
 
 			if(pos < 1800)
 			{
-				motorControl(SPEED,L,0.89);
+				set_motors(0, SPEED);
 			}
 			else
 			{
-				motorControl(SLOW,L, 0.89);
+				set_motors(SLOW, FAST);
 			}
 			
 		}
 		
 		else if (pos > 2050)
+		
 		{
 			// We are far to the left of the line: turn right.
 			red_led(1);
 			
 			if(pos > 2200)
 			{
-				motorControl(SPEED,R, 0.89);
+				set_motors(SPEED,0)
 			}
 			else
 			{
-				motorControl(SLOW,R, 0.89);
+				set_motors(FAST, SLOW);
 			}
 		}
 		else
 		{
 			red_led(0);
 			green_led(0);
-			motorControl(SPEED,F, 0.89);
+			motorControl(SPEED,SPEED);
 		
 		}
 
