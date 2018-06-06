@@ -29,6 +29,7 @@ int main(){
 	int orderX[sizeOfOrder] = { 2, 5, 3, 4};    // replace with user input
 	int orderY[sizeOfOrder] = { 3, 1, 4, 2};    // replace with user input
 	sortOrder(orderX, orderY);
+	driveRoute(routes, 1, 0, amountOfIntersects);
 	fetchOrder(orderX, orderY, routes);	
 				
 }

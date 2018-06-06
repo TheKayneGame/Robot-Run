@@ -1,4 +1,4 @@
-Grid.d Grid.o: .././Grid.c .././Grid.h .././sensoren.h \
+Grid.d Grid.o: .././Grid.c .././Grid.h .././sensoren.h .././motoren.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\3pi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\Pololu3pi/Pololu3pi.h \
@@ -45,6 +45,8 @@ Grid.d Grid.o: .././Grid.c .././Grid.h .././sensoren.h \
 .././Grid.h:
 
 .././sensoren.h:
+
+.././motoren.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
