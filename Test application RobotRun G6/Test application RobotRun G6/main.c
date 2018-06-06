@@ -22,17 +22,15 @@ int speedCurrentRight = 0;
 int speedCurrentLeft = 0;
 
 int main(){
-	
-	motorControl(0,'F', 0.86);
-	delay_ms(150);
+	delay_ms(1000);
 	play_from_program_space(PSTR(">g32>>c32"));
-	motorControl(60,'R', 0.86);
+	motorControl(60,'R', 0.31);
 	
-	motorControl(60, 'F', 0.86);
-	delay_ms(150);
-	motorControl(0, 'F', 0.86);
 	play_from_program_space(PSTR(">g32>>c32"));
-
+	delay_ms(1000);
+	motorControl(60,'L', 0.31);
+		play_from_program_space(PSTR(">g32>>c32"));
+		delay_ms(1000);
 	return 0;
 }
 
@@ -104,6 +102,27 @@ void motorControl(int speed, char direction, float aggressionFactor){
 		}
 		speedCurrentRight = -speed;
 		speedCurrentLeft = speed;
+
+		speed = 0;
+		
+		setSpeedRight = speed + speedCurrentRight;
+		setSpeedLeft = speed - speedCurrentLeft;
+		
+		for (accelerationCounter = 0.0; accelerationCounter < 1.0; accelerationCounter = accelerationCounter + 0.01){
+			timerStart = get_ms();
+			
+			motorRightSpeed = speedCurrent + (speedCurrentRight - (setSpeedRight * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) ) );
+			
+			motorLeftSpeed = speedCurrent + (speedCurrentLeft + (setSpeedLeft * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) ) );
+			
+			set_motors(motorLeftSpeed, motorRightSpeed);
+
+			while ( (get_ms() - timerStart ) < (aggressionFactor * 10.0) ) {
+				//change for optimal acceleration time.
+			}
+		}
+		speedCurrentRight = -speed;
+		speedCurrentLeft = speed;
 		
 		break;
 
@@ -127,6 +146,27 @@ void motorControl(int speed, char direction, float aggressionFactor){
 		}
 		speedCurrentRight = speed;
 		speedCurrentLeft = -speed;
+		
+		speed = 0;
+		
+			setSpeedRight = speed - speedCurrentRight;
+			setSpeedLeft = speed + speedCurrentLeft;
+			
+			for (accelerationCounter = 0.0; accelerationCounter < 1.0; accelerationCounter = accelerationCounter + 0.01){
+				timerStart = get_ms();
+				
+				motorRightSpeed = speedCurrentRight + (setSpeedRight * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) );
+				
+				motorLeftSpeed = speedCurrentLeft - (setSpeedLeft * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ));
+				
+				set_motors(motorLeftSpeed, motorRightSpeed);
+
+				while ( (get_ms() - timerStart ) < (aggressionFactor * 10.0) ) {
+					//change for optimal acceleration time.
+				}
+			}
+			speedCurrentRight = speed;
+			speedCurrentLeft = -speed;
 		break;
 		
 		default:
