@@ -127,38 +127,47 @@ int readGrid(int routes[4][20]){
 	do{
 		resultTemp = checkAfslag();
 		switch(resultTemp){
+			case 0:
+			followLine();
+			break;
 			case 1:                     //It is a corner to the right
 			routes[0][i] = 1;
-			motorControl(70, 'R', 0.89);
+			motorControl(60, 'R', 0.30);
+			followLine();
 			i++;
 			break;
 			case 2:                   //It is a corner to the left
 			routes[0][i] = 2;
-			motorControl(70, 'L', 0.89);
+			motorControl(60, 'L', 0.30);
+			followLine();
 			i++;
 			break;
 			case 3:                  //It is a T-crossing    L R
-			motorControl(70, 'L', 0.89);
+			motorControl(60, 'L', 0.30);
+			followLine();
 			routes[0][i] = 3;
 			i++;
 			break;
 			case 4:                 //R
 			routes[0][i] = 4;
 			motorControl(80, 'F', 0.89);
+			followLine();
 			break;
 			case 5:                //L
 			routes[0][i] = 5;
 			motorControl(80, 'F', 0.89);
+			followLine();
 			break;
 			case 6:               //It is a crossing
-			motorControl(70, 'L', 0.89);
+			motorControl(60, 'L', 0.30);
+			followLine();
 			i++;
 			routes[0][i] = 6;
 			break;
 			case 7:              //Dead end
 			routes[0][i] = 7;
-			motorControl(70, 'R', 0.89);
-			motorControl(70, 'R', 0.89);
+			motorControl(60, 'R', 0.30);
+			motorControl(0, 'R', 0.30);
 			break;
 			case 8:
 			grid = 1;
@@ -231,7 +240,7 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 	}
 	
 	if(flag == 2){
-		motorControl(70, 'R', 0.89);
+		motorControl(70, 'R', 0.30);
 	}
 	
 	Next:
@@ -244,11 +253,11 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 		if(flagReturn == 0){
 			switch(route[flag][intersectnum]){
 				case 1:
-				motorControl(70, 'R', 0.89);
+				motorControl(70, 'R', 0.30);
 				intersectnum++;
 				goto Next;
 				case 2:
-				motorControl(70, 'L', 0.89);
+				motorControl(70, 'L', 0.30);
 				intersectnum++;
 				goto Next;
 				case 3:

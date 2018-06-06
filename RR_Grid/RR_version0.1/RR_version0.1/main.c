@@ -21,8 +21,12 @@
 #include "Grid.h"
 #include <pololu/3pi.h>
 #include <avr/pgmspace.h>
+#include "wireless.h"
+#include "sensoren.h"
+#include "motoren.h"
 
 int main(){
+	initialize();
 	int amountOfIntersects = 0;
 	int routes[2][20];
     amountOfIntersects = readGrid(routes);

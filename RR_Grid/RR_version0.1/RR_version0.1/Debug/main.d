@@ -39,7 +39,8 @@ main.d main.o: .././main.c .././Grid.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\orangutanpulsein\orangutanpulsein.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\orangutantime\orangutantime.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\orangutanspimaster\orangutanspimaster.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\workaround.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\workaround.h \
+ .././wireless.h .././sensoren.h .././motoren.h
 
 .././Grid.h:
 
@@ -124,3 +125,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\orangutanspimaster\orangutanspimaster.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\pololu\workaround.h:
+
+.././wireless.h:
+
+.././sensoren.h:
+
+.././motoren.h:
