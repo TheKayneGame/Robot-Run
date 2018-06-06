@@ -12,7 +12,6 @@
 #include <avr/pgmspace.h>
 #include <stdio.h>
 #include <math.h>
-#include "motoren.h"
 
 enum directions{ F=0,B,R,L};
 
@@ -88,10 +87,52 @@ void motorControl(int speed, char direction, float aggressionFactor){
 		}
 		speedCurrentRight = -speed;
 		speedCurrentLeft = speed;
+
+		speed = 0;
+		
+		setSpeedRight = speed + speedCurrentRight;
+		setSpeedLeft = speed - speedCurrentLeft;
+		
+		for (accelerationCounter = 0.0; accelerationCounter < 1.0; accelerationCounter = accelerationCounter + 0.01){
+			timerStart = get_ms();
+			
+			motorRightSpeed = speedCurrent + (speedCurrentRight - (setSpeedRight * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) ) );
+			
+			motorLeftSpeed = speedCurrent + (speedCurrentLeft + (setSpeedLeft * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) ) );
+			
+			set_motors(motorLeftSpeed, motorRightSpeed);
+
+			while ( (get_ms() - timerStart ) < (aggressionFactor * 10.0) ) {
+				//change for optimal acceleration time.
+			}
+		}
+		speedCurrentRight = -speed;
+		speedCurrentLeft = speed;
 		
 		break;
 
 		case 'L':
+		
+		setSpeedRight = speed - speedCurrentRight;
+		setSpeedLeft = speed + speedCurrentLeft;
+		
+		for (accelerationCounter = 0.0; accelerationCounter < 1.0; accelerationCounter = accelerationCounter + 0.01){
+			timerStart = get_ms();
+			
+			motorRightSpeed = speedCurrentRight + (setSpeedRight * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ) );
+			
+			motorLeftSpeed = speedCurrentLeft - (setSpeedLeft * (accelerationCounter + ( ( 1 / ( 2 * M_PI ) ) * sin ( 2 * M_PI * accelerationCounter ) ) ));
+			
+			set_motors(motorLeftSpeed, motorRightSpeed);
+
+			while ( (get_ms() - timerStart ) < (aggressionFactor * 10.0) ) {
+				//change for optimal acceleration time.
+			}
+		}
+		speedCurrentRight = speed;
+		speedCurrentLeft = -speed;
+		
+		speed = 0;
 		
 		setSpeedRight = speed - speedCurrentRight;
 		setSpeedLeft = speed + speedCurrentLeft;

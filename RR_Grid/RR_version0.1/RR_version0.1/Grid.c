@@ -1,9 +1,9 @@
 /*
- * Grid.c
- *
- * Created: 8-5-2018 18:29:21
- *  Author: Madita
- */ 
+* Grid.c
+*
+* Created: 8-5-2018 18:29:21
+*  Author: Madita
+*/
 
 #include "Grid.h"
 #include "sensoren.h"
@@ -64,12 +64,6 @@ void sortOrder(int X[], int Y[]) {
 	}
 }
 
-void turn(char direction){
-	motorControl(70, direction, 0.89);
-	delay_ms(50);
-	motorControl(0, direction, 0.89);
-}
-
 void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 	int crossCountX = 0, crossCountY = 0, flagY = 0, flagX = 0, endX = 5, endY = 0, endFlag = 0;
 	int amountOfIntersects = readGrid(route);
@@ -82,11 +76,12 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 			endFlag = 1;
 		}
 		if((crossCountX > OrderX[i]) || (endFlag == 1 && (crossCountX > endX))){
-			turn('L');
+			motorControl(70, 'L', 0.89);
+
 			flagX = 1;
 		}
 		else if((crossCountX < OrderX[i]) || (endFlag == 1 && (crossCountX < endX))){
-			turn('R');
+			motorControl(70, 'R', 0.89);
 			flagX = 2;
 		}
 		while((crossCountX != OrderX[i]) || (endFlag == 1 && (crossCountX != endX))){
@@ -101,11 +96,11 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 		}
 		motorControl(0, 'F', 0.89);
 		if((crossCountY > orderY[i]) || (endFlag == 1 && (crossCountY > endY))){
-			turn('L');
+			motorControl(70, 'L', 0.89);
 			flagY = 1;
 		}
 		else if((crossCountY < orderY[i]) || (endFlag == 1 && (crossCountY < endY))){
-			turn('R');
+			motorControl(70, 'R', 0.89);
 			flagY = 2;
 		}
 		while((crossCountY != orderY[i]) || (endFlag == 1 && (crossCountY != endY))){
@@ -129,45 +124,44 @@ int readGrid(int routes[4][20]){
 	int resultTemp;
 	routes[1][0] = 5;                    //Marks beginning of route
 	do{
-		resultTemp = checkAfslag();	
+		resultTemp = checkAfslag();
 		switch(resultTemp){
-			case 1:                  //It is a corner to the right
+			case 1:                     //It is a corner to the right
 			routes[0][i] = 1;
-			turn('R');
+			motorControl(70, 'R', 0.89);
 			i++;
 			break;
-			case 2:                 //It is a corner to the left
+			case 2:                   //It is a corner to the left
 			routes[0][i] = 2;
-			turn('L');
+			motorControl(70, 'L', 0.89);
 			i++;
 			break;
-			case 3:                 //It is a T-crossing    L R
-			turn('L');
+			case 3:                  //It is a T-crossing    L R
+			motorControl(70, 'L', 0.89);
 			routes[0][i] = 3;
 			i++;
 			break;
-			case 4:                //R
+			case 4:                 //R
 			routes[0][i] = 4;
 			motorControl(80, 'F', 0.89);
 			break;
-			case 5:               //L
+			case 5:                //L
 			routes[0][i] = 5;
 			motorControl(80, 'F', 0.89);
 			break;
-			case 6:              //It is a crossing
-			turn('L');
+			case 6:               //It is a crossing
+			motorControl(70, 'L', 0.89);
 			i++;
 			routes[0][i] = 6;
 			break;
-			case 7:         //Dead end
+			case 7:              //Dead end
 			routes[0][i] = 7;
-			turn('R');
-			turn('R');
+			motorControl(70, 'R', 0.89);
+			motorControl(70, 'R', 0.89);
 			break;
 			case 8:
 			grid = 1;
 			routes[0][i] = 8; //Marks end of route
-			routes[0][20] = { 0 };
 		}
 	}while(grid == 0);
 	numOfIntersects = i;
@@ -212,12 +206,14 @@ int readGrid(int routes[4][20]){
 				routes[1][i - 1] = 3;
 			}
 			break;
-			case 8:                                                      //case 7 isn't part of a route
-			routes[1][i] = 8;  //Marks end of route
+			case 8:                                                     //case 7 isn't part of a route
+			routes[routeNum][i] = 8;                                    //Marks end of route
 			for(int j = 0; j < 20; j++){                                //reset decoy array
 				routes[0][i] = 0;
 			}
-			routeNum++;
+			if(routeNum < 4){
+				routeNum++;
+			}
 			break;
 			
 		}
@@ -234,7 +230,7 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 	}
 	
 	if(flag == 2){
-		turn('R');
+		motorControl(70, 'R', 0.89);
 	}
 	
 	Next:
@@ -247,18 +243,18 @@ void driveRoute(int route[2][20], int flag, int flagReturn, int max){           
 		if(flagReturn == 0){
 			switch(route[flag][intersectnum]){
 				case 1:
-				turn('R');
+				motorControl(70, 'R', 0.89);
 				intersectnum++;
 				goto Next;
 				case 2:
-				turn('L');
+				motorControl(70, 'L', 0.89);
 				intersectnum++;
 				goto Next;
 				case 3:
 				motorControl(80, 'F', 0.89);
 				intersectnum++;
 				goto Next;
-				case 5:                  
+				case 5:
 				motorControl(0, 'F', 0.89);    //stop
 				break;
 				play_from_program_space(PSTR(">g32>>c32"));
