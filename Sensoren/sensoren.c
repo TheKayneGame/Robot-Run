@@ -75,11 +75,11 @@ void followLine()
 
 			if(pos < 1800)
 			{
-				motorControl(SPEED,L,0.86);
+				motorControl(SPEED,L,0.89);
 			}
 			else
 			{
-				motorControl(SLOW,L, 0.86);
+				motorControl(SLOW,L, 0.89);
 			}
 			
 		}
@@ -91,18 +91,18 @@ void followLine()
 			
 			if(pos > 2200)
 			{
-				motorControl(SPEED,R, 0.86);
+				motorControl(SPEED,R, 0.89);
 			}
 			else
 			{
-				motorControl(SLOW,R, 0.86);
+				motorControl(SLOW,R, 0.89);
 			}
 		}
 		else
 		{
 			red_led(0);
 			green_led(0);
-			motorControl(SPEED,F, 0.86);
+			motorControl(SPEED,F, 0.89);
 		
 		}
 
@@ -176,7 +176,7 @@ int checkDistance()
 		print("heeeel");
 		lcd_goto_xy(0,1);
 		print("dichtbij");
-		motorControl(0,F,0.86);
+		motorControl(STOP,F,0.89);
 		wachtenOpMedewerker();
 	}
 	else
@@ -191,19 +191,19 @@ int checkDistance()
 
 void objectOmzeilen()
 {
-	motorControl(20, L, 0.5);
-	motorControl(20, F, 0.5);
+	motorControl(SLOW, L, 0.89);
+	motorControl(SLOW, F, 0.89);
 	
 	
 	if (distance2 < heelDichtbij)
 	{
-		motorControl(20, F, 0.5);
+		motorControl(SLOW, F, 0.89);
 	}
 	else
 	{
-		motorControl(20,F,0.5);
+		motorControl(SLOW,F,0.89);
 		delay(100);
-		motorControl(20, R, 0.5)
+		motorControl(SLOW,R,0.89)
 	}
 	
 };
@@ -219,6 +219,5 @@ void wachtenOpMedewerker()
 		print("B knop");
 		delay_ms(100);
 	}
-	
 	wait_for_button_release(BUTTON_B);
 }

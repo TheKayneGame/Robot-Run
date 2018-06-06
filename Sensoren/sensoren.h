@@ -48,8 +48,9 @@ int sensorDistance2;
 #define SENSOR_C_R sensors[3]
 #define SENSOR_R sensors[4]
 
+#define STOP 0
 #define SPEED 60
-#define ALTER 0
+#define ALTER 15
 #define SLOW SPEED - ALTER
 #define FAST SPEED + ALTER
 
