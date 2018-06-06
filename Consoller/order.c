@@ -36,39 +36,51 @@ int getLine(char *prmpt, char *buff, size_t sz) {
 }
 
 void inputOrder(char port[16], int mode) {
-	char buffer;
 	char *data;
-	char data_to_send[2] = { '0', '\0' };
+	char data_to_send[3] = { '0', '\0' };
 	int tel;
 	HANDLE hComm;
 
 	system("cls");
-	buffer = getch();
-	if (isdigit(buffer)) {
-		int items = buffer - 48;
-		data = (char *) malloc(items * 2 + 1);
-		data[0] = buffer;
 
-		switch (mode) {
-		case 1:
-			orderManual(data, items * 2);
-			break;
-		case 2:
-			orderFile(data, items * 2);
-			break;
+	printf("Order invoer\n"
+			"\n=======================================================\n"
+			">1< Voer aantal Producten in\n"
+			">2< Voer X Positie in\n"
+			">3< Voer Y Positie in\n"
+			"=======================================================\n\n");
+	printf("Voer aantal Producten in: ");
+	int items = leesInteger();
 
-		}
+	data = (char *) malloc(items * 2 + 1);
+	data[0] = 1;
+	data[1] = items;
 
-		for (tel = 0; tel < (items * 2 + 1); tel++) {
-			data_to_send[0] = data[tel];
-			if (portAlive(port)) {
-				hComm = openPort(port);
-				sendByte(data_to_send, hComm);
-				closePort(hComm);
-			} else {
-				Sleep(2000);
-				tel = (items * 2);
-			}
+	switch (mode) {
+	case 1:
+		orderManual(data, items * 2);
+		break;
+	case 2:
+		orderFile(data, items * 2);
+		break;
+
+	}
+
+	if (portAlive(port)) {
+		hComm = openPort(port);
+		sendByte(data_to_send, hComm);
+		closePort(hComm);
+	}
+
+	for (tel = 0; tel < (items * 2 + 1); tel++) {
+		data_to_send[0] = data[tel];
+		if (portAlive(port)){
+			hComm = openPort(port);
+			sendByte(data_to_send, hComm);
+			closePort(hComm);
+		} else {
+			Sleep(2000);
+			tel = (items * 2);
 		}
 	}
 	free(data);
@@ -76,7 +88,7 @@ void inputOrder(char port[16], int mode) {
 }
 
 void orderManual(char *data, int size) {
-	int coordIndex = 0;
+	int coordIndex = 1;
 	int item = 1;
 	char buffer;
 
@@ -95,13 +107,13 @@ void orderManual(char *data, int size) {
 		printf("\nX [%d]: ", item);
 		buffer = leesInteger();
 
-		data[coordIndex + 1] = buffer;
+		data[coordIndex] = buffer;
 		coordIndex++;
 
 		printf("\nY [%d]: ", item);
 		buffer = leesInteger();
 
-		data[coordIndex + 1] = buffer;
+		data[coordIndex] = buffer;
 		coordIndex++;
 	}
 }
@@ -110,26 +122,31 @@ void orderFile(char *data, int size) {
 	printfln("reading input.csv");
 	fflush(stdout);
 	FILE* stream = fopen("input.csv", "r");
-	int coordIndex = 0;
+	int coordIndex = 1;
 	char line[1024];
 	char buffX;
 	char buffY;
 	while (fgets(line, 1024, stream)) {
+
 		char* tmp = strdup(line);
 
 		buffX = atoi(getfield(tmp, 1));
+		free(tmp);
+		tmp = strdup(line);
 		buffY = atoi(getfield(tmp, 2));
+		free(tmp);
 
-		data[coordIndex + 1] = buffX + '0';
+		data[coordIndex] = buffX + '0';
 		coordIndex++;
-		data[coordIndex + 1] = buffY+ '0';
+		data[coordIndex] = buffY + '0';
 		coordIndex++;
 
 		printfln("X: %d; Y: %d", buffX, buffY);
-		free(tmp);
+		fflush(stdout);
+
 	}
 
 	fclose(stream);
 	char key[1];
-	fgets(key,1,stdin);
+	fgets(key, 1, stdin);
 }
