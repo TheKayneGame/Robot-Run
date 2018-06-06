@@ -37,11 +37,11 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../../../../../wireless.c \
 ../Grid.c \
 ../main.c \
 ../motoren.c \
-../sensoren.c
+../sensoren.c \
+../wireless.c
 
 
 PREPROCESSING_SRCS += 
@@ -51,32 +51,32 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-wireless.o \
 Grid.o \
 main.o \
 motoren.o \
-sensoren.o
+sensoren.o \
+wireless.o
 
 OBJS_AS_ARGS +=  \
-wireless.o \
 Grid.o \
 main.o \
 motoren.o \
-sensoren.o
+sensoren.o \
+wireless.o
 
 C_DEPS +=  \
-wireless.d \
 Grid.d \
 main.d \
 motoren.d \
-sensoren.d
+sensoren.d \
+wireless.d
 
 C_DEPS_AS_ARGS +=  \
-wireless.d \
 Grid.d \
 main.d \
 motoren.d \
-sensoren.d
+sensoren.d \
+wireless.d
 
 OUTPUT_FILE_PATH +=RobotRunGrid.elf
 
@@ -102,13 +102,6 @@ LINKER_SCRIPT_DEP+=
 
 
 
-
-./%.o: ../../../../../%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
 
 ./%.o: .././%.c
 	@echo Building file: $<
