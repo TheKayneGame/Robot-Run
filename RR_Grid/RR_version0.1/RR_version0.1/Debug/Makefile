@@ -40,7 +40,8 @@ C_SRCS +=  \
 ../Grid.c \
 ../main.c \
 ../motoren.c \
-../sensoren.c
+../sensoren.c \
+../wireless.c
 
 
 PREPROCESSING_SRCS += 
@@ -53,25 +54,29 @@ OBJS +=  \
 Grid.o \
 main.o \
 motoren.o \
-sensoren.o
+sensoren.o \
+wireless.o
 
 OBJS_AS_ARGS +=  \
 Grid.o \
 main.o \
 motoren.o \
-sensoren.o
+sensoren.o \
+wireless.o
 
 C_DEPS +=  \
 Grid.d \
 main.d \
 motoren.d \
-sensoren.d
+sensoren.d \
+wireless.d
 
 C_DEPS_AS_ARGS +=  \
 Grid.d \
 main.d \
 motoren.d \
-sensoren.d
+sensoren.d \
+wireless.d
 
 OUTPUT_FILE_PATH +=RobotRunGrid.elf
 
@@ -87,6 +92,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
