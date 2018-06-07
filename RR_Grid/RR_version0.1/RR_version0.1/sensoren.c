@@ -75,11 +75,11 @@ void followLine()
 
 			if(pos < 1800)
 			{
-				motorControl(SPEED, 'L' ,0.89);
+				set_motors(0,SPEED);
 			}
 			else
 			{
-				motorControl(SLOW,'L', 0.89);
+				set_motors(SLOW,SPEED);
 			}
 			
 		}
@@ -91,18 +91,18 @@ void followLine()
 			
 			if(pos > 2200)
 			{
-				motorControl(SPEED,'R', 0.89);
+				set_motors(SPEED,0);
 			}
 			else
 			{
-				motorControl(SLOW,'R', 0.89);
+				set_motors(FAST,SLOW);
 			}
 		}
 		else
 		{
 			red_led(0);
 			green_led(0);
-			motorControl(SPEED,'F', 0.89);
+			motorControl(SLOW,SLOW);
 		
 		}
 
@@ -145,6 +145,9 @@ int checkAfslag()
 	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C > high_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
 	{
 		return GRID_HOME; //entry grid/home
+	}
+	else {
+		return 0;
 	}
 	return 0;
 }
