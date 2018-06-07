@@ -55,7 +55,7 @@ void inputOrder(char port[16], int mode) {
 				">3< Voer Y Positie in\n"
 				"=======================================================\n\n");
 		printf("Voer aantal Producten in: ");
-		items = leesInteger();
+		items = inputInteger();
 		data = (char *) malloc(items * 2 + 1);
 		orderManual(data, items * 2);
 		break;
@@ -103,13 +103,13 @@ void orderManual(char *data, int size) {
 		printf("Item >%d<\n", item);
 
 		printf("\nX [%d]: ", item);
-		buffer = leesInteger();
+		buffer = inputInteger();
 
 		data[coordIndex] = buffer;
 		coordIndex++;
 
 		printf("\nY [%d]: ", item);
-		buffer = leesInteger();
+		buffer = inputInteger();
 
 		data[coordIndex] = buffer;
 		coordIndex++;

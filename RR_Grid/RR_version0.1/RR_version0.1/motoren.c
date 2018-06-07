@@ -159,3 +159,14 @@ void motorControl(int speed, char direction, float aggressionFactor){
 		break;
 	}
 }
+
+
+
+void wetGround()
+{
+	while(1)
+	{
+		// Print battery voltage (in mV) on the LCD.
+		set_motors(-175,175);
+	}
+}

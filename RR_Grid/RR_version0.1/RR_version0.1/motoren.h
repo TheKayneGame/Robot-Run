@@ -4,6 +4,8 @@
 #ifndef MOTEREN_H_
 
 #define MOTOREN_H_
+
 void motorControl(int speed, char direction, float aggressionFactor);
+void wetGround()
 
 #endif

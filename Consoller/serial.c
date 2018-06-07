@@ -3,6 +3,7 @@
  *
  *  Created on: May 11, 2018
  *      Author: Kayne
+ *      Commented: True
  */
 
 #include "kayneLib.h"
@@ -11,6 +12,8 @@ int status;
 HANDLE hComm;
 char currPort[16];
 
+
+//Controleert of de port nog levend is.
 BOOL portAlive(char port[16]) {
 	BOOL result = FALSE;
 	HANDLE hComm;
@@ -23,18 +26,20 @@ BOOL portAlive(char port[16]) {
 	return result;
 }
 
-//Function to open ports
+//Port open
 HANDLE openPort(char port[16]) {
 	HANDLE hComm;
-	//Opening the commPort and creating the handle
-	hComm = CreateFile(port,            //port name
-			GENERIC_READ | GENERIC_WRITE, //Read/Write
-			0,                            //No Sharing
-			NULL,                         //No Security
-			OPEN_EXISTING,				  //Open existing port only
-			0,            				  //Non Overlapped I/O
-			NULL);        				  //Null for COM Devices
 
+	//Open port en maak handel aan
+	hComm = CreateFile(port,            	//Port Naam
+			GENERIC_READ | GENERIC_WRITE, 	//Lezen/Schrijven
+			0,                            	//Niet delen
+			NULL,                         	//Geen veiligheid
+			OPEN_EXISTING,				  	//Open Bestaande poort
+			0,            				  	//Niet-Overlappend I/O
+			NULL);        				  	//NULL voor COM Apparaten
+
+	//Controleert of de poort geopent kan wordern en sluit deze indien niet mogelijk
 	if (hComm == INVALID_HANDLE_VALUE) {
 		system("cls");
 		printf("Fout bij openen COM port\n"
@@ -46,16 +51,17 @@ HANDLE openPort(char port[16]) {
 	return hComm;
 }
 
-//Function to close the port
+//Functie om port te sluiten
 void closePort(HANDLE hComm) {
 	CloseHandle(hComm);
 }
 
-//function to send bytes
-BOOL sendByte(char buffByte[8], HANDLE hComm) {
+//Functie om data te versturen
+BOOL sendData(char buffByte[8], HANDLE hComm) {
 	DWORD byteWritten = 0;
 	int buffLen = strlen(buffByte); //Gets length of array
 
+	//Probeert data in de handle te schrijven en geeft een foutmelding terug als deze mislukt is.
 	if (!WriteFile(hComm, buffByte, buffLen, &byteWritten, NULL)) {
 		printf("Err\n");
 		return FALSE;
@@ -64,7 +70,7 @@ BOOL sendByte(char buffByte[8], HANDLE hComm) {
 	}
 }
 
-//function to read bytes NOT IN USE
+//function to read bytes NOT IN USE!!!!!!!!!!!!!!
 BOOL readData(void *dataString, int *length, HANDLE hComm) {
 	BOOL active = TRUE;
 	byte dataout[2048] = { 0 };
@@ -88,6 +94,7 @@ BOOL readData(void *dataString, int *length, HANDLE hComm) {
 	*length = index;
 	return TRUE;
 }
+///\/\/\/\/\/\/\/\/\/\/\NOT IN USE!!!!!!/\/\/\/\/\
 
 void getCOM() {
 	char port[7];
@@ -95,9 +102,10 @@ void getCOM() {
 	status = getLine("Voer COM Poort in: ", port, sizeof(port));
 
 	//Checking for the errors found during input.
-	if (status != IN_OVF || status != IN_NULL) {
-		sprintf(buffer, strupr(port));
+	if (status != IN_OVF || status != IN_NULL) {//gaat na of de situsatie normaal is
+		sprintf(buffer, strupr(port));//Converteert alle karakters naar hoofdletter als zij dat niet waren
 		if (buffer[0] == 'C' && buffer[1] == 'O' && buffer[2] == 'M') {
+			//Controleert of COM port geldig is
 			for (int i = 3; i < strlen(port); i++) {
 				if (!isdigit(buffer[i]) || buffer[3] == '0') {
 					status = IN_ERR;
@@ -108,11 +116,12 @@ void getCOM() {
 			}
 		}
 		if (status != IN_ERR) {
-			sprintf(currPort, "\\\\.\\%s", strupr(port)); // Edits the enterd portnumber to excepted paramiters
+			sprintf(currPort, "z\\\\.\\%s", strupr(port)); //Formateert de COM poort invoer naar geldige handle invoer
 		}
 	}
 }
 
+//functie om COM port invoer te accepteren
 void setupCOM() {
 	BOOL setupComplete = FALSE;
 
@@ -122,7 +131,6 @@ void setupCOM() {
 	while (!setupComplete) {
 		getCOM();
 		if (status != 0) {
-			//Clear and declare error;
 			system("cls");
 			printf(
 					"Fout bij invoer COM port.\n"
@@ -134,7 +142,7 @@ void setupCOM() {
 							"=======================================================\n\n",
 					status);
 		} else {
-			//Verifies if COM port was openened correctly
+			//Verificatie van COM Port
 			printf("COM port wordt gecontroleerd\n");
 			setupComplete = portAlive(currPort);
 			Sleep(1000);

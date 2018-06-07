@@ -32,16 +32,15 @@ long i = 0;
 int main(){
 	initialize();
 	
-		int amountOfIntersects = 0;
-		int routes[2][20];
-		amountOfIntersects = readGrid(routes);
-		int orderX[sizeOfOrder];
-		int orderY[sizeOfOrder];
-		wirMain(orderX, orderY);
-		sortOrder(orderX, orderY);
+	int routes[3][4];
+	readGrid(routes);
+	/*int orderX[sizeOfOrder];
+	int orderY[sizeOfOrder];
+	wirCoord();
+	wirMain(orderX, orderY);
+	sortOrder(orderX, orderY);
+	clear();*/
+	driveRoute(routes, 1);
+	//fetchOrder(orderX, orderY, routes);
 	
-	while (1){
-	driveRoute(routes, 1, 0, amountOfIntersects);
-	fetchOrder(orderX, orderY, routes);
-	}
 }

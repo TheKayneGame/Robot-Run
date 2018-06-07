@@ -65,10 +65,9 @@ void sortOrder(int X[], int Y[]) {
 	}
 }
 
-void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
+void fetchOrder(int OrderX[], int orderY[], int route[3][4]){
 	int crossCountX = 0, crossCountY = 0, flagY = 0, flagX = 0, endX = 5, endY = 0, endFlag = 0;
-	int amountOfIntersects = readGrid(route);
-	driveRoute(route, 1, 0, amountOfIntersects);    //Rij naar grid ingang
+	driveRoute(route, 1);    //Rij naar grid ingang
 	motorControl(70, 'R', 0.89);
 	delay(50);
 	motorControl(0, 'R', 0.89);
@@ -115,122 +114,52 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 		play_from_program_space(PSTR(">g32>>c32"));
 		delay(200);
 	}
-	driveRoute(route, 1, 1, amountOfIntersects);    //Rij terug naar begipunt
+	driveRoute(route, 3);    //Rij terug naar begipunt
 	play_from_program_space(PSTR(">g32>>c32"));
 }
 
-int readGrid(int routes[4][20]){
-	int i = 1, grid = 0, numOfIntersects, crossing = 0, routeNum = 1;
+void readGrid(int routes[3][4]){
 	int resultTemp;
 	char test;
-	routes[1][0] = 5;                    //Markeert begin van de route
-	do{
-		if(checkAfslag() == 0){
-			followLine();
-		}
-		resultTemp = checkAfslag();
-		test = resultTemp+'0';
-		print_character(test);
-		switch(resultTemp){
-			case 3:                  //Het is een T-splitsing    L R
-			motorControl(60, 'L', 0.30);
-			routes[0][i] = 3;
-			i++;
-			break;
-			case 4:                 //R
-			routes[0][i] = 4;
-			motorControl(80, 'F', 0.89);
-			break;
-			case 5:                //L
-			routes[0][i] = 5;
-			motorControl(80, 'F', 0.89);
-			break;
-			case 6:               //Het is een kruispunt
-			motorControl(60, 'L', 0.30);
-			i++;
-			routes[0][i] = 6;
-			break;
-			case 7:              //Doodlopende weg
-			routes[0][i] = 7;
-			motorControl(60, 'R', 0.30);
-			motorControl(0, 'R', 0.30);
-			break;
-			case 8:
-			grid = 1;
-			routes[0][i] = 8; //Markeert einde van de route
-		}
-	}while(grid == 0);
-	numOfIntersects = i;
+	//test = resultTemp+'0';
+	print_character(test);
 	
-	for(i = 1; i <= numOfIntersects; i++){   //Writing route towards X
-		switch(routes[0][i]){
-			case 3:
-			if(routes[0][i + 1] == 7){
-				routes[routeNum][i] = 1;
-			}
-			else if(routes[0][i + 1] != 7){
-				routes[routeNum][i] = 2;
-			}
-			break;
-			case 4:
-			if(routes[0][i + 1] == 7){
-				routes[routeNum][i] = 1;
-			}
-			else if(routes[0][i] != 7){
-				routes[routeNum][i] = 3;
-			}
-			break;
-			case 5:
-			if(routes[0][i + 1] == 7){
-				routes[routeNum][i] = 1;
-			}
-			else if(routes[0][i] != 7){
-				routes[routeNum][i] = 2;
-			}
-			break;
-			case 6:
-			crossing++;
-			routes[routeNum][i] = 6;
-			if((crossing == 2) && (routes[routeNum][i - 1] == 6)){
-				crossing = 0;
-				routes[1][i - 1] = 3;
-			}
-			break;
-			case 8:                                                     //case 7 isn't part of a route
-			routes[routeNum][i] = 8;                                    //Marks end of route
-			for(int j = 0; j < 20; j++){                                //reset decoy array
-				routes[0][i] = 0;
-			}
-			if(routeNum < 4){
-				routeNum++;
-			}
-			break;
-			
-		}
-	}
+	routes[0][0] = 2;
+	routes[0][1] = 3;
+	routes[0][2] = 2;
+	routes[0][3] = 5;
 	
-	return numOfIntersects;                                                       //returns intersect count, so amount of intersects on route
+	routes[1][0] = 1;
+	routes[1][1] = 1;
+	routes[1][2] = 5;
+	
+	routes[2][0] = 3;
+	routes[2][1] = 3;
+	routes[2][2] = 5;
+	
+	routes[3][0] = 3;
+	routes[3][1] = 1;
+	routes[3][2] = 2;
+	routes[3][3] = 5;	
+	                                                     //returns intersect count, so amount of intersects on route
 }
 
-void driveRoute(int route[2][20], int flag, int flagReturn, int max){             //go to or return from, grid or chargepoint
-	int intersectnum = 1;                                       // flag 1 =  from or to home, flag 2 is from or to chargepoint
-	
-	if(flagReturn == 1){
-		intersectnum = max;
-	}
-	
-	if(flag == 2){
-		motorControl(70, 'R', 0.30);
-	}
+void driveRoute(int route[3][4], int flag){             //go to or return from, grid or chargepoint
+	int intersectnum = 0, decision, resultTemp;                                       // flag 1 =  from or to home, flag 2 is from or to chargepoint
 	
 	Next:
 	do{
 		followLine();
-	}while(checkAfslag() == 0);
+	}while(test() == 0);
 	
-	if(checkAfslag() != 0){
+	resultTemp = test();
+	if(resultTemp > 1){
+		decision = HIGH;
+	}
+	
+	if(test() != 0){
 		
-		if(flagReturn == 0){
+		if(decision == HIGH){
 			switch(route[flag][intersectnum]){
 				case 1:
 				motorControl(70, 'R', 0.30);
