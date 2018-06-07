@@ -69,7 +69,7 @@ BOOL manual(char port[16]) {
 		if (buffer[0] == 'p') {
 			system("cls");
 			hComm = openPort(port);
-			sendByte(buffer, hComm);
+			sendData(buffer, hComm);
 			closePort(hComm);
 			return FALSE;
 		}
@@ -78,7 +78,7 @@ BOOL manual(char port[16]) {
 
 			if (portAlive(port)) {
 				hComm = openPort(port);
-				sendByte(buffer, hComm);
+				sendData(buffer, hComm);
 				closePort(hComm);
 			} else {
 				Sleep(2000);

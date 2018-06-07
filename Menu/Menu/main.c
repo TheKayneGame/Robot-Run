@@ -9,6 +9,7 @@
 */
 
 #include <pololu/3pi.h>
+#include <stdio.h>
 
 char functions[3][8]{
 	{"Handmatig"},

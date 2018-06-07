@@ -16,7 +16,7 @@ int battRequest(char port[16]) {
 	buff = (char *) malloc(8 + 1);
 	if (portAlive(port)) {
 		hComm = openPort(port);
-		sendByte("BATTERY", hComm);
+		sendData("BATTERY", hComm);
 		closePort(hComm);
 		readData(buff, length, hComm);
 		printf("%s", buff);

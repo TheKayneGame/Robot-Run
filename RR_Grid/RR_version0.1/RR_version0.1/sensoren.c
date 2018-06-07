@@ -1,9 +1,9 @@
 /*
- * sensoren.c
- *
- * Created: 3-6-2018 23:15:43
- *  Author: 2125228
- */ 
+* sensoren.c
+*
+* Created: 3-6-2018 23:15:43
+*  Author: 2125228
+*/
 #include <pololu/3pi.h>
 #include <avr/pgmspace.h>
 #include <stdio.h>
@@ -13,6 +13,8 @@
 
 void initialize()
 {
+
+	
 	unsigned int counter;
 	pololu_3pi_init(2000);
 	
@@ -68,43 +70,43 @@ void followLine()
 	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);
 	clear();
 	
-		if(pos < 1950)
-		{
-			// We are far to the right of the line: turn left.
-			green_led(1);
+	if(pos < 1950)
+	{
+		// We are far to the right of the line: turn left.
+		green_led(1);
 
-			if(pos < 1800)
-			{
-				set_motors(0,SPEED);
-			}
-			else
-			{
-				set_motors(SLOW,SPEED);
-			}
-			
-		}
-		
-		else if (pos > 2050)
+		if(pos < 1800)
 		{
-			// We are far to the left of the line: turn right.
-			red_led(1);
-			
-			if(pos > 2200)
-			{
-				set_motors(SPEED,0);
-			}
-			else
-			{
-				set_motors(FAST,SLOW);
-			}
+			set_motors(0,SPEED);
 		}
 		else
 		{
-			red_led(0);
-			green_led(0);
-			motorControl(SLOW,SLOW);
-		
+			set_motors(SLOW,SPEED);
 		}
+		
+	}
+	
+	else if (pos > 2050)
+	{
+		// We are far to the left of the line: turn right.
+		red_led(1);
+		
+		if(pos > 2200)
+		{
+			set_motors(SPEED,0);
+		}
+		else
+		{
+			set_motors(FAST,SLOW);
+		}
+	}
+	else
+	{
+		red_led(0);
+		green_led(0);
+		set_motors(SLOW,SLOW);
+		
+	}
 
 	
 }
@@ -113,37 +115,45 @@ void followLine()
 int checkAfslag()
 {
 	read_line(sensors,IR_EMITTERS_ON);
+
 	
-	if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
+	if(SENSOR_C_L > high_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
 	{
+		delay_ms(1000);
 		return LEFT; //afslag naar links
 	}
-	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
+	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
 	{
+				delay_ms(1000);
 		return RIGHT; //afslag naar rechts
 	}
 	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
 	{
+				delay_ms(1000);
 		return FOUR_WAY_JOINT; //kruispunt
 	}
 	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C < low_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
 	{
+				delay_ms(1000);
 		return T_LEFT_RIGHT; //t-splitsing rechtdoor
 	}
 	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
 	{
+				delay_ms(1000);
 		return T_LEFT; //t-splitsing linksaf
 	}
 	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_C_R > high_range)
 	{
+				delay_ms(1000);
 		return T_RIGHT; //t-splitsing rechtsaf
 	}
-	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
+	/*else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
 	{
 		return DEAD_END; //doodlopende straat
-	}
+	}*/
 	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C > high_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
 	{
+				delay_ms(1000);
 		return GRID_HOME; //entry grid/home
 	}
 	else {

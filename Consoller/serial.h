@@ -18,7 +18,7 @@ void closePort(HANDLE hComm);
 
 BOOL portAlive(char port[16]);
 
-BOOL sendByte(char bytes_to_send[8], HANDLE hComm);
+BOOL sendData(char bytes_to_send[8], HANDLE hComm);
 
 BOOL readData(void *dataString, int *length, HANDLE hComm);
 
