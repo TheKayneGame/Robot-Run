@@ -75,7 +75,7 @@ void inputOrder(char port[16], int mode) {
 		data_to_send[0] = data[tel];
 		if (portAlive(port)) {
 			hComm = openPort(port);
-			sendByte(data_to_send, hComm);
+			sendData(data_to_send, hComm);
 			closePort(hComm);
 		} else {
 			Sleep(2000);
