@@ -33,9 +33,15 @@ unsigned char keyboard() {
 					break;
 				}
 				break;
+			case KEY_SQUARE_BRACKET_OPEN:
+				return '[';
+				break;
+			case KEY_SQUARE_BRACKET_CLOSE:
+				return ']';
+				break;
 
 			case KEY_S:
-
+				return 'S';
 				break;
 			case KEY_ESC:
 				return 'p';
@@ -51,14 +57,7 @@ BOOL manual(char port[16]) {
 	BOOL active = TRUE;
 	HANDLE hComm;
 	char buffer[2] = { '0', '\0' };
-	buffer[1] = 2;
 	char sleep = '1';
-	if (portAlive(port)) {
-		hComm = openPort(port);
-		sendByte("1", hComm);
-		closePort(hComm);
-	}
-
 
 	printf("Handmatige besturing\n"
 			"\n=======================================================\n"
@@ -66,7 +65,7 @@ BOOL manual(char port[16]) {
 			">2< Gebruik ESC om het terug te keren naar de selector\n"
 			"=======================================================\n\n");
 	while (active) {
-		buffer[1] = keyboard();
+		buffer[0] = keyboard();
 		if (buffer[0] == 'p') {
 			system("cls");
 			hComm = openPort(port);
@@ -75,8 +74,7 @@ BOOL manual(char port[16]) {
 			return FALSE;
 		}
 
-		else if (buffer[0] == 'w' || buffer[0] == 'a' || buffer[0] == 's'
-				|| buffer[0] == 'd') {
+		else if (buffer[0] != '\0') {
 
 			if (portAlive(port)) {
 				hComm = openPort(port);
@@ -88,28 +86,7 @@ BOOL manual(char port[16]) {
 			}
 		}
 
-		else if (buffer[0] == '-') {
-			if (sleep == '1') {
-				printf(
-						"Er is te lang geen invoer gedetecteerd wilt u stoppen met handmatige besturing?\n"
-								"Enter >1< om te stoppen met handmatige besturing.\n"
-								"Enter >2< om dese melding niet meer weer te geven.\n");
-				sleep = getch();
-				printf("%c\n", sleep);
-				if (sleep == '1') {
-					system("cls");
-					return FALSE;
-				} else {
-					system("cls");
-					printf(
-							"Handmatige besturing\n"
-									"\n=======================================================\n"
-									">1< Gebuik de pijltjes toetsen om te bewegen.\n"
-									">2< Gebruik ESC om het terug te keren naar de selector\n"
-									"=======================================================\n\n");
-				}
-			}
-		}
 	}
+
 	return TRUE;
 }

@@ -37,44 +37,43 @@ int getLine(char *prmpt, char *buff, size_t sz) {
 
 void inputOrder(char port[16], int mode) {
 	char *data;
-	char data_to_send[3] = { '0', '\0' };
+	char data_to_send[2] = { '0', '\0' };
 	int tel;
 	HANDLE hComm;
-
+	char readBuff[2024];
+	FILE* stream = fopen("input.csv", "r");
 	system("cls");
 
-	printf("Order invoer\n"
-			"\n=======================================================\n"
-			">1< Voer aantal Producten in\n"
-			">2< Voer X Positie in\n"
-			">3< Voer Y Positie in\n"
-			"=======================================================\n\n");
-	printf("Voer aantal Producten in: ");
-	int items = leesInteger();
-
-	data = (char *) malloc(items * 2 + 1);
-	data[0] = 1;
-	data[1] = items;
+	int items = 0;
 
 	switch (mode) {
 	case 1:
+		printf("Order invoer\n"
+				"\n=======================================================\n"
+				">1< Voer aantal Producten in\n"
+				">2< Voer X Positie in\n"
+				">3< Voer Y Positie in\n"
+				"=======================================================\n\n");
+		printf("Voer aantal Producten in: ");
+		items = leesInteger();
+		data = (char *) malloc(items * 2 + 1);
 		orderManual(data, items * 2);
 		break;
 	case 2:
+
+		while (fgets(readBuff, 1024, stream)) {
+			items++;
+		}
+		data = (char *) malloc(items * 2 + 1);
 		orderFile(data, items * 2);
 		break;
 
 	}
-
-	if (portAlive(port)) {
-		hComm = openPort(port);
-		sendByte(data_to_send, hComm);
-		closePort(hComm);
-	}
+	data[0] = items;
 
 	for (tel = 0; tel < (items * 2 + 1); tel++) {
 		data_to_send[0] = data[tel];
-		if (portAlive(port)){
+		if (portAlive(port)) {
 			hComm = openPort(port);
 			sendByte(data_to_send, hComm);
 			closePort(hComm);
@@ -84,14 +83,13 @@ void inputOrder(char port[16], int mode) {
 		}
 	}
 	free(data);
-
+	fclose(stream);
 }
 
 void orderManual(char *data, int size) {
 	int coordIndex = 1;
 	int item = 1;
 	char buffer;
-
 	while (coordIndex < size) {
 
 		system("cls");
@@ -136,14 +134,13 @@ void orderFile(char *data, int size) {
 		buffY = atoi(getfield(tmp, 2));
 		free(tmp);
 
-		data[coordIndex] = buffX + '0';
+		data[coordIndex] = buffX;
 		coordIndex++;
-		data[coordIndex] = buffY + '0';
+		data[coordIndex] = buffY;
 		coordIndex++;
 
 		printfln("X: %d; Y: %d", buffX, buffY);
 		fflush(stdout);
-
 	}
 
 	fclose(stream);
