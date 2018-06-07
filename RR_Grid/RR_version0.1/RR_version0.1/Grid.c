@@ -122,32 +122,31 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 int readGrid(int routes[4][20]){
 	int i = 1, grid = 0, numOfIntersects, crossing = 0, routeNum = 1;
 	int resultTemp;
+	char test;
 	routes[1][0] = 5;                    //Markeert begin van de route
 	do{
-		resultTemp = checkAfslag();
-		switch(resultTemp){
-			case 0:
+		if(checkAfslag() == 0){
 			followLine();
-			break;
+		}
+		resultTemp = checkAfslag();
+		test = resultTemp+'0';
+		print_character(test);
+		switch(resultTemp){
 			case 3:                  //Het is een T-splitsing    L R
 			motorControl(60, 'L', 0.30);
-			followLine();
 			routes[0][i] = 3;
 			i++;
 			break;
 			case 4:                 //R
 			routes[0][i] = 4;
 			motorControl(80, 'F', 0.89);
-			followLine();
 			break;
 			case 5:                //L
 			routes[0][i] = 5;
 			motorControl(80, 'F', 0.89);
-			followLine();
 			break;
 			case 6:               //Het is een kruispunt
 			motorControl(60, 'L', 0.30);
-			followLine();
 			i++;
 			routes[0][i] = 6;
 			break;
