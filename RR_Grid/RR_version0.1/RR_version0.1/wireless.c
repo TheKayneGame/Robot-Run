@@ -9,6 +9,7 @@
 */
 
 #include <pololu/3pi.h>
+#include <pololu/orangutan.h>
 #include "wireless.h"
 
 void wirMain(int orderX[], int orderY[]){
@@ -24,7 +25,7 @@ void wirMain(int orderX[], int orderY[]){
 		case 2:
 		wirManual();
 		break;
-	}	
+	}
 }
 
 void wirOrder(int orderX[], int orderY[]){
@@ -43,7 +44,7 @@ void wirOrder(int orderX[], int orderY[]){
 		orderY[count1] = data[0];
 		count1++;
 		
-	} while(count1 < items);	
+	} while(count1 < items);
 }
 
 void wirManual(){
@@ -80,4 +81,39 @@ void wirManual(){
 		while(!serial_receive_buffer_full());
 		
 	} while(status);
+}
+char functions [3][8] = {{"Handm."},{"WeerC."},{"Volger"}};
+void menu(){
+
+	lcd_init_printf();
+	unsigned char button = (wait_for_button_press(ANY_BUTTON));
+	
+	switch(button)
+	{
+		case (BUTTON_A) :
+		clear();
+		selected--;
+		display(selected);
+		play_frequency(400, 100, 15);// Beep
+		delay_ms(200);
+		break;
+		case (BUTTON_B) :
+		play_frequency(660, 100, 15);// Beep
+		delay_ms(150);
+		play_frequency(660, 100, 15);
+		delay_ms(50);
+		//run(selected);
+		break;
+		
+		case (BUTTON_C) :
+		clear();
+		selected++;
+		display(selected);
+		play_frequency(800, 100, 15);// Beep
+		delay_ms(200);
+		break;
+		
+		default:
+		break;
+	}
 }

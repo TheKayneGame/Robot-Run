@@ -30,6 +30,7 @@ int main(){
 	int amountOfIntersects = 0;
 	int routes[2][20];
     amountOfIntersects = readGrid(routes);
+	
 	int orderX[sizeOfOrder];
 	int orderY[sizeOfOrder];
 	wirMain(orderX, orderY);

@@ -16,11 +16,11 @@
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue){
 	int temp;
 
-	temp = *secondXValue;                                                                               //swap X-coordinates
+	temp = *secondXValue;                                                                               //Verwissel X-coordinaten
 	*secondXValue = *firstXValue;
 	*firstXValue = temp;
 
-	temp = *secondYValue;                                                                               //swap Y-coordinates
+	temp = *secondYValue;                                                                               //Verwissel Y-coordinaten
 	*secondYValue = *firstYValue;
 	*firstYValue = temp;
 }
@@ -68,7 +68,7 @@ void sortOrder(int X[], int Y[]) {
 void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 	int crossCountX = 0, crossCountY = 0, flagY = 0, flagX = 0, endX = 5, endY = 0, endFlag = 0;
 	int amountOfIntersects = readGrid(route);
-	driveRoute(route, 1, 0, amountOfIntersects);    //Drive to grid entrance
+	driveRoute(route, 1, 0, amountOfIntersects);    //Rij naar grid ingang
 	motorControl(70, 'R', 0.89);
 	delay(50);
 	motorControl(0, 'R', 0.89);
@@ -78,7 +78,6 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 		}
 		if((crossCountX > OrderX[i]) || (endFlag == 1 && (crossCountX > endX))){
 			motorControl(70, 'L', 0.89);
-
 			flagX = 1;
 		}
 		else if((crossCountX < OrderX[i]) || (endFlag == 1 && (crossCountX < endX))){
@@ -87,13 +86,13 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 		}
 		while((crossCountX != OrderX[i]) || (endFlag == 1 && (crossCountX != endX))){
 			if(flagX == 1){
-				//if intersection detected crossCountX++
+				//Als er een splitsing gedetecteerd wordt crossCountX++
 			}
 			else if(flagX == 2){
-				//if intersection detected crossCountX--
+				//Als er een splitsing gedetecteerd wordt crossCountX--
 			}
 			motorControl(90, 'F', 0.89);
-			// if intersection detected crossCountX++
+			//Als er een splitsing gedetecteerd wordt crossCountX++
 		}
 		motorControl(0, 'F', 0.89);
 		if((crossCountY > orderY[i]) || (endFlag == 1 && (crossCountY > endY))){
@@ -106,43 +105,31 @@ void fetchOrder(int OrderX[], int orderY[], int route[2][20]){
 		}
 		while((crossCountY != orderY[i]) || (endFlag == 1 && (crossCountY != endY))){
 			if(flagY == 1){
-				//if intersection detected crossCountY++
+				//Als er een splitsing gedetecteerd wordt crossCountX++
 			}
 			else if(flagY == 2){
-				//if intersection detected crossCountY--
+				//Als er een splitsing gedetecteerd wordt crossCountX--
 			}
 			motorControl(90, 'F', 0.89);
 		}
 		play_from_program_space(PSTR(">g32>>c32"));
 		delay(200);
 	}
-	driveRoute(route, 1, 1, amountOfIntersects);    //Drive back to home
+	driveRoute(route, 1, 1, amountOfIntersects);    //Rij terug naar begipunt
 	play_from_program_space(PSTR(">g32>>c32"));
 }
 
 int readGrid(int routes[4][20]){
 	int i = 1, grid = 0, numOfIntersects, crossing = 0, routeNum = 1;
 	int resultTemp;
-	routes[1][0] = 5;                    //Marks beginning of route
+	routes[1][0] = 5;                    //Markeert begin van de route
 	do{
 		resultTemp = checkAfslag();
 		switch(resultTemp){
 			case 0:
 			followLine();
 			break;
-			case 1:                     //It is a corner to the right
-			routes[0][i] = 1;
-			motorControl(60, 'R', 0.30);
-			followLine();
-			i++;
-			break;
-			case 2:                   //It is a corner to the left
-			routes[0][i] = 2;
-			motorControl(60, 'L', 0.30);
-			followLine();
-			i++;
-			break;
-			case 3:                  //It is a T-crossing    L R
+			case 3:                  //Het is een T-splitsing    L R
 			motorControl(60, 'L', 0.30);
 			followLine();
 			routes[0][i] = 3;
@@ -158,32 +145,26 @@ int readGrid(int routes[4][20]){
 			motorControl(80, 'F', 0.89);
 			followLine();
 			break;
-			case 6:               //It is a crossing
+			case 6:               //Het is een kruispunt
 			motorControl(60, 'L', 0.30);
 			followLine();
 			i++;
 			routes[0][i] = 6;
 			break;
-			case 7:              //Dead end
+			case 7:              //Doodlopende weg
 			routes[0][i] = 7;
 			motorControl(60, 'R', 0.30);
 			motorControl(0, 'R', 0.30);
 			break;
 			case 8:
 			grid = 1;
-			routes[0][i] = 8; //Marks end of route
+			routes[0][i] = 8; //Markeert einde van de route
 		}
 	}while(grid == 0);
 	numOfIntersects = i;
 	
-	for(i = 0; i < numOfIntersects; i++){   //Writing route towards X
+	for(i = 1; i <= numOfIntersects; i++){   //Writing route towards X
 		switch(routes[0][i]){
-			case 1:
-			routes[routeNum][i] = 1;
-			break;
-			case 2:
-			routes[routeNum][i] = 2;
-			break;
 			case 3:
 			if(routes[0][i + 1] == 7){
 				routes[routeNum][i] = 1;

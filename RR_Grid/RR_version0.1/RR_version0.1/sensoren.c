@@ -102,7 +102,7 @@ void followLine()
 		{
 			red_led(0);
 			green_led(0);
-			motorControl(SLOW,SLOW);
+			set_motors(SLOW,SLOW);
 		
 		}
 
