@@ -23,22 +23,22 @@
 #define TRUE 			1
 #define FALSE 			0
 
-#define KEY_ARROW				224
-#define KEY_ESC					27
-#define KEY_UP					72
-#define KEY_DOWN				80
-#define KEY_LEFT				75
-#define KEY_RIGHT				77
-#define KEY_S					115
-#define KEY_SQUARE_BRACKET_OPEN 91
-#define KEY_SQUARE_BRACKET_CLOSE 93
+#define KEY_ARROW					224
+#define KEY_ESC						27
+#define KEY_UP						72
+#define KEY_DOWN					80
+#define KEY_LEFT					75
+#define KEY_RIGHT					77
+#define KEY_S						115
+#define KEY_SQUARE_BRACKET_OPEN 	91
+#define KEY_SQUARE_BRACKET_CLOSE	93
 
 #define OK				0x0
 #define IN_NULL			0x1
 #define IN_OVF			0x2
 #define IN_ERR			0x3
 
-int leesInteger();
+int inputInteger();
 void printfln(const char*,...);
 const char* getfield(char* line, int num);
 

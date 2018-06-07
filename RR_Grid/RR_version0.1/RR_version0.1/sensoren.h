@@ -17,6 +17,7 @@ void initialize();
 void wachtenOpMedewerker();
 int checkDistance();
 int checkAfslag();
+int test();
 
 unsigned int sensors[5];
 unsigned int sensorValues[20];
@@ -51,9 +52,12 @@ int sensorDistance2;
 
 #define STOP 0
 #define SPEED 60
-#define ALTER 15
+#define ALTER 5
 #define SLOW SPEED - ALTER
 #define FAST SPEED + ALTER
+
+extern int situations[3];
+
 
 
 #endif /* SENSOREN_H_ */

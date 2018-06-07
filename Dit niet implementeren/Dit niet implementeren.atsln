@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Master_BOB", "..\..\..\..\Downloads\Master\Main robot code\3pi_app4\3pi_app4\Master_BOB.cproj", "{2EE50A68-AF70-4133-9A83-4F03D5B9CD47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EE50A68-AF70-4133-9A83-4F03D5B9CD47}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2EE50A68-AF70-4133-9A83-4F03D5B9CD47}.Debug|AVR.Build.0 = Debug|AVR
+		{2EE50A68-AF70-4133-9A83-4F03D5B9CD47}.Release|AVR.ActiveCfg = Release|AVR
+		{2EE50A68-AF70-4133-9A83-4F03D5B9CD47}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

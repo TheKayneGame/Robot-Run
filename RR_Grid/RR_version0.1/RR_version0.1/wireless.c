@@ -28,6 +28,66 @@ void wirMain(int orderX[], int orderY[]){
 	}
 }
 
+void wirCoord(){
+	clear();
+	unsigned char orderX[8];
+	unsigned char orderY[8];
+	int numItems = 0;
+	int numItemCount = 0;
+	do{
+		int x = 10;
+		int y = 10;
+		
+		char data[1];
+		data[0] = 'e';
+		do
+		{
+			serial_receive( data, 1 );
+			if(numItems == 0 && data[0] != 'e'){
+				
+				numItems = data[0];
+				continue;
+			}
+			
+			if( data[0] != 'e' && data[0] != 'c' )
+			{
+				if( y == 10 ){
+					y = data[0];
+				}
+				else if( x == 10 ){
+					x = data[0];
+				}
+			}
+			
+			data[0] = 'e';
+		} while ( y == 10 );
+		orderX[numItemCount] = x;
+		orderY[numItemCount] = y;
+		numItemCount++;
+	}while(numItemCount < numItems);
+	
+	//debug shizzle
+	print("Exit yes");
+	delay_ms(1000);
+	print(numItems);
+	delay_ms(1000);
+	clear();
+	for (int i=0; i < numItems; i++)
+	{
+		
+		
+		lcd_goto_xy(0, 1);
+		print_hex(orderX[i]);
+		delay_ms(1000);
+		lcd_goto_xy(0,0);
+		print_hex(orderY[i]);
+		delay_ms(1000);
+		clear();
+	}
+
+}
+
+
 void wirOrder(int orderX[], int orderY[]){
 	int items = 0;
 	int count1 = 0;
