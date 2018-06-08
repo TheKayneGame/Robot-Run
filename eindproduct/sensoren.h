@@ -25,9 +25,6 @@ int distance2;
 int sensorDistance;
 int sensorDistance2;
 
-#define high_range 1800
-#define low_range 1000
-
 #define close 20
 #define veryClose 10
 

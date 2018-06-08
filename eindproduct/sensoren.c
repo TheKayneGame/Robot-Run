@@ -161,14 +161,14 @@ int checkDistance()
 	clear();																//clear LCD
 	
 	
-	if(distance < close && distance > veryClose)						//compares if distance is less than 20 cm & bigger than 10 cm
+	if(distance < close && distance > veryClose)							//compares if distance is less than 20 cm & bigger than 10 cm
 	{
 		clear();
 		play_from_program_space(PSTR(">g32>>c32"));							//sound warning
 		print("dichtbij");													//warning on LCD
 		delay_ms(200);
 	}
-	else if(distance < veryClose && distance > 0)						//compares if distance is less than 10 cm 
+	else if(distance < veryClose && distance > 0)							//compares if distance is less than 10 cm 
 	{
 		clear();
 		play_from_program_space(PSTR(">f32>>a32"));							//sound warning
