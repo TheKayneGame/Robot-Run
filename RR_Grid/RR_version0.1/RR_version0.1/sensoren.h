@@ -11,13 +11,11 @@
 
 
 void followLine();
-void objectOmzeilen();
-void load_custom_characters();
 void initialize();
-void wachtenOpMedewerker();
+void moveObject();
 int checkDistance();
 int checkAfslag();
-int test();
+
 
 unsigned int sensors[5];
 unsigned int sensorValues[20];
@@ -28,21 +26,8 @@ int distance2;
 int sensorDistance;
 int sensorDistance2;
 
-#define high_range 1800
-#define low_range 1000
-
-#define dichtbij 20
-#define heelDichtbij 10
-
-#define STRAIGHT 0
-#define T_LEFT 5
-#define T_RIGHT 4
-#define T_LEFT_RIGHT 3
-#define FOUR_WAY_JOINT 6
-#define LEFT 2
-#define RIGHT 1
-#define DEAD_END 7
-#define GRID_HOME 8
+#define close 20
+#define veryClose 10
 
 #define SENSOR_L sensors[0]
 #define SENSOR_C_L sensors[1]

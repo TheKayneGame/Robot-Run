@@ -35,7 +35,7 @@
         <InterfaceProperties>
           <JtagDbgClock>1000000</JtagDbgClock>
           <JtagProgClock>1000000</JtagProgClock>
-          <IspClock>500000</IspClock>
+          <IspClock>125000</IspClock>
           <JtagInChain>false</JtagInChain>
           <JtagEnableExtResetOnStartSession>false</JtagEnableExtResetOnStartSession>
           <JtagDevicesBefore>0</JtagDevicesBefore>
@@ -68,6 +68,31 @@
         </dependencies>
       </framework-data>
     </AsfFrameworkConfig>
+    <avrtoolserialnumber />
+    <avrdeviceexpectedsignature>0x1E950F</avrdeviceexpectedsignature>
+    <avrtoolinterfaceclock>125000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>ISP</InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>ISP</InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>

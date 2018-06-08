@@ -5,7 +5,7 @@
 
 #define MOTOREN_H_
 
-void motorControl(int speed, char direction, float aggressionFactor);
-void wetGround()
+void motorControl(int speed, char direction, float aggressionFactor);	//Here the main function motorControl is defined.
+void wetFloor();		                                                    //Here the function wetFloor is defined.
 
 #endif
