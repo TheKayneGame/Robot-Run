@@ -32,7 +32,7 @@ long i = 0;
 int main(){
 	initialize();
 	
-	int routes[3][4];
+	int routes[4][4];
 	readGrid(routes);
 	/*int orderX[sizeOfOrder];
 	int orderY[sizeOfOrder];

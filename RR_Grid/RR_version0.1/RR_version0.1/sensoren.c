@@ -17,23 +17,23 @@ void initialize()
 
 	
 	unsigned int counter;
-	pololu_3pi_init(2000);
+	pololu_3pi_init(2000);								//initialize sensor value from 0 to 2000
 	
-	while(!button_is_pressed(BUTTON_B))
+	while(!button_is_pressed(BUTTON_B))					//this function is activated until button B is pressed.
 	{
 		int bat = read_battery_millivolts();
 		clear();
-		print_long(bat);
+		print_long(bat);								//print battery voltage in millivolts on the LCD
 		print("mV");
 		lcd_goto_xy(0,1);
-		print("druk B");
+		print("druk B");								//print instruction to continue
 		delay_ms(100);
 	}
 	
-	wait_for_button_release(BUTTON_B);
+	wait_for_button_release(BUTTON_B);					//button B is pressed
 	delay_ms(1000);
 	
-	for(counter=0;counter<80;counter++)
+	for(counter=0;counter<80;counter++)					//calibrating line sensors
 	{
 		if(counter < 20 || counter >= 60)
 		set_motors(40,-40);
@@ -45,22 +45,18 @@ void initialize()
 	
 	set_motors(0,0);
 	
-	while(!button_is_pressed(BUTTON_B))
+	while(!button_is_pressed(BUTTON_B))										//function is activated until button B is pressed
 	{
-		red_led(1);
-		unsigned int position = read_line(sensors,IR_EMITTERS_ON);
-		clear();
+		unsigned int position = read_line(sensors,IR_EMITTERS_ON);			//reading the sensors to determine the position of the robot
+		clear();															//clear LCD
 		print("  ");
-		print_long(position);
-		lcd_goto_xy(0,1);
-		print(" ");
+		print_long(position);												//print position of the robot compared to the line
 		delay_ms(100);
 	}
 	
-	wait_for_button_release(BUTTON_B);
-	clear();
+	wait_for_button_release(BUTTON_B);										//button B is pressed
+	clear();																//clear LCD
 	print("Go!");
-	red_led(1);
 
 }
 
@@ -68,29 +64,24 @@ void initialize()
 void followLine()
 {
 	
-	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);
-	read_line_sensors(sensors,IR_EMITTERS_ON);
-	/*if((SENSOR_L > 1000)&&(SENSOR_R > 1000)) {
-	print_long(SENSOR_L);
-	set_motors(0,0);
-	while(1){
-	
-	}
-	}*/
-	clear();
+	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);					//write position of the robot to an unsigned int called pos
+	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
+
+
+	clear();																//clear display
 	
 	if(pos < 1950)
 	{
-		// We are far to the right of the line: turn left.
+		
 		green_led(1);
 
-		if(pos < 1800)
+		if(pos < 1800)														//We are far to the right of the line: turn left.
 		{
 			set_motors(0,SPEED);
 		}
 		else
 		{
-			set_motors(SLOW,SPEED);
+			set_motors(SLOW,SPEED);											//we are to the right of the line: turn left.
 		}
 		
 	}
@@ -100,179 +91,102 @@ void followLine()
 		// We are far to the left of the line: turn right.
 		red_led(1);
 		
-		if(pos > 2200)
+		if(pos > 2200)														//We are far to the left of the line: turn right
 		{
 			set_motors(SPEED,0);
 		}
 		else
 		{
-			set_motors(FAST,SLOW);
+			set_motors(FAST,SLOW);											//We are to the left of the line: turn right
 		}
 	}
 	else
 	{
-		red_led(0);
-		green_led(0);
-		set_motors(SLOW,SLOW);
+		set_motors(SLOW,SLOW);												//we are on the line. move forward
 		
 	}
 
 	
 }
 
-int test(){
-	int flag = 0, turn = 0;
-	situations[0] =LOW;
-	situations[1] =LOW;
-	situations[2] =LOW;
-	read_line_sensors(sensors,IR_EMITTERS_ON);
-	int rangeHigh = 1000;
+int checkAfslag(){
+	int flag = 0;													//initialize flag and turn
+	situations[0] =LOW;														//sensor left initialize
+	situations[1] =LOW;														//sensor center initialize
+	situations[2] =LOW;														//sensor right initialize
+	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
+	int rangeHigh = 1000;													//set high range to 1000
 	
 	if(SENSOR_L > rangeHigh){
 		situations[0] = HIGH;
-		flag = 1;
+		flag = 1;															//sensor left is high, flag = 1
 	}
 	if(SENSOR_C_C > rangeHigh){
 		situations[1] = HIGH;
-		flag = 2;
+		flag = 2;															//sensor center is high, flag = 2
 	}
 	if(SENSOR_R > rangeHigh){
 		situations[2] = HIGH;
-		flag = 3;
-	}
-	
-	for(int i = 0; i < 3; i++){
-		if(situations[i] == HIGH){
-			turn++;
-		}
+		flag = 3;															//sensor right is high, flag = 3
 	}
 	
 	
 	
-	print_long(flag);
+	print_long(flag);														//print flag to LCD
 	lcd_goto_xy(0,1);
-	print_long(situations[0]);
+	print_long(situations[0]);												//print sensor data (0/1) to LCD
 	print_long(situations[1]);
 	print_long(situations[2]);
-	clear();
-	return turn;
+	clear();																//clear LCD
+	return flag;
 }
-int checkAfslag()
-{
-	read_line_sensors(sensors,IR_EMITTERS_ON);
 
-	
-	if(SENSOR_C_L > high_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
-	{
-		delay_ms(1000);
-		return LEFT; //afslag naar links
-	}
-	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
-	{
-		delay_ms(1000);
-		return RIGHT; //afslag naar rechts
-	}
-	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R > high_range)
-	{
-		delay_ms(1000);
-		return FOUR_WAY_JOINT; //kruispunt
-	}
-	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C < low_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
-	{
-		delay_ms(1000);
-		return T_LEFT_RIGHT; //t-splitsing rechtdoor
-	}
-	else if(SENSOR_L > high_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
-	{
-		delay_ms(1000);
-		return T_LEFT; //t-splitsing linksaf
-	}
-	else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C > high_range && SENSOR_C_R < low_range && SENSOR_C_R > high_range)
-	{
-		delay_ms(1000);
-		return T_RIGHT; //t-splitsing rechtsaf
-	}
-	/*else if(SENSOR_L < low_range && SENSOR_C_L < low_range && SENSOR_C_C < low_range && SENSOR_C_R < low_range && SENSOR_R < low_range)
-	{
-	return DEAD_END; //doodlopende straat
-	}*/
-	else if(SENSOR_L > high_range && SENSOR_C_L > high_range && SENSOR_C_C > high_range && SENSOR_C_R > high_range && SENSOR_R > high_range)
-	{
-		delay_ms(1000);
-		return GRID_HOME; //entry grid/home
-	}
-	return 0;
-}
 
 
 int checkDistance()
 {
 	
-	sensorDistance = analog_read(ADCH5);
-	sensorDistance2 = analog_read(ADCH7);
+	sensorDistance = analog_read(ADCH5);									//write sensor data to sensorDistance
+	sensorDistance2 = analog_read(ADCH7);									//write sensor data to sensorDistance2
 	
-	distance = (2076/(sensorDistance - 11));
-	distance2 = (2076/(sensorDistance2 - 11));
+	distance = (2076/(sensorDistance - 11));								//convert sensor data to distance in cm
+	distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
 	
-	clear();
+	clear();																//clear LCD
 	
 	
-	if(distance < dichtbij && distance > heelDichtbij)
+	if(distance < close && distance > veryClose)						    //compares if distance is less than 20 cm & bigger than 10 cm
 	{
 		clear();
-		play_from_program_space(PSTR(">g32>>c32"));
-		print("dichtbij");
+		play_from_program_space(PSTR(">g32>>c32"));							//sound warning
+		print("dichtbij");													//warning on LCD
 		delay_ms(200);
 	}
-	else if(distance < heelDichtbij && distance > 0)
+	else if(distance < veryClose && distance > 0)						    //compares if distance is less than 10 cm
 	{
 		clear();
-		play_from_program_space(PSTR(">f32>>a32"));
-		print("heeeel");
+		play_from_program_space(PSTR(">f32>>a32"));							//sound warning
+		print("heeeel");													//warning on LCD
 		lcd_goto_xy(0,1);
 		print("dichtbij");
-		motorControl(STOP,'F',0.89);
-		wachtenOpMedewerker();
-	}
-	else
-	{
-		clear();
-		print_long(distance);
+		motorControl(STOP,'F',0.89);										//robot brakes
+		moveObject();														//function that waits until the oject is removed
 	}
 
 	return 0;
 
 }
 
-void objectOmzeilen()
-{
-	motorControl(SLOW, 'L', 0.89);
-	motorControl(SLOW, 'F', 0.89);
-	
-	
-	if (distance2 < heelDichtbij)
-	{
-		motorControl(SLOW, 'F', 0.89);
-	}
-	else
-	{
-		motorControl(SLOW,'F',0.89);
-		delay(100);
-		motorControl(SLOW,'R',0.89);
-	}
-	
-}
 
-void wachtenOpMedewerker()
+void moveObject()
 {
 	while(!button_is_pressed(BUTTON_B))
 	{
-		red_led(1);
 		clear();
-		print("druk op");
+		print("druk op");													//print instruction to LCD
 		lcd_goto_xy(0,1);
 		print("B knop");
 		delay_ms(100);
 	}
-	wait_for_button_release(BUTTON_B);
+	wait_for_button_release(BUTTON_B);										//when button is released the robot will continue driving
 }
