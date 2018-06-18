@@ -12,6 +12,8 @@
 #include <pololu/orangutan.h>
 #include "wireless.h"
 
+
+//obsolete
 void wirMain(int orderX[], int orderY[]){
 	play_from_program_space(PSTR(">g32>>c32"));  // Play welcoming notes.
 	int mode = 0;
@@ -28,26 +30,33 @@ void wirMain(int orderX[], int orderY[]){
 	}
 }
 
+//start accepting DATA  for coords
 void wirCoord(){
 	clear();
+	//declare working values
 	unsigned char orderX[8];
 	unsigned char orderY[8];
 	int numItems = 0;
 	int numItemCount = 0;
+	
+	//start loop
 	do{
+		//redeclare and reinitialize looping values
 		int x = 10;
 		int y = 10;
 		
 		char data[1];
-		data[0] = 'e';
+		data[0] = 'e'; //set to unused variable
 		do
 		{
-			serial_receive( data, 1 );
+			
+			serial_receive( data, 1 );// Start receiving data
+			
 			if(numItems == 0 && data[0] != 'e'){
 				
 				numItems = data[0];
 				continue;
-			}
+			} else continue;
 			
 			if( data[0] != 'e' && data[0] != 'c' )
 			{
