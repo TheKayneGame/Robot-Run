@@ -115,17 +115,17 @@ int checkAfslag(){
 	situations[1] =LOW;														//sensor center initialize
 	situations[2] =LOW;														//sensor right initialize
 	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
-	int rangeHigh = 1000;													//set high range to 1000
+	int rangeHigh = 1500;													//set high range to 1000
 	
 	if(SENSOR_L > rangeHigh){
 		situations[0] = HIGH;
 		flag = 1;															//sensor left is high, flag = 1
 	}
-	if(SENSOR_C_C > rangeHigh){
+	else if(SENSOR_C_C > rangeHigh){
 		situations[1] = HIGH;
 		flag = 2;															//sensor center is high, flag = 2
 	}
-	if(SENSOR_R > rangeHigh){
+	else if(SENSOR_R > rangeHigh){
 		situations[2] = HIGH;
 		flag = 3;															//sensor right is high, flag = 3
 	}

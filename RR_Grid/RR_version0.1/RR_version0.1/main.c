@@ -31,16 +31,18 @@ long i = 0;
 
 int main(){
 	initialize();
-	
-	int routes[4][4];
-	readGrid(routes);
+	motorControl(100, 'F', 0.86);
+	delay(3000);
+	motorControl(0, 'F', 0.86);
+	//int routes[4][4];
+	//readGrid(routes);
 	/*int orderX[sizeOfOrder];
 	int orderY[sizeOfOrder];
 	wirCoord();
 	wirMain(orderX, orderY);
 	sortOrder(orderX, orderY);
 	clear();*/
-	driveRoute(routes, 1);
+	//driveRoute(routes, 1);
 	//fetchOrder(orderX, orderY, routes);
 	
 }

@@ -145,14 +145,14 @@ void readGrid(int routes[4][4]){
 	routes[4][0] = 3;                                                                       //Charge point to grid
 	routes[4][1] = 2;
 	routes[4][2] = 3;
-	routes[4][3] = 5;	
-	                                                                                    
+	routes[4][3] = 5;
+	
 }
 
 void driveRoute(int route[4][4], int flag){                                                //Drive the given route
 	int intersectnum = 0, decision = LOW, resultTemp, turn = 0;                            //Flag selects the route
 	
-	Next:                                                                                 
+	Next:
 	do{
 		turn = 0;
 		for(int i = 0; i < 3; i++){
@@ -163,32 +163,41 @@ void driveRoute(int route[4][4], int flag){                                     
 		followLine();
 	}while(checkAfslag() == 0);                                                           //Keep following the line if the sensor does not detect any intersections
 	
-	resultTemp = checkAfslag();                                                           //If there is more than one option, the robot has to make a decision
-	if(resultTemp > 1){                                                                    
+	resultTemp = turn;                                                                    //If there is more than one option, the robot has to make a decision
+	if(resultTemp > 1){
 		decision = HIGH;
 		red_led(1);
 	}
 	
 	checkDistance();                                                                      //Keep checking for objects on the route
-		
+	
 	if(checkAfslag() != 0){
 		
 		if(decision == HIGH){                                                            //If there is more than one turn, the robot makes a decision depending on the values in the route array
 			switch(route[flag][intersectnum]){
 				case 1:
-				motorControl(70, 'R', 0.30);
+				delay(150);
+				motorControl(70, 'R', 0.30);				
 				intersectnum++;
+				print("afslag 1");
+				delay(500);
 				goto Next;
 				case 2:
 				motorControl(70, 'L', 0.30);
 				intersectnum++;
+				print("afslag 2");
+				delay(500);
 				goto Next;
 				case 3:
 				motorControl(80, 'F', 0.89);
 				intersectnum++;
+				print("afslag 3");
+				delay(500);
 				goto Next;
 				case 5:
 				motorControl(0, 'F', 0.89);    //stop
+				print("einde");
+				delay(500);
 				break;
 				play_from_program_space(PSTR(">g32>>c32"));                            //Robot has reached destination
 
