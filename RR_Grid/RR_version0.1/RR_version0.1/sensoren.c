@@ -14,7 +14,6 @@ int situations[3]={LOW, LOW, LOW};
 
 void initialize()
 {
-
 	
 	unsigned int counter;
 	pololu_3pi_init(2000);								//initialize sensor value from 0 to 2000
@@ -110,7 +109,9 @@ void followLine()
 }
 
 int checkAfslag(){
-	int flag = 0;													//initialize flag and turn
+	play_from_program_space(PSTR(">g32>>c32"));                            
+
+	int flag = 0;													        //initialize flag and turn
 	situations[0] =LOW;														//sensor left initialize
 	situations[1] =LOW;														//sensor center initialize
 	situations[2] =LOW;														//sensor right initialize
@@ -121,11 +122,11 @@ int checkAfslag(){
 		situations[0] = HIGH;
 		flag = 1;															//sensor left is high, flag = 1
 	}
-	else if(SENSOR_C_C > rangeHigh){
+	if(SENSOR_C_C > rangeHigh){
 		situations[1] = HIGH;
 		flag = 2;															//sensor center is high, flag = 2
 	}
-	else if(SENSOR_R > rangeHigh){
+	if(SENSOR_R > rangeHigh){
 		situations[2] = HIGH;
 		flag = 3;															//sensor right is high, flag = 3
 	}
@@ -153,7 +154,6 @@ int checkDistance()
 	distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
 	
 	clear();																//clear LCD
-	
 	
 	if(distance < close && distance > veryClose)						    //compares if distance is less than 20 cm & bigger than 10 cm
 	{
