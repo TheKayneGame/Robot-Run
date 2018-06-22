@@ -102,34 +102,31 @@ void fetchOrder2(int OrderX[], int orderY[], int route[4][4]){
 	print("DoneD!");
 	int gridZero = 1;
 	
-	// 	while(checkAfslag() == 0){
-	// 		followLine();
-	// 		print("Here!");
-	//
-	// 	}
-	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
-		if(checkAfslag() != 0){
-			lcd_goto_xy(0,1);
-			print_long(orderNum);
-			while((OrderX[orderNum] != positionCurrentX) && (orderY[orderNum] != positionCurrentY)){
-				if(checkAfslag() != 0){
-					if( OrderX[orderNum] == positionCurrentX){
-						getInstructionsX(gridZero, OrderX[orderNum]);
-					}
-					else{
-						getInstructionsY(gridZero, orderY[orderNum]);
-					}
-					if((OrderX[orderNum] == positionCurrentX) && (orderY[orderNum] == positionCurrentY)){
-						motorControl(0, 'F', 0.89);
-						play_from_program_space(PSTR(">f32>>a32"));
-						orderNum++;
-						delay(3000);
-					}
-				}
-				followLine();
-			}
-		}
+	while(checkAfslag() == 0){   //geen probleem
+		followLine();
+		print("Here!");
 		
+	}
+	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
+		lcd_goto_xy(0,1);
+		print_long(orderNum);
+		while((OrderX[orderNum] != positionCurrentX) && (orderY[orderNum] != positionCurrentY)){
+			if(checkAfslag() != 0){
+				if( OrderX[orderNum] == positionCurrentX){
+					getInstructionsX(gridZero, OrderX[orderNum]);
+				}
+				else{
+					getInstructionsY(gridZero, orderY[orderNum]);
+				}
+				if((OrderX[orderNum] == positionCurrentX) && (orderY[orderNum] == positionCurrentY)){
+					motorControl(0, 'F', 0.89);
+					play_from_program_space(PSTR(">f32>>a32"));
+					orderNum++;
+					delay(3000);
+				}
+			}
+			followLine();
+		}				
 	}
 }
 
@@ -172,27 +169,24 @@ void setDirection(direction directionDesired, direction directionCurrent){
 		motorControl(70, 'R', 0.30);
 		directionCurrent = directionDesired;
 		print("R");
-		delay(500);
 		break;
 		case L:
 		motorControl(70, 'L', 0.30);
 		directionCurrent = directionDesired;
 		print("L");
-		delay(500);
 		break;
 		case T:
 		motorControl(70, 'R', 0.30);
 		motorControl(70, 'R', 0.30);
 		directionCurrent = directionDesired;
 		print("B");
-		delay(500);
 		break;
 		default:
 		break;
 	}
 }
 
-void driveRoute(int route[4][4], int flag){                                                //Drive the given route
+void driveRoute(int route[4][4], int flag){                          //Drive the given route
 	int intersectnum = 0, decision = LOW, endOfRoute = 0;            //Flag selects the route
 	
 	do{
