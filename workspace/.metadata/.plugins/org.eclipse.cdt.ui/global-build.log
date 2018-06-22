@@ -531,3 +531,949 @@ gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
 gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+16:56:30 **** Rebuild of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:21:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket());
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:21:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:21:6: error: too few arguments to function 'sendPacket'
+      sendPacket(composeMovPacket());
+      ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: declared here
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:39:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop());
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:39:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:39:5: error: too few arguments to function 'sendPacket'
+     sendPacket(composeEmergencyStop());
+     ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: declared here
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:52:7: error: conflicting types for 'composeEmergencyStop'
+ byte *composeEmergencyStop() {
+       ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:39:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop());
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:53:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:54:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:57:7: error: conflicting types for 'composeMovPacket'
+ byte *composeMovPacket(byte action, byte speed) {
+       ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:21:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket());
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:58:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:62:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+16:59:12 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:7: error: conflicting types for 'composeEmergencyStop'
+ byte *composeEmergencyStop() {
+       ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:7: error: conflicting types for 'composeMovPacket'
+ byte *composeMovPacket(byte action, byte speed) {
+       ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+16:59:12 **** Rebuild of configuration Debug for project RobotRunPC ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o stdFunc.o "..\\stdFunc.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+..\manual.c: In function 'ManualControl':
+..\manual.c:59:31: warning: passing argument 1 of 'sendCommunicate' from incompatible pointer type [-Wincompatible-pointer-types]
+    feedback = sendCommunicate(&send);
+                               ^
+In file included from ..\manual.c:9:0:
+..\communication.h:16:5: note: expected 'char *' but argument is of type 'char (*)[8]'
+ int sendCommunicate(char *lpBuffer);
+     ^~~~~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+..\order.c: In function 'Order':
+..\order.c:81:21: warning: passing argument 1 of 'getCommunicate' from incompatible pointer type [-Wincompatible-pointer-types]
+  x = getCommunicate(&buffer);
+                     ^
+In file included from ..\order.c:9:0:
+..\communication.h:15:5: note: expected 'char *' but argument is of type 'char (*)[10]'
+ int getCommunicate(char *lpBuffer);
+     ^~~~~~~~~~~~~~
+..\order.c:71:6: warning: variable 'status' set but not used [-Wunused-but-set-variable]
+  int status;
+      ^~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o batterij.o "..\\batterij.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o communication.o "..\\communication.c" 
+..\communication.c: In function 'getBattery':
+..\communication.c:196:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+..\communication.c: In function 'getCommunicate':
+..\communication.c:289:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o article.o "..\\article.c" 
+gcc -o RobotRunPC.exe article.o batterij.o communication.o main.o manual.o order.o stdFunc.o 
+17:00:02 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:8: error: conflicting types for 'composeEmergencyStop'
+ byte * composeEmergencyStop() {
+        ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:8: error: conflicting types for 'composeMovPacket'
+ byte * composeMovPacket(byte action, byte speed) {
+        ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:00:46 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: error: conflicting types for 'composeEmergencyStop'
+ byte composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:6: error: conflicting types for 'composeMovPacket'
+ byte composeMovPacket(byte action, byte speed) {
+      ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+Info: Nothing to build for RobotRunPC
+17:01:02 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: error: conflicting types for 'composeEmergencyStop'
+ byte composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:7: error: conflicting types for 'composeMovPacket'
+ byte *composeMovPacket(byte action, byte speed) {
+       ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:16: error: expected expression before ']' token
+  return packet[];
+                ^
+..\manualcontrol.c:59:7: warning: variable 'packet' set but not used [-Wunused-but-set-variable]
+  byte packet[8] = 0;
+       ^~~~~~
+..\manualcontrol.c:64:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Info: Nothing to build for RobotRunPC
+17:01:12 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: error: conflicting types for 'composeEmergencyStop'
+ byte composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:7: error: conflicting types for 'composeMovPacket'
+ byte* composeMovPacket(byte action, byte speed) {
+       ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:16: error: expected expression before ']' token
+  return packet[];
+                ^
+..\manualcontrol.c:59:7: warning: variable 'packet' set but not used [-Wunused-but-set-variable]
+  byte packet[8] = 0;
+       ^~~~~~
+..\manualcontrol.c:64:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+Info: Nothing to build for RobotRunPC
+17:01:16 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:22:17: warning: implicit declaration of function 'composeMovPacket' [-Wimplicit-function-declaration]
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: error: conflicting types for 'composeEmergencyStop'
+ byte composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:54:19: error: invalid initializer
+  byte packet[8] = 0xFFFFFFFF;
+                   ^~~~~~~~~~
+..\manualcontrol.c:55:9: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c:55:9: warning: function returns address of local variable [-Wreturn-local-addr]
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:58:7: error: conflicting types for 'composeMovPacket'
+ byte* composeMovPacket(byte action, byte speed) {
+       ^~~~~~~~~~~~~~~~
+..\manualcontrol.c:22:17: note: previous implicit declaration of 'composeMovPacket' was here
+      sendPacket(composeMovPacket(),hComm);
+                 ^~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:02:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: warning: conflicting types for 'composeEmergencyStop'
+ void composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:55:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:55:20: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:55:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:03:06 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: warning: conflicting types for 'composeEmergencyStop'
+ void composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:55:20: error: expected expression before ']' token
+  sendPacket(packet[],hComm);
+                    ^
+..\manualcontrol.c:55:22: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet[],hComm);
+                      ^~~~~
+..\manualcontrol.c:55:22: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:54:7: warning: variable 'packet' set but not used [-Wunused-but-set-variable]
+  byte packet[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+       ^~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:03:19 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: warning: conflicting types for 'composeEmergencyStop'
+ void composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:55:20: error: expected expression before ']' token
+  sendPacket(packet[],hComm);
+                    ^
+..\manualcontrol.c:55:22: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet[],hComm);
+                      ^~~~~
+..\manualcontrol.c:55:22: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:54:7: warning: variable 'packet' set but not used [-Wunused-but-set-variable]
+  byte packet[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+       ^~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:59:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:63:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:03:22 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:39: error: 'hComm' undeclared (first use in this function)
+     sendPacket(composeEmergencyStop(),hComm);
+                                       ^~~~~
+..\manualcontrol.c:40:39: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: warning: conflicting types for 'composeEmergencyStop'
+ void composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: expected expression before ']' token
+  sendPacket(packet[],hComm);
+                    ^
+..\manualcontrol.c:55:7: warning: variable 'packet' set but not used [-Wunused-but-set-variable]
+  byte packet[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+       ^~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:03:31 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:40:16: warning: implicit declaration of function 'composeEmergencyStop' [-Wimplicit-function-declaration]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:39: error: 'hComm' undeclared (first use in this function)
+     sendPacket(composeEmergencyStop(),hComm);
+                                       ^~~~~
+..\manualcontrol.c:40:39: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:40:16: warning: passing argument 1 of 'sendPacket' makes pointer from integer without a cast [-Wint-conversion]
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'int'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: At top level:
+..\manualcontrol.c:53:6: warning: conflicting types for 'composeEmergencyStop'
+ void composeEmergencyStop() {
+      ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c:40:16: note: previous implicit declaration of 'composeEmergencyStop' was here
+     sendPacket(composeEmergencyStop(),hComm);
+                ^~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:04:00 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:04:39 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char bytes_to_send[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:05:38 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:17:6: warning: variable 'done' set but not used [-Wunused-but-set-variable]
+  int done;
+      ^~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char *bytesOut, HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:05:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:17:6: warning: variable 'done' set but not used [-Wunused-but-set-variable]
+  int done;
+      ^~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:53:6: error: conflicting types for 'sendPacket'
+ BOOL sendPacket(char *bytesOut, HANDLE hComm) {
+      ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\serial.c:7:
+..\serial.h:17:6: note: previous declaration of 'sendPacket' was here
+ BOOL sendPacket(char *bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+17:06:54 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:53:6: error: conflicting types for 'sendPacket'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm) {
+      ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\serial.c:7:
+..\serial.h:17:6: note: previous declaration of 'sendPacket' was here
+ BOOL sendPacket(char *bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+17:07:18 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char **' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char *bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:07:21 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:53:6: error: conflicting types for 'sendPacket'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm) {
+      ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\serial.c:7:
+..\serial.h:17:6: note: previous declaration of 'sendPacket' was here
+ BOOL sendPacket(char *bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+17:07:25 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+..\serial.c:53:6: error: conflicting types for 'sendPacket'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm) {
+      ^~~~~~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\serial.c:7:
+..\serial.h:17:6: note: previous declaration of 'sendPacket' was here
+ BOOL sendPacket(char *bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+17:07:46 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+..\kayneLib.c: In function 'printfln':
+..\kayneLib.c:17:6: warning: variable 'done' set but not used [-Wunused-but-set-variable]
+  int done;
+      ^~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:07:56 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:08:00 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: passing argument 1 of 'sendPacket' from incompatible pointer type [-Wincompatible-pointer-types]
+  sendPacket(&packet,hComm);
+             ^
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte (*)[8] {aka unsigned char (*)[8]}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+17:08:18 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:60:19: error: invalid initializer
+  byte packet[8] = 0;
+                   ^
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+Info: Nothing to build for RobotRunPC
+17:09:16 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:64:9: warning: function returns address of local variable [-Wreturn-local-addr]
+  return packet;
+         ^~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:2: warning: 'hComm' is used uninitialized in this function [-Wuninitialized]
+  sendPacket(packet,hComm);
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+Info: Nothing to build for RobotRunPC
+17:09:44 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:64:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:64:20: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:64:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+17:09:55 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:2: warning: 'hComm' is used uninitialized in this function [-Wuninitialized]
+  sendPacket(packet,hComm);
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:2: warning: 'hComm' is used uninitialized in this function [-Wuninitialized]
+  sendPacket(packet,hComm);
+  ^~~~~~~~~~~~~~~~~~~~~~~~
+gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
+Info: Nothing to build for RobotRunPC
+19:59:59 **** Rebuild of configuration Debug for project COnsoller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o COnsoller.exe main.o manual.o order.o serial.o 
+Info: Nothing to build for Controller
+Info: Nothing to build for RobotRunPC

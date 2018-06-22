@@ -7,7 +7,7 @@
 #include "kayneLib.h"
 
 void manualControl() {
-	printf("inpunt234234234");
+	HANDLE hComm =  openPort(port);
 	int b, key;
 	while (TRUE) {
 		b = kbhit();
@@ -19,6 +19,7 @@ void manualControl() {
 				switch (key) {
 				case KEY_UP:
 					printfln("up");
+
 					break;
 				case KEY_LEFT:
 					printfln("left");
@@ -35,6 +36,9 @@ void manualControl() {
 				}
 				break;
 
+			case KEY_S:
+
+				break;
 			case KEY_ESC:
 				return;
 				break;
@@ -44,29 +48,20 @@ void manualControl() {
 		}
 	}
 
-	/*while (TRUE) {
-	 if (getch() == '\033') {
-	 getch();
-	 switch (getch()) {
-	 case 'A':
-	 printfln("up");
-	 break;
-	 case 'B':
-	 printfln("up");
-	 break;
-	 case 'C':
-	 printfln("up");
-	 break;
-	 case 'D':
-	 printfln("up");
-	 break;
-	 }
-	 }
-
-	 if (getch() == 'E') {
-	 break;
-	 }
-	 }*/
 }
 
+void composeEmergencyStop() {
+
+	byte packet[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+	sendPacket(packet,hComm);
+}
+
+void composeMovPacket(byte action, byte speed) {
+
+	byte packet[8] = {};
+	packet[0] = 1;
+	packet[1] = action;
+	packet[2] = speed;
+	sendPacket(packet,hComm);
+}
 

@@ -14,7 +14,14 @@ void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *second
 void sortOrder(int X[], int Y[]);
 void swapOne(float *firstValue, float *secondValue);
 void driveRoute(int route[4][4], int flag);
-void fetchOrder(int OrderX[], int orderY[], int route[3][4]);
+void fetchOrder(int OrderX[], int orderY[], int route[4][4]);
 void readGrid(int routes[4][4]);
 
+typedef enum { T, R, L, X} rotation;
+typedef enum { N, E, S, W} direction;
+
+void fetchOrder2(int OrderX[], int orderY[], int route[4][4]);
+void getInstructionsX(int gridZero, int orderX);
+void getInstructionsY(int gridZero, int orderY);
+void setDirection(direction directionDesired, direction directionCurrent);
 #endif

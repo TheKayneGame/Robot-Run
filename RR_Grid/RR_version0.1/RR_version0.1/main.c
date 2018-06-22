@@ -18,7 +18,7 @@ X = motor 1
 Y = motor 2
 */
 
-long i = 0;
+//long i = 0;
 
 #include "Grid.h"
 #include "wireless.h"
@@ -31,16 +31,12 @@ long i = 0;
 
 int main(){
 	initialize();
-	
 	int routes[4][4];
 	readGrid(routes);
-	/*int orderX[sizeOfOrder];
-	int orderY[sizeOfOrder];
-	wirCoord();
-	wirMain(orderX, orderY);
+	int orderX[sizeOfOrder] ={0, 3, 2, 4};
+	int orderY[sizeOfOrder] ={4, 2, 3, 0};
+	//wirMain(orderX, orderY);
 	sortOrder(orderX, orderY);
-	clear();*/
-	driveRoute(routes, 1);
-	//fetchOrder(orderX, orderY, routes);
-	
+	fetchOrder2(orderX, orderY, routes);
+	clear();
 }

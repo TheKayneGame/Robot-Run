@@ -15,6 +15,7 @@ void initialize();
 void moveObject();
 int checkDistance();
 int checkAfslag();
+int checkDecision();
 
 
 unsigned int sensors[5];
