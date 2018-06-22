@@ -1,7 +1,1 @@
-12:12:06 **** Incremental Build of configuration Debug for project Controller ****
-Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
-gcc -o Controller.exe kayneLib.o main.o manualcontrol.o serial.o 
-
-12:12:07 Build Finished (took 613ms)
-
+Info: Nothing to build for Controller
