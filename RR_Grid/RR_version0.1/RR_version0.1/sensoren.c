@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "sensoren.h"
 #include "motoren.h"
+#include "Grid.h"
 
 int situations[3]={LOW, LOW, LOW};
 
@@ -109,7 +110,6 @@ void followLine()
 }
 
 int checkAfslag(){
-	play_from_program_space(PSTR(">g32>>c32"));                            
 
 	int flag = 0;													        //initialize flag and turn
 	situations[0] =LOW;														//sensor left initialize
@@ -130,19 +130,31 @@ int checkAfslag(){
 		situations[2] = HIGH;
 		flag = 3;															//sensor right is high, flag = 3
 	}
-	
-	
-	
-	print_long(flag);														//print flag to LCD
-	lcd_goto_xy(0,1);
-	print_long(situations[0]);												//print sensor data (0/1) to LCD
-	print_long(situations[1]);
-	print_long(situations[2]);
 	clear();																//clear LCD
 	return flag;
 }
 
-
+int checkDecision()
+{
+	int decision = LOW, turn, resultTemp = 0;
+	do{
+		turn = 0;
+		checkAfslag();
+		for(int i = 0; i < 3; i++){
+			if(situations[i] == HIGH){                                                     //Counts number of possible turns
+				turn++;
+			}
+		}
+		followLine();
+		//	checkDistance();
+	}while(checkAfslag() == 0);                                                           //Keep following the line if the sensor does not detect any intersections
+	
+	resultTemp = turn;                                                                    //If there is more than one option, the robot has to make a decision
+	if(resultTemp > 1){
+		decision = HIGH;
+	}
+	return decision;
+}
 
 int checkDistance()
 {

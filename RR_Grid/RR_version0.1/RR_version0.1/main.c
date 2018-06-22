@@ -18,7 +18,7 @@ X = motor 1
 Y = motor 2
 */
 
-long i = 0;
+//long i = 0;
 
 #include "Grid.h"
 #include "wireless.h"
