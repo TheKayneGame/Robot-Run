@@ -37,6 +37,6 @@ int main(){
 	int orderY[sizeOfOrder] ={4, 2, 3, 0};
 	//wirMain(orderX, orderY);
 	sortOrder(orderX, orderY);
-	fetchOrder2(orderX, orderY, routes);
+	fetchOrder3(orderX, orderY, routes);
 	clear();
 }

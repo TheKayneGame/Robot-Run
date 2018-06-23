@@ -12,7 +12,7 @@
 #include <pololu/3pi.h>
 #include <avr/pgmspace.h>
 
-direction directionCurrent;
+direction directionCurrent = N;
 int positionCurrentX, positionCurrentY;
 
 
@@ -97,66 +97,106 @@ void readGrid(int routes[4][4]){
 	routes[4][3] = 5;
 	
 }
-void fetchOrder2(int OrderX[], int orderY[], int route[4][4]){
-	driveRoute(route, 0);
-	print("DoneD!");
-	int gridZero = 1;
+void fetchOrder3(int orderX[], int orderY[], int route[4][4]){
+	int xCoordinate = 0, yCoordinate = 0;
 	
-	while(checkAfslag() == 0){   //geen probleem
-		followLine();
-		print("Here!");
-		
-	}
 	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
-		lcd_goto_xy(0,1);
-		print_long(orderNum);
-		while((OrderX[orderNum] != positionCurrentX) && (orderY[orderNum] != positionCurrentY)){
-			if(checkAfslag() != 0){
-				if( OrderX[orderNum] == positionCurrentX){
-					getInstructionsX(gridZero, OrderX[orderNum]);
-				}
-				else{
-					getInstructionsY(gridZero, orderY[orderNum]);
-				}
-				if((OrderX[orderNum] == positionCurrentX) && (orderY[orderNum] == positionCurrentY)){
-					motorControl(0, 'F', 0.89);
-					play_from_program_space(PSTR(">f32>>a32"));
-					orderNum++;
-					delay(3000);
-				}
+		if(orderX[orderNum] != xCoordinate){
+			if(orderX[orderNum] > xCoordinate){
+				setDirection(E, directionCurrent);
 			}
+			if(orderX[orderNum] < xCoordinate){
+				setDirection(W, directionCurrent);
+			}
+			followStraightLine(&xCoordinate, orderX);
+		}
+		
+		if(orderY[orderNum] != yCoordinate){
+			if(orderY[orderNum] > yCoordinate){
+				setDirection(N, directionCurrent);
+			}
+			if(orderY[orderNum] < yCoordinate){
+				setDirection(S, directionCurrent);
+			}
+			followStraightLine(&yCoordinate, orderY);
+		}
+		motorControl(0, 'F', 0.89);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
+		play_from_program_space(PSTR(">f32>>a32"));
+		delay(3000);
+	}		
+}
+
+void followStraightLine(int *coordinate, int coordinateDesired){
+	while(coordinate != coordinateDesired){
+		do{
 			followLine();
-		}				
+		}while(checkDecision() == HIGH);
+		
+		coordinateDesired++;
+		motorControl(70, 'F', 0.89);      //moet korte stoot geven zodat de robot over kruispunt heen komt, nog kijkeb hoe har / lang
 	}
 }
 
-void getInstructionsX(int gridZero, int orderX){
-	if(gridZero){
-		positionCurrentX = 0;
-		directionCurrent = N;
-	}
-	
-	if(orderX > positionCurrentX){
-		setDirection(E, directionCurrent);
-	}
-	else{
-		setDirection(W, directionCurrent);
-	}
-}
-
-void getInstructionsY(int gridZero, int orderY){
-	if(gridZero){
-		positionCurrentY = 0;
-		directionCurrent = N;
-	}
-	
-	if(orderY > positionCurrentY){
-		setDirection(N, directionCurrent);
-	}
-	else{
-		setDirection(S, directionCurrent);
-	}
-}
+// void fetchOrder2(int OrderX[], int orderY[], int route[4][4]){
+// 	driveRoute(route, 0);
+// 	print("DoneD!");
+// 	int gridZero = 1;
+// 	
+// 	while(checkAfslag() == 0){   //geen probleem
+// 		followLine();
+// 		print("Here!");
+// 		
+// 	}
+// 	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
+// 		lcd_goto_xy(0,1);
+// 		print_long(orderNum);
+// 		while((OrderX[orderNum] != positionCurrentX) || (orderY[orderNum] != positionCurrentY)){
+// 			if(checkAfslag() != 0){
+// 				if( OrderX[orderNum] == positionCurrentX){
+// 					getInstructionsX(gridZero, OrderX[orderNum]);
+// 				}
+// 				else{
+// 					getInstructionsY(gridZero, orderY[orderNum]);
+// 				}
+// 				if((OrderX[orderNum] == positionCurrentX) && (orderY[orderNum] == positionCurrentY)){
+// 					motorControl(0, 'F', 0.89);
+// 					play_from_program_space(PSTR(">f32>>a32"));
+// 					orderNum++;
+// 					delay(3000);
+// 				}
+// 			}
+// 			followLine();
+// 		}
+// 	}
+// }
+// 
+// void getInstructionsX(int gridZero, int orderX){
+// 	if(gridZero){
+// 		positionCurrentX = 0;
+// 		directionCurrent = N;
+// 	}
+// 	
+// 	if(orderX > positionCurrentX){
+// 		setDirection(E, directionCurrent);
+// 	}
+// 	else{
+// 		setDirection(W, directionCurrent);
+// 	}
+// }
+// 
+// void getInstructionsY(int gridZero, int orderY){
+// 	if(gridZero){
+// 		positionCurrentY = 0;
+// 		directionCurrent = N;
+// 	}
+// 	
+// 	if(orderY > positionCurrentY){
+// 		setDirection(N, directionCurrent);
+// 	}
+// 	else{
+// 		setDirection(S, directionCurrent);
+// 	}
+// }
 
 void setDirection(direction directionDesired, direction directionCurrent){
 	rotation orientation[4][4] ={{X, R, T, L},
@@ -183,6 +223,7 @@ void setDirection(direction directionDesired, direction directionCurrent){
 		break;
 		default:
 		break;
+		clear();
 	}
 }
 
