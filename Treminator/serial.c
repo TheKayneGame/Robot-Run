@@ -107,17 +107,17 @@ void receiveData(HANDLE hComm) {
 		DWORD NoBytesRead;                     // Bytes read by ReadFile()
 		int i = 0;
 
+		portStatus = SetCommMask(hComm, EV_RXCHAR);
+
 		if (portStatus == FALSE)
 			printf("\n\n    Error! in Setting CommMask");
-
-		/*------------------------------------ Setting WaitComm() Event   ----------------------------------------*/
 
 		portStatus = WaitCommEvent(hComm, &dwEventMask, NULL); //Wait for the character to be received
 		printf("\nKOM HIER");
 		/*-------------------------- Program will Wait here till a Character is received ------------------------*/
 
 		if (portStatus == FALSE) {
-			printf("\n    Error! in Setting WaitCommEvent()");
+			printf("\n    Error! in Setting WaitCommEvent()\n");
 		} else {
 			do {
 				portStatus = ReadFile(hComm, &TempChar, sizeof(TempChar), &NoBytesRead,
@@ -127,8 +127,8 @@ void receiveData(HANDLE hComm) {
 			} while (NoBytesRead > 0);
 
 			/*------------Printing the RXed String to Console----------------------*/
-			SerialBuffer[2] = '\0';
-			printf("%s", SerialBuffer);
+			//SerialBuffer[2] = '\0';
+			printf("%s\n", SerialBuffer);
 		}
 }
 
