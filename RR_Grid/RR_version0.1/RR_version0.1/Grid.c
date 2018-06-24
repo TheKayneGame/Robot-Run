@@ -127,12 +127,24 @@ void fetchOrder3(int orderX[], int orderY[], int route[4][4]){
 }
 
 void followStraightLine(int *coordinate, int coordinateDesired){
+	int biggerThan = 2;
+	if(*coordinate > coordinateDesired){
+		biggerThan = 1;
+	}
+	else{
+		biggerThan = 0;
+	}
 	while(coordinate != coordinateDesired){
 		do{
 			followLine();
 		}while(checkDecision() == HIGH);
 		
-		coordinateDesired++;
+		if(biggerThan == 1){
+			*coordinate++;
+		}
+		else if(biggerThan == 0{
+			*coordinate--;
+		}
 		motorControl(70, 'F', 0.89);      //moet korte stoot geven zodat de robot over kruispunt heen komt, nog kijkeb hoe har / lang
 	}
 }
