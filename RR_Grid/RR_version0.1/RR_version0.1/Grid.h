@@ -24,4 +24,7 @@ void fetchOrder2(int OrderX[], int orderY[], int route[4][4]);
 void getInstructionsX(int gridZero, int orderX);
 void getInstructionsY(int gridZero, int orderY);
 void setDirection(direction directionDesired, direction directionCurrent);
+
+void fetchOrder3(int OrderX[], int orderY[], int route[4][4]);
+void followStraightLine(int *coordinate, int coordinateDesired);
 #endif
