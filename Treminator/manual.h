@@ -14,7 +14,7 @@
 #include <windows.h>
 
 
-char * keyboard();
+int keyboard();
 
 BOOL manual(char port[16]);
 
