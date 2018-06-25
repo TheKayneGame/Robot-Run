@@ -56,10 +56,10 @@ HANDLE openPort(char port[16]) {
 		return 0;
 	}
 
-	dcbSerialParams.BaudRate = CBR_9600;      // Setting BaudRate = 9600
-	dcbSerialParams.ByteSize = 8;             // Setting ByteSize = 8
-	dcbSerialParams.StopBits = ONESTOPBIT;    // Setting StopBits = 1
-	dcbSerialParams.Parity = NOPARITY;      // Setting Parity = None
+	dcbSerialParams.BaudRate 	= CBR_9600;      // Setting BaudRate = 9600
+	dcbSerialParams.ByteSize	= 8;             // Setting ByteSize = 8
+	dcbSerialParams.StopBits 	= ONESTOPBIT;    // Setting StopBits = 1
+	dcbSerialParams.Parity 		= NOPARITY;      // Setting Parity = None
 
 	portStatus = SetCommState(hComm, &dcbSerialParams); //Configuring the port according to settings in DCB
 
@@ -70,11 +70,11 @@ HANDLE openPort(char port[16]) {
 
 	COMMTIMEOUTS timeouts = { 0 };
 
-	timeouts.ReadIntervalTimeout = 100;
-	timeouts.ReadTotalTimeoutConstant = 200;
-	timeouts.ReadTotalTimeoutMultiplier = 10;
-	timeouts.WriteTotalTimeoutConstant = 100;
-	timeouts.WriteTotalTimeoutMultiplier = 100;
+	timeouts.ReadIntervalTimeout         = 50; // in milliseconds
+	timeouts.ReadTotalTimeoutConstant    = 50; // in milliseconds
+	timeouts.ReadTotalTimeoutMultiplier  = 10; // in milliseconds
+	timeouts.WriteTotalTimeoutConstant   = 50; // in milliseconds
+	timeouts.WriteTotalTimeoutMultiplier = 10; // in milliseconds
 
 	if (SetCommTimeouts(hComm, &timeouts) == FALSE) {
 		printf("Error Setting timeout");
@@ -97,6 +97,7 @@ void sendData(char *lpBuffer, HANDLE hComm) {
 	portStatus = WriteFile(hComm, lpBuffer, dNoOFBytestoWrite,
 			&dNoOfBytesWritten,
 			NULL); // Send the data
+	printf("%s\n", lpBuffer);
 }
 
 //function to read bytes
@@ -126,7 +127,7 @@ void receiveData(HANDLE hComm) {
 				i++;
 			} while (NoBytesRead > 0);
 
-			/*------------Printing the RXed String to Console----------------------*/
+			/*------------Printing the RX Buffer----------------------*/
 			//SerialBuffer[2] = '\0';
 			printf("%s\n", SerialBuffer);
 		}
