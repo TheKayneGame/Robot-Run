@@ -115,7 +115,6 @@ void receiveData(HANDLE hComm) {
 		printf("\n\n    Error! in Setting CommMask");
 
 	portStatus = WaitCommEvent(hComm, &dwEventMask, NULL); //Wait for the character to be received
-	printf("\nKOM HIER");
 	/*-------------------------- Program will Wait here till a Character is received ------------------------*/
 
 	if (portStatus == FALSE) {
