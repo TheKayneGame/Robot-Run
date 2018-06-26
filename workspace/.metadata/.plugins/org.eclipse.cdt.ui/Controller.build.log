@@ -1,1 +1,38 @@
-Info: Nothing to build for Controller
+10:50:45 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+
+10:50:45 Build Finished (took 185ms)
+

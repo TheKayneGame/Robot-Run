@@ -31,10 +31,11 @@ Y = motor 2
 
 int main(){
 	initialize();
+	serial_set_baud_rate(9600);
 	int routes[4][4];
 	readGrid(routes);
-	int orderX[sizeOfOrder] ={0, 3, 2, 4};
-	int orderY[sizeOfOrder] ={4, 2, 3, 0};
+	int orderX[sizeOfOrder] ={1, 1, 1, 1};
+	int orderY[sizeOfOrder] ={4, 3, 3, 3};
 	//wirMain(orderX, orderY);
 	sortOrder(orderX, orderY);
 	fetchOrder3(orderX, orderY, routes);

@@ -7,29 +7,30 @@
 
 #include "kayneLib.h"
 
-char * keyboard() {
+int keyboard() {
 	int b, key;
-	while (TRUE) {
+	while (1) {
 		b = kbhit();
 		if (b != 0) {
+
 			switch (getch()) {
 			case 224:
 				key = getch();
 				switch (key) {
 				case KEY_UP:
-					return "101";
+					return 1;
 					break;
 				case KEY_LEFT:
-					return "103";
+					return 3;
 					break;
 				case KEY_DOWN:
-					return "102";
+					return 2;
 					break;
 				case KEY_RIGHT:
-					return "104";
+					return 4;
 					break;
 				default:
-					return "222";
+					return 0;
 					break;
 				}
 				break;
@@ -38,23 +39,23 @@ char * keyboard() {
 
 				break;
 			case KEY_ESC:
-				return "p";
+				return 7;
 				break;
 			default:
-				return "222";
+				return 0;
 				break;
 
 			}
-
-		}else{return "222";}
+		}
 	}
+	return 0;
 }
 
 BOOL manual(char port[16]) {
 	BOOL active = TRUE;
 	HANDLE hComm;
-	char buffer[8] = "222";
-	char bufferPrev[8] = "222";
+	char buffer[2] = { 0, '\0' };
+	char bufferPrev[2] = { 0, '\0' };
 
 	printf("Handmatige besturing\n"
 			"\n=======================================================\n"
@@ -62,33 +63,15 @@ BOOL manual(char port[16]) {
 			">2< Gebruik ESC om het terug te keren naar de selector\n"
 			"=======================================================\n\n");
 	while (active) {
-		strcpy(buffer, keyboard());
-		if (!strcmp(buffer, bufferPrev)) {
-			printfln("nop");
-			continue;
-		}
-		strcpy(bufferPrev, buffer);
-
-		if (!strcmp(buffer, "p")) {
-			system("cls");
-			hComm = openPort(port);
-			sendData(buffer, hComm);
-			closePort(hComm);
-			return FALSE;
-		}
-
-		else {
-			//position to send the bytes and check connection;
+		buffer[0] = keyboard();
+		if (buffer[0] != bufferPrev[0]) {
 			if (portAlive(port)) {
 				hComm = openPort(port);
 				sendData(buffer, hComm);
-				closePort(hComm);
-			} else {
-				Sleep(2000);
-				return FALSE;
+				CloseHandle(hComm);
+				bufferPrev[0] = buffer[0];
 			}
 		}
-
 	}
 	return TRUE;
 }

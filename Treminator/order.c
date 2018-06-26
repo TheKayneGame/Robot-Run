@@ -43,9 +43,8 @@ void inputOrder(char port[16], int mode) {
 	HANDLE hComm;
 
 	system("cls");
-	buffer = getch();
-	if (isdigit(buffer)) {
-		int items = buffer - 48;
+	buffer = leesInteger();
+		char items = buffer;
 		data = (char *) malloc(items * 2 + 1);
 		data[0] = buffer;
 
@@ -70,7 +69,7 @@ void inputOrder(char port[16], int mode) {
 				tel = (items * 2);
 			}
 		}
-	}
+
 	free(data);
 
 }
