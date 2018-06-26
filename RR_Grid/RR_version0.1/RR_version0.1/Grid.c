@@ -12,7 +12,6 @@
 #include <pololu/3pi.h>
 #include <avr/pgmspace.h>
 
-direction directionCurrent = N;
 int positionCurrentX, positionCurrentY;
 
 
@@ -71,12 +70,16 @@ void sortOrder(int X[], int Y[]) {                                              
 
 
 
-void readGrid(int routes[4][4]){
+void readGrid(int routes[4][8]){
 	
-	//routes[0][0] = 2;                                                                         //Home to grid
-	routes[0][0] = 3;
-	routes[0][1] = 2;
-	routes[0][2] = 5;
+	routes[0][0] = 2;                                                                         //Home to grid
+	routes[0][1] = 1;
+	routes[0][2] = 2;
+	routes[0][3] = 1;
+	routes[0][4] = 1;
+	routes[0][5] = 3;
+	routes[0][6] = 2;
+	routes[0][7] = 5;
 	
 	routes[1][0] = 1;                                                                        //Home to charge point
 	routes[1][1] = 1;
@@ -97,41 +100,63 @@ void readGrid(int routes[4][4]){
 	routes[4][3] = 5;
 	
 }
-void fetchOrder3(int orderX[], int orderY[], int route[4][4]){
-	//driveRoute(route, 0);
-	do{
-		followLine();
-	}while(checkDecision() != LOW);
-	
-	int xCoordinate = 0, yCoordinate = 0;
-	
-	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
-		if(orderX[orderNum] != xCoordinate){
-			if(orderX[orderNum] > xCoordinate){
-				setDirection(W, directionCurrent);
-			}
-			if(orderX[orderNum] < xCoordinate){
-				setDirection(E, directionCurrent);
-			}
-			followStraightLine(&xCoordinate, orderX[orderNum]);
-			print("Hoi :D");
-		}
-		
-		if(orderY[orderNum] != yCoordinate){
-			if(orderY[orderNum] > yCoordinate){
-				setDirection(N, directionCurrent);
-			}
-			if(orderY[orderNum] < yCoordinate){
-				setDirection(S, directionCurrent);
-			}
-			followStraightLine(&yCoordinate, orderY[orderNum]);
-			print("Hoi2 :D");
-		}
-		set_motors(0,0);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
-		play_from_program_space(PSTR(">f32>>a32"));
-		delay(3000);
-	}
-}
+
+// void fetchOrder4(int orderX[], int orderY[], int route[4][8]){
+// 	int afslag = 0;
+// 	do{
+// 		read_line_sensors(sensors,IR_EMITTERS_ON);
+// 		clear();
+// 		if(!checkAfslag()){
+// 			followLine();
+// 		}
+// 		if(checkAfslag()){
+// 			afslag++;
+// 			print_long(afslag);
+// 			delay_ms(500);
+// 		}
+// 	}while(afslag != 4);
+// 	set_motors(0,0);
+// 	delay_ms(10000);
+// }
+// 
+// void fetchOrder3(int orderX[], int orderY[], int route[4][8]){
+// 	clear();
+// 	do{
+// 		read_line_sensors(sensors,IR_EMITTERS_ON);
+// 		followLine();
+// 	}while(!checkAfslag());
+// 	
+// 	int xCoordinate = 0, yCoordinate = 0;
+// 
+// 	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
+// 		clear();
+// 		if(orderX[orderNum] != xCoordinate){
+// 			if(orderX[orderNum] > xCoordinate){
+// 				setDirection(W, directionCurrent);
+// 				delay_ms(200);
+// 			}
+// 			if(orderX[orderNum] < xCoordinate){
+// 				setDirection(E, directionCurrent);
+// 				delay_ms(200);
+// 			}
+// 			followStraightLine(&xCoordinate, orderX[orderNum]);
+// 		}
+// 		if(orderY[orderNum] != yCoordinate){
+// 			if(orderY[orderNum] > yCoordinate){
+// 				setDirection(N, directionCurrent);
+// 				delay_ms(200);
+// 			}
+// 			if(orderY[orderNum] < yCoordinate){
+// 				setDirection(S, directionCurrent);
+// 				delay_ms(200);
+// 			}
+// 			followStraightLine(&yCoordinate, orderY[orderNum]);
+// 		}
+// 		set_motors(0,0);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
+// 		play_from_program_space(PSTR(">f32>>a32"));
+// 		delay(3000);
+// 	}
+// }
 
 void followStraightLine(int *coordinate, int coordinateDesired){
 	int biggerThan = 2;
@@ -145,18 +170,22 @@ void followStraightLine(int *coordinate, int coordinateDesired){
 	while(*coordinate != coordinateDesired){
 		do{
 			followLine();
-		}while(checkDecision() == HIGH);
+		}while(!checkAfslag());
 		if(biggerThan == 1){
 			*coordinate = *coordinate + 1;
+			print_long(*coordinate);
 			play_from_program_space(PSTR(">f32>>a32"));
 			//print_long(*coordinate);
-			delay(50);
+			delay(200);
+			clear();
 		}
 		else if(biggerThan == 0){
-			*coordinate = *coordinate - 1;			
+			*coordinate = *coordinate - 1;
+			print_long(*coordinate);
 			play_from_program_space(PSTR(">f32>>a32"));
 			//print_long(*coordinate);
-			delay(50);
+			delay(200);
+			clear();
 		}
 		motorControl(50, 'F', 0.30);      //moet korte stoot geven zodat de robot over kruispunt heen komt, nog kijken hoe hard / lang
 	}
@@ -229,61 +258,56 @@ void setDirection(direction directionDesired, direction directionCurrent){
 	{T, L, X, R},
 	{R, T, L, X}};
 	
-	switch(orientation[directionDesired][directionCurrent]){
-		case R:
-		motorControl(60, 'R', 0.20);
-		directionCurrent = directionDesired;
-		break;
-		case L:
-		motorControl(60, 'L', 0.20);
-		directionCurrent = directionDesired;
-		break;
-		case T:
-		motorControl(60, 'R', 0.20);
-		motorControl(60, 'R', 0.20);
-		directionCurrent = directionDesired;
-		break;
-		default:
-		break;
-		clear();
+	if(directionCurrent != directionDesired){
+		switch(orientation[directionDesired][directionCurrent]){
+			case R:
+			motorControl(60, 'R', 0.25);
+			directionCurrent = directionDesired;
+			break;
+			case L:
+			motorControl(60, 'L', 0.25);
+			directionCurrent = directionDesired;
+			break;
+			case T:
+			motorControl(60, 'R', 0.25);
+			motorControl(60, 'R', 0.25);
+			directionCurrent = directionDesired;
+			break;
+			default:
+			break;
+			clear();
+		}
 	}
+	
 }
 
-void driveRoute(int route[4][4], int flag){                          //Drive the given route
+void driveRoute(int route[4][8], int flag){                          //Drive the given route
 	int intersectnum = 0, decision = LOW, endOfRoute = 0;            //Flag selects the route
 	
-	do{
-		decision = checkDecision();
-		
-		if(checkAfslag() != 0){
-			
-			if(decision == HIGH){                                                          //If there is more than one turn, the robot makes a decision depending on the values in the route array
-				switch(route[flag][intersectnum]){
-					case 1:
-					delay(50);
-					motorControl(70, 'R', 0.30);
-					intersectnum++;
-					break;
-					case 2:
-					delay(50);
-					motorControl(70, 'L', 0.30);
-					intersectnum++;
-					break;
-					case 3:
-					delay(50);
-					motorControl(60, 'F', 0.89);
-					intersectnum++;
-					break;
-					case 5:
-					motorControl(0, 'F', 0.30);
-					green_led(1);                            //Robot has reached destination
-					endOfRoute = 1;
-
-					break;
-				}
-				//clear();
-			}
-		}
-	}while(endOfRoute !=  1);
-	delay(2000);
+	set_motors(60,60);
+	play_from_program_space(PSTR(">f32>>a32"));
+	delay_ms(190);
+	set_motors(0,0);
+	
+	switch(route[0][intersectnum]){
+		case 1:
+		motorControl(60, 'R', 0.25);
+		intersectnum++;
+		break;
+		case 2:
+		motorControl(60, 'L', 0.25);
+		intersectnum++;
+		break;
+		case 3:
+		//motorControl(60, 'F', 0.89);
+		intersectnum++;
+		break;
+		case 5:
+		motorControl(0, 'F', 0.30);
+		green_led(1);                            //Robot has reached destination
+		play_from_program_space(PSTR(">f32>>a32"));
+		delay_ms(1000);
+		endOfRoute = 1;
+		break;
+	}
 }

@@ -13,6 +13,12 @@
 
 int situations[3]={LOW, LOW, LOW};
 
+int integral;
+int last_proportional;
+int proportional;
+int derivative;
+
+
 void initialize()
 {
 	
@@ -60,78 +66,53 @@ void initialize()
 
 }
 
-
-void followLine()
-{
-	
-	unsigned int pos = read_line(sensors,IR_EMITTERS_ON);					//write position of the robot to an unsigned int called pos
-	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
-
-
-	clear();																//clear display
-	
-	if(pos < 1950)
-	{
-		
-		green_led(1);
-
-		if(pos < 1800)														//We are far to the right of the line: turn left.
-		{
-			set_motors(0,SPEED);
-		}
-		else
-		{
-			set_motors(SLOW,SPEED);											//we are to the right of the line: turn left.
-		}
-		
+int checkAfslag(){
+	int flag;
+	if(SENSOR_L < 800 && SENSOR_R < 800){
+		flag = 0;
 	}
-	
-	else if (pos > 2050)
-	{
-		// We are far to the left of the line: turn right.
-		red_led(1);
-		
-		if(pos > 2200)														//We are far to the left of the line: turn right
-		{
-			set_motors(SPEED,0);
-		}
-		else
-		{
-			set_motors(FAST,SLOW);											//We are to the left of the line: turn right
-		}
+	else{
+		 flag = 1;
 	}
-	else
-	{
-		set_motors(SLOW,SLOW);												//we are on the line. move forward
-		
-	}
-
-	
+	return flag;
 }
 
-int checkAfslag(){
-
-	int flag = 0;													        //initialize flag and turn
-	situations[0] =LOW;														//sensor left initialize
-	situations[1] =LOW;														//sensor center initialize
-	situations[2] =LOW;														//sensor right initialize
-	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
-	int rangeHigh = 1500;													//set high range to 1000
+void followLine(){
+	// Get the position of the line.  Note that we *must* provide
+	// the "sensors" argument to read_line() here, even though we
+	// are not interested in the individual sensor readings.
+	unsigned int position = read_line(sensors,IR_EMITTERS_ON);
 	
-	if(SENSOR_L > rangeHigh){
-		situations[0] = HIGH;
-		flag = 1;															//sensor left is high, flag = 1
-	}
-	if(SENSOR_C_C > rangeHigh){
-		situations[1] = HIGH;
-		flag = 2;															//sensor center is high, flag = 2
-	}
-	if(SENSOR_R > rangeHigh){
-		situations[2] = HIGH;
-		flag = 3;															//sensor right is high, flag = 3
-	}
-	clear();																//clear LCD
-	return flag;
+	// The "proportional" term should be 0 when we are on the line.
+	int proportional = ((int)position) - 2000;
+	
+	// Compute the derivative (change) and integral (sum) of the
+	// position.
+	int derivative = proportional - last_proportional;
+	integral += proportional;
+	
+	// Remember the last position.
+	last_proportional = proportional;
+
+	// Compute the difference between the two motor power settings,
+	// m1 - m2.  If this is a positive number the robot will turn
+	// to the right.  If it is a negative number, the robot will
+	// turn to the left, and the magnitude of the number determines
+	// the sharpness of the turn.
+	int power_difference = proportional/20 + integral/10000 + derivative*3/2;
+	
+	// Compute the actual motor settings.  We never set either motor
+	// to a negative value.
+	const int max = 70;
+	if(power_difference > max)
+	power_difference = max;
+	if(power_difference < -max)
+	power_difference = -max;
+	
+	if(power_difference < 0)
+	set_motors(max+power_difference, max);
+	else
+	set_motors(max, max-power_difference);
 }
 
 int checkDecision()
@@ -153,6 +134,7 @@ int checkDecision()
 	if(resultTemp > 1){
 		decision = HIGH;
 	}
+	delay(100);
 	return decision;
 }
 
