@@ -10,7 +10,7 @@
 #include "sensoren.h"
 #include "motoren.h"
 
-int situations[3]={LOW, LOW, LOW};
+int situations[2]={LOW, LOW};
 
 void initialize()
 {
@@ -112,25 +112,21 @@ void followLine()
 int checkAfslag(){
 	int flag = 0, turn = 0;													//initialize flag and turn
 	situations[0] =LOW;														//sensor left initialize
-	situations[1] =LOW;														//sensor center initialize
-	situations[2] =LOW;														//sensor right initialize
+	situations[1] =LOW;														//sensor right initialize
 	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
-	int rangeHigh = 1000;													//set high range to 1000
+	int rangeHigh = 800;													//set high range to 1000
 	
 	if(SENSOR_L > rangeHigh){												
 		situations[0] = HIGH;
 		flag = 1;															//sensor left is high, flag = 1
 	}
-	if(SENSOR_C_C > rangeHigh){
-		situations[1] = HIGH;
-		flag = 2;															//sensor center is high, flag = 2
-	}
+	
 	if(SENSOR_R > rangeHigh){
-		situations[2] = HIGH;
-		flag = 3;															//sensor right is high, flag = 3
+		situations[1] = HIGH;
+		flag = 2;															//sensor right is high, flag = 3
 	}
 	
-	for(int i = 0; i < 3; i++){
+	for(int i = 0; i < 2; i++){
 		if(situations[i] == HIGH){
 			turn++;															//turn left when left sensor is high, move forward wen center sensor is high, turn right when right sensor is high
 		}
