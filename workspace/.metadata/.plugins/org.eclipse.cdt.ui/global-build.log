@@ -3626,3 +3626,744 @@ Info: Nothing to build for RobotRunPC
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
 gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:23:54 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:23:54 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:28:33 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+Info: Nothing to build for Treminator
+Info: Nothing to build for COnsoller
+23:28:34 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+Info: Nothing to build for Treminator
+Info: Nothing to build for COnsoller
+23:28:37 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:28:38 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+..\manual.c: In function 'retrieveBatteryStatus':
+..\manual.c:96:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:29:12 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+Info: Nothing to build for Treminator
+Info: Nothing to build for COnsoller
+23:29:51 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:29:51 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:31:22 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+Info: Nothing to build for Treminator
+Info: Nothing to build for COnsoller
+23:31:25 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:31:26 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:36:10 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:36:11 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:42:06 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:42:06 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+..\order.c: In function 'inputOrder':
+..\order.c:63:25: warning: array subscript has type 'char' [-Wchar-subscripts]
+   data_to_send[0] = data[tel];
+                         ^
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:43:03 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:43:03 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:48:58 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:48:58 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o kayneLib.o "..\\kayneLib.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+23:53:07 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:53:07 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Treminator.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for COnsoller
+23:53:13 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+23:53:13 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+00:00:08 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+00:00:08 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o serial.o "..\\serial.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o order.o "..\\order.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/ld.exe: cannot open output file Treminator.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+Info: Nothing to build for COnsoller
+00:00:33 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+00:00:33 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+00:02:55 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+00:02:55 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 
+Info: Nothing to build for COnsoller
+00:04:30 **** Incremental Build of configuration Debug for project Controller ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
+..\manualcontrol.c: In function 'manualControl':
+..\manualcontrol.c:10:27: error: 'port' undeclared (first use in this function)
+  HANDLE hComm =  openPort(port);
+                           ^~~~
+..\manualcontrol.c:10:27: note: each undeclared identifier is reported only once for each function it appears in
+..\manualcontrol.c:10:9: warning: unused variable 'hComm' [-Wunused-variable]
+  HANDLE hComm =  openPort(port);
+         ^~~~~
+..\manualcontrol.c: In function 'composeEmergencyStop':
+..\manualcontrol.c:56:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:56:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+..\manualcontrol.c: In function 'composeMovPacket':
+..\manualcontrol.c:65:20: error: 'hComm' undeclared (first use in this function)
+  sendPacket(packet,hComm);
+                    ^~~~~
+..\manualcontrol.c:65:13: warning: pointer targets in passing argument 1 of 'sendPacket' differ in signedness [-Wpointer-sign]
+  sendPacket(packet,hComm);
+             ^~~~~~
+In file included from ..\kayneLib.h:19:0,
+                 from ..\manualcontrol.c:7:
+..\serial.h:17:6: note: expected 'char *' but argument is of type 'byte * {aka unsigned char *}'
+ BOOL sendPacket(char bytesOut[8], HANDLE hComm);
+      ^~~~~~~~~~
+Info: Nothing to build for RobotRunPC
+00:04:30 **** Incremental Build of configuration Debug for project Treminator ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manual.o "..\\manual.c" 
+gcc -o Treminator.exe kayneLib.o main.o manual.o order.o serial.o 

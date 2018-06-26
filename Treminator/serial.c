@@ -94,7 +94,7 @@ void closePort(HANDLE hComm) {
 void sendData(char *lpBuffer, HANDLE hComm) {
 	DWORD dNoOFBytestoWrite;              	// PAckage size
 	DWORD dNoOfBytesWritten = 0;          	// Package index
-	dNoOFBytestoWrite = sizeof(&lpBuffer); 	// Define package size
+	dNoOFBytestoWrite = strlen(lpBuffer); 	// Define package size
 	portStatus = WriteFile(hComm, lpBuffer, dNoOFBytestoWrite,
 			&dNoOfBytesWritten,
 			NULL); // Send the data
@@ -181,12 +181,11 @@ void commSetup() {
 					status);
 		} else {
 			//ComPort gets checked, if it is able to be opend the program is allowed to proceed.
-			printf("De port wordt gecheckt .....\n");
+			printf("De port wordt gecontrollerd .....\n");
 			setupComplete = portAlive(currPort);
-			Sleep(1000);
 		}
 		if (setupComplete) {
-			printf("De port is succesvol gecheckt.");
+			printf("De port is succesvol benaderd.");
 			Sleep(2000);
 			system("cls");
 		}
@@ -199,7 +198,7 @@ void receive(char port[16]) {
 			hComm = openPort(port);
 			receiveData(hComm);
 			closePort(hComm);
-			if (kbhit()&&(getch()==KEY_ESC)){
+			if ((getch()==KEY_ESC)){
 				return;
 			}
 		}

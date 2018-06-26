@@ -63,8 +63,13 @@ BOOL manual(char port[16]) {
 			">2< Gebruik ESC om het terug te keren naar de selector\n"
 			"=======================================================\n\n");
 	while (active) {
+
 		buffer[0] = keyboard();
 		if (buffer[0] != bufferPrev[0]) {
+			if (buffer[0] == 7) {
+				break;
+			}
+
 			if (portAlive(port)) {
 				hComm = openPort(port);
 				sendData(buffer, hComm);
@@ -72,18 +77,21 @@ BOOL manual(char port[16]) {
 				bufferPrev[0] = buffer[0];
 			}
 		}
+
 	}
 	return TRUE;
 }
 
-int retrieveBatteryStatus(char port[16]) {
+void retrieveBatteryStatus(char port[16]) {
 	HANDLE hComm;
 	char buffer[2] = { 0, '\0' };
-	buffer[2] = 20;
+	buffer[0] = 20;
 	if (portAlive(port)) {
 		hComm = openPort(port);
 		sendData(buffer, hComm);
 		CloseHandle(hComm);
+	}
+	if (portAlive(port)) {
 		hComm = openPort(port);
 		receiveData(hComm);
 		CloseHandle(hComm);

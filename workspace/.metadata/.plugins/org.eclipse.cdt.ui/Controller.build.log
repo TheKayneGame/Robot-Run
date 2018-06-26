@@ -1,4 +1,4 @@
-10:50:45 **** Incremental Build of configuration Debug for project Controller ****
+00:04:30 **** Incremental Build of configuration Debug for project Controller ****
 Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o manualcontrol.o "..\\manualcontrol.c" 
 ..\manualcontrol.c: In function 'manualControl':
@@ -34,5 +34,5 @@ In file included from ..\kayneLib.h:19:0,
  BOOL sendPacket(char bytesOut[8], HANDLE hComm);
       ^~~~~~~~~~
 
-10:50:45 Build Finished (took 185ms)
+00:04:30 Build Finished (took 184ms)
 

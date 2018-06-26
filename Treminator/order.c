@@ -45,31 +45,31 @@ void inputOrder(char port[16], int mode) {
 	system("cls");
 	printf("Voer aantal Producten in: ");
 	buffer = leesInteger();
-		char items = buffer;
-		data = (char *) malloc(items * 2 + 1);
-		data[0] = buffer;
+	char items = buffer;
+	data = (char *) malloc(items * 2 + 1);
+	data[0] = buffer;
 
-		switch (mode) {
-		case 1:
-			orderManual(data, items * 2);
-			break;
-		case 2:
-			orderFile(data, items * 2);
-			break;
+	switch (mode) {
+	case 1:
+		orderManual(data, items * 2);
+		break;
+	case 2:
+		orderFile(data, items * 2);
+		break;
 
+	}
+	printf("Orders versturen");
+	for (tel = 0; tel < ((int)items * 2 + 1); tel++) {
+		data_to_send[0] = data[tel];
+		if (portAlive(port)) {
+			hComm = openPort(port);
+			sendData(data_to_send, hComm);
+			closePort(hComm);
+		} else {
+			Sleep(2000);
+			tel = (items * 2);
 		}
-
-		for (tel = 0; tel < (items * 2 + 1); tel++) {
-			data_to_send[0] = data[tel];
-			if (portAlive(port)) {
-				hComm = openPort(port);
-				sendData(data_to_send, hComm);
-				closePort(hComm);
-			} else {
-				Sleep(2000);
-				tel = (items * 2);
-			}
-		}
+	}
 
 	free(data);
 
@@ -122,7 +122,7 @@ void orderFile(char *data, int size) {
 
 		data[coordIndex + 1] = buffX + '0';
 		coordIndex++;
-		data[coordIndex + 1] = buffY+ '0';
+		data[coordIndex + 1] = buffY + '0';
 		coordIndex++;
 
 		printfln("X: %d; Y: %d", buffX, buffY);
@@ -131,7 +131,7 @@ void orderFile(char *data, int size) {
 
 	fclose(stream);
 	char key[1];
-	fgets(key,1,stdin);
+	fgets(key, 1, stdin);
+	printf("Bestand gesloten");
 }
-
 
