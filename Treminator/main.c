@@ -20,7 +20,9 @@ int main() {
 				">2< Orders invoeren\n"
 				">3< Orders inladen\n"
 				">4< COM Port\n"
-				">5< Exit program\n"
+				">5< Debug Monitor\n"
+				">6< Batterij Status"
+				">6< Exit program\n"
 				"=======================================================\n\n");
 		if (status != OK) {
 			printf("Foute Actie\n");
@@ -49,8 +51,12 @@ int main() {
 			status = OK;
 			receive(currPort);
 			break;
-
 		case 6:
+			status = OK;
+			receive(currPort);
+			break;
+
+		case 7:
 			system("cls");
 			active = FALSE;
 			break;

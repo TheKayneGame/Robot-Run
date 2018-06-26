@@ -42,7 +42,8 @@ HANDLE openPort(char port[16]) {
 		printf("Fout bij openen COM port\n"
 				"\n=======================================================\n"
 				">1< Kan %s port niet openen\n"
-				"=======================================================\n\n", port);
+				"=======================================================\n\n",
+				port);
 		CloseHandle(hComm);
 	}
 
@@ -56,10 +57,10 @@ HANDLE openPort(char port[16]) {
 		return 0;
 	}
 
-	dcbSerialParams.BaudRate 	= CBR_9600;      // Setting BaudRate = 9600
-	dcbSerialParams.ByteSize	= 8;             // Setting ByteSize = 8
-	dcbSerialParams.StopBits 	= ONESTOPBIT;    // Setting StopBits = 1
-	dcbSerialParams.Parity 		= NOPARITY;      // Setting Parity = None
+	dcbSerialParams.BaudRate = CBR_9600;      // Setting BaudRate = 9600
+	dcbSerialParams.ByteSize = 8;             // Setting ByteSize = 8
+	dcbSerialParams.StopBits = ONESTOPBIT;    // Setting StopBits = 1
+	dcbSerialParams.Parity = NOPARITY;      // Setting Parity = None
 
 	portStatus = SetCommState(hComm, &dcbSerialParams); //Configuring the port according to settings in DCB
 
@@ -70,10 +71,10 @@ HANDLE openPort(char port[16]) {
 
 	COMMTIMEOUTS timeouts = { 0 };
 
-	timeouts.ReadIntervalTimeout         = 50; // in milliseconds
-	timeouts.ReadTotalTimeoutConstant    = 50; // in milliseconds
-	timeouts.ReadTotalTimeoutMultiplier  = 10; // in milliseconds
-	timeouts.WriteTotalTimeoutConstant   = 50; // in milliseconds
+	timeouts.ReadIntervalTimeout = 50; // in milliseconds
+	timeouts.ReadTotalTimeoutConstant = 50; // in milliseconds
+	timeouts.ReadTotalTimeoutMultiplier = 10; // in milliseconds
+	timeouts.WriteTotalTimeoutConstant = 50; // in milliseconds
 	timeouts.WriteTotalTimeoutMultiplier = 10; // in milliseconds
 
 	if (SetCommTimeouts(hComm, &timeouts) == FALSE) {
@@ -103,39 +104,40 @@ void sendData(char *lpBuffer, HANDLE hComm) {
 //function to read bytes
 void receiveData(HANDLE hComm) {
 	DWORD dwEventMask;                     // Event mask to trigger
-		char TempChar;                        // Temporary Buffer Character
-		char SerialBuffer[10];               // Buffer Containing Rxed Data
-		DWORD NoBytesRead;                     // Bytes read by ReadFile()
-		int i = 0;
+	char TempChar;                        // Temporary Buffer Character
+	char SerialBuffer[10];               // Buffer Containing Rxed Data
+	DWORD NoBytesRead;                     // Bytes read by ReadFile()
+	int i = 0;
 
-		portStatus = SetCommMask(hComm, EV_RXCHAR);
+	portStatus = SetCommMask(hComm, EV_RXCHAR);
 
-		if (portStatus == FALSE)
-			printf("\n\n    Error! in Setting CommMask");
+	if (portStatus == FALSE)
+		printf("\n\n    Error! in Setting CommMask");
 
-		portStatus = WaitCommEvent(hComm, &dwEventMask, NULL); //Wait for the character to be received
-		printf("\nKOM HIER");
-		/*-------------------------- Program will Wait here till a Character is received ------------------------*/
+	portStatus = WaitCommEvent(hComm, &dwEventMask, NULL); //Wait for the character to be received
+	printf("\nKOM HIER");
+	/*-------------------------- Program will Wait here till a Character is received ------------------------*/
 
-		if (portStatus == FALSE) {
-			printf("\n    Error! in Setting WaitCommEvent()\n");
-		} else {
-			do {
-				portStatus = ReadFile(hComm, &TempChar, sizeof(TempChar), &NoBytesRead,
-				NULL);
-				SerialBuffer[i] = TempChar;
-				i++;
-			} while (NoBytesRead > 0);
+	if (portStatus == FALSE) {
+		printf("\n    Error! in Setting WaitCommEvent()\n");
+	} else {
+		do {
+			portStatus = ReadFile(hComm, &TempChar, sizeof(TempChar),
+					&NoBytesRead,
+					NULL);
+			SerialBuffer[i] = TempChar;
+			i++;
+		} while (NoBytesRead > 0);
 
-			/*------------Printing the RX Buffer----------------------*/
-			//SerialBuffer[2] = '\0';
-			printf("%s\n", SerialBuffer);
-		}
+		/*------------Printing the RX Buffer----------------------*/
+		//SerialBuffer[2] = '\0';
+		printf("%s\n", SerialBuffer);
+	}
 }
 
 void getComm() {
 	char port[7];
-	char buffer[7];
+	char buffer[7]="";
 	status = getLine("Voer COM Poort in: ", port, sizeof(port));
 
 	//Checking for the errors found during input.
@@ -152,7 +154,7 @@ void getComm() {
 			}
 		}
 		if (status != IN_ERR) {
-			sprintf(currPort, "\\\\.\\%s", strupr(port)); // Edits the enterd portnumber to excepted paramiters
+			sprintf(currPort, "\\\\.\\%s", strupr(port));
 		}
 	}
 }
@@ -191,11 +193,17 @@ void commSetup() {
 	}
 }
 
-void receive(char port[16]){
-	if (portAlive(port)) {
-					hComm = openPort(port);
-					receiveData(hComm);
-					closePort(hComm);}
+void receive(char port[16]) {
+	while (1) {
+		if (portAlive(port)) {
+			hComm = openPort(port);
+			receiveData(hComm);
+			closePort(hComm);
+			if (kbhit()&&(getch()==KEY_ESC)){
+				return;
+			}
+		}
+	}
 
 }
 

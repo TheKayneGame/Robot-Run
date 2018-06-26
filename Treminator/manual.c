@@ -75,3 +75,18 @@ BOOL manual(char port[16]) {
 	}
 	return TRUE;
 }
+
+int retrieveBatteryStatus(char port[16]) {
+	HANDLE hComm;
+	char buffer[2] = { 0, '\0' };
+	buffer[2] = 20;
+	if (portAlive(port)) {
+		hComm = openPort(port);
+		sendData(buffer, hComm);
+		CloseHandle(hComm);
+		hComm = openPort(port);
+		receiveData(hComm);
+		CloseHandle(hComm);
+	}
+
+}

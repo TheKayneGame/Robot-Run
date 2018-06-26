@@ -43,6 +43,7 @@ void inputOrder(char port[16], int mode) {
 	HANDLE hComm;
 
 	system("cls");
+	printf("Voer aantal Producten in: ");
 	buffer = leesInteger();
 		char items = buffer;
 		data = (char *) malloc(items * 2 + 1);
@@ -132,3 +133,5 @@ void orderFile(char *data, int size) {
 	char key[1];
 	fgets(key,1,stdin);
 }
+
+
