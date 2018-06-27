@@ -17,6 +17,6 @@
 int keyboard();
 
 BOOL manual(char port[16]);
-
+void retrieveBatteryStatus(char port[16]);
 
 #endif /* MANUAL_H_ */

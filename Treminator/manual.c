@@ -18,16 +18,16 @@ int keyboard() {
 				key = getch();
 				switch (key) {
 				case KEY_UP:
-					return 1;
+					return 'w';
 					break;
 				case KEY_LEFT:
-					return 3;
+					return 'a';
 					break;
 				case KEY_DOWN:
-					return 2;
+					return 's';
 					break;
 				case KEY_RIGHT:
-					return 4;
+					return 'd';
 					break;
 				default:
 					return 0;
@@ -35,11 +35,19 @@ int keyboard() {
 				}
 				break;
 
-			case KEY_S:
+			case KEY_BRACKET_O:
+				return '[';
+				break;
 
+			case KEY_BRACKET_C:
+				return ']';
+				break;
+
+			case KEY_S:
+				return 's';
 				break;
 			case KEY_ESC:
-				return 7;
+				return 'p';
 				break;
 			default:
 				return 0;
@@ -65,16 +73,17 @@ BOOL manual(char port[16]) {
 	while (active) {
 
 		buffer[0] = keyboard();
-		if (buffer[0] != bufferPrev[0]) {
-			if (buffer[0] == 7) {
-				break;
-			}
+		if (1/*buffer[0] != bufferPrev[0]*/) {
 
 			if (portAlive(port)) {
 				hComm = openPort(port);
 				sendData(buffer, hComm);
 				CloseHandle(hComm);
 				bufferPrev[0] = buffer[0];
+			}
+
+			if (buffer[0] == 'p') {
+				break;
 			}
 		}
 
@@ -85,7 +94,7 @@ BOOL manual(char port[16]) {
 void retrieveBatteryStatus(char port[16]) {
 	HANDLE hComm;
 	char buffer[2] = { 0, '\0' };
-	buffer[0] = 20;
+	buffer[0] = 'b';
 	if (portAlive(port)) {
 		hComm = openPort(port);
 		sendData(buffer, hComm);
