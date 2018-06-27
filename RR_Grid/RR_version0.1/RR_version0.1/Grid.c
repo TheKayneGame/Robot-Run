@@ -8,12 +8,13 @@
 #include "Grid.h"
 #include "sensoren.h"
 #include "motoren.h"
+#include "wireless.h"
 #include <math.h>
 #include <pololu/3pi.h>
 #include <avr/pgmspace.h>
 
 int positionCurrentX, positionCurrentY;
-
+sizeOfOrder = 0;
 int followLineFlag;
 int productCollectedFlag;
 int endOfRouteFlag;
@@ -40,7 +41,7 @@ void swapOne(int *firstValue, int *secondValue) {                               
 	*firstValue = temp;
 }
 
-void sortOrder(int XC[sizeOfOrder], int YC[sizeOfOrder]) {                                                                   //Sorting algorithm, this sorts the coordinates of the given order
+void sortOrder(int XC[10], int YC[10]) {                                                                   //Sorting algorithm, this sorts the coordinates of the given order
 	int check = 0, orderCorrect;
 	int sum[sizeOfOrder];
 
@@ -159,33 +160,33 @@ void driveRoute(int routes[5][8], int route, int *intersectNum){
 	switch(routes[route][*intersectNum]){
 		case 1:
 		set_motors(60,60);
-		delay_ms(170);
+		delay_ms(180);
 		set_motors(0,0);
 		
 		//motorControl(60, 'R', 0.25);
 		
-		 				set_motors(60,-60);
-						delay_ms(270);
-		 				set_motors(0,0);
+		set_motors(60,-60);
+		delay_ms(280);
+		set_motors(0,0);
 		
 		*intersectNum = *intersectNum + 1;
 		break;
 		case 2:
 		set_motors(60,60);
-		delay_ms(170);
+		delay_ms(180);
 		set_motors(0,0);
 		
 		//motorControl(60, 'L', 0.25);
 		
-		 				set_motors(-60,60);
-		 				delay_ms(270);
-		 				set_motors(0,0);
+		set_motors(-60,60);
+		delay_ms(280);
+		set_motors(0,0);
 		
 		*intersectNum = *intersectNum + 1;
 		break;
 		case 3:
 		set_motors(60,60);
-		delay_ms(170);
+		delay_ms(180);
 		set_motors(0,0);
 		*intersectNum = *intersectNum + 1;
 		break;
@@ -200,8 +201,8 @@ void driveRoute(int routes[5][8], int route, int *intersectNum){
 	}
 }
 
-void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum, int *xCoordinate, int *yCoordinate, int *x, direction *directionCurrent, direction *directionLast){
-	
+void getProduct(int orderX[10], int orderY[10], int *orderNum, int *xCoordinate, int *yCoordinate, int *x, direction *directionCurrent, direction *directionLast){
+	int endFlag = 0;
 	clear();
 	lcd_goto_xy(0,0);
 	print_long(*xCoordinate);
@@ -217,9 +218,13 @@ void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum,
 	if (productCollectedFlag == 1){
 		productCollectedFlag = 0;
 	}
+	
+	if(*orderNum == sizeOfOrder){
+		endFlag = 1;
+	}
 
-	if((orderX[*orderNum] != *xCoordinate) && (*x == 0)){
-		if(orderX[*orderNum] > *xCoordinate){
+	if(((orderX[*orderNum] != *xCoordinate) && (*x == 0)) || ((endFlag == 1) && (*xCoordinate != 4))){
+		if((orderX[*orderNum] > *xCoordinate) || ((*xCoordinate < 4) && (endFlag == 1))){
 			directionLast = directionCurrent;
 			setDirection(W, directionCurrent);
 			if (followLineFlag == 1){
@@ -234,7 +239,7 @@ void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum,
 			print_long(*yCoordinate);
 
 		}
-		if(orderX[*orderNum] < *xCoordinate){
+		if(((orderX[*orderNum] < *xCoordinate)) || ((*xCoordinate > 4) && (endFlag == 1))){
 			directionLast = directionCurrent;
 			setDirection(E, directionCurrent);
 			
@@ -247,14 +252,13 @@ void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum,
 			print_long(*xCoordinate);
 			lcd_goto_xy(0,1);
 			print_long(*yCoordinate);
-
 		}
 	}
 	if(orderX[*orderNum] == *xCoordinate){
 		*x = 1;
 	}
-	if((orderY[*orderNum] != *yCoordinate) && (*x == 1)){
-		if(orderY[*orderNum] > *yCoordinate){
+	if(((orderY[*orderNum] != *yCoordinate) && (*x == 1)) || ((endFlag == 1) && (*yCoordinate != 0))){
+		if((orderY[*orderNum] > *yCoordinate) || ((*yCoordinate < 0) && (endFlag == 1))){
 			directionLast = directionCurrent;
 			setDirection(N, directionCurrent);
 			
@@ -269,7 +273,7 @@ void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum,
 			print_long(*yCoordinate);
 
 		}
-		if(orderY[*orderNum] < *yCoordinate){
+		if((orderY[*orderNum] < *yCoordinate) || ((*yCoordinate > 0) && (endFlag == 1))){
 			directionLast = directionCurrent;
 			setDirection(S, directionCurrent);
 			
@@ -286,18 +290,82 @@ void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum,
 		}
 	}
 
-	if((orderX[*orderNum] == *xCoordinate) && (orderY[*orderNum] == *yCoordinate)){
+	if(((orderX[*orderNum] == *xCoordinate) && (orderY[*orderNum] == *yCoordinate)) || (((endFlag == 1) && (*xCoordinate == 4) && (*yCoordinate == 0)))){
 		set_motors(0,0);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
 		clear();
 		print("Product");
 		*orderNum = *orderNum + 1;
 
-		if (*orderNum == sizeOfOrder){
+		if (endFlag){
 			setDirection('S', directionCurrent);
 		}
 		play_from_program_space(PSTR(">f32>>a32"));
 		delay(1000);
 		*x = 0;
 		productCollectedFlag = 1;
+	}
+}
+
+void warehouseMode(){
+	int orderX[10];
+	int orderY[10];
+	
+	wirCoord(orderX, orderY, &sizeOfOrder);
+
+	int xCoordinate = 0, yCoordinate = 0, x = 0;
+	direction directionCurrent = N;
+	direction directionLast;
+	
+	//wirOrder(&orderX, &orderY);
+	
+	sortOrder(orderX, orderY);
+	
+	int routes[5][8];
+	int intersectNum = 0;
+	readGrid(routes);
+	
+	int orderNum = 0;
+	
+	while (orderNum != sizeOfOrder)
+	{
+		
+		read_line_sensors(sensors,IR_EMITTERS_ON);
+
+		if (checkAfslag() != 1 && productCollectedFlag == 0){
+			//checkDistance();
+			followLine();
+			followLineFlag = 1;
+
+		}
+		
+		if (endOfRouteFlag == 0 && checkAfslag() == 1){
+
+			driveRoute(routes, 0, &intersectNum);
+			
+		}
+		
+		if ((endOfRouteFlag == 1 && checkAfslag() == 1) || productCollectedFlag == 1){
+			
+			getProduct(orderX, orderY, &orderNum, &xCoordinate, &yCoordinate, &x, &directionCurrent, &directionLast);
+
+		}
+	}
+
+	homeFlag = 0;
+	intersectNum = 0;
+	
+	while (homeFlag != 1){
+
+		read_line_sensors(sensors,IR_EMITTERS_ON);
+
+		if (checkAfslag() != 1){
+			//checkDistance();
+			followLine();
+
+		}
+		else if (checkAfslag() == 1){
+			driveRoute(routes, 3, &intersectNum);
+		}
+
 	}
 }

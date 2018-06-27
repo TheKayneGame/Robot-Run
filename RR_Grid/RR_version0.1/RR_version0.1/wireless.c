@@ -52,9 +52,9 @@ void wirCoord(int orderX[], int orderY[], int *numItems){
 			
 			serial_receive( data, 1 );// Start receiving data
 			
-			if(numItems == 0 && data[0] != 'e'){//first byte is number items
+			if(*numItems == 0 && data[0] != 'e'){//first byte is number items
 				
-				numItems = data[0];
+				*numItems = data[0];
 				data[0] = 'e'; //reset value
 				continue;
 			}
@@ -62,10 +62,10 @@ void wirCoord(int orderX[], int orderY[], int *numItems){
 			if( data[0] != 'e' && data[0] != 'c' ) //all the other bytes are X/Y values
 			{
 				if( y == 10 ){
-					y = data[0];
+					y = data[0] - '0';
 				}
 				else if( x == 10 ){
-					x = data[0];
+					x = data[0] - '0';
 				}
 			}
 			
@@ -77,26 +77,22 @@ void wirCoord(int orderX[], int orderY[], int *numItems){
 	}while(numItemCount < *numItems);
 	
 	//debug
-	/*
+	
 	print("Exit yes");
 	delay_ms(1000);
 	print(numItems);
 	delay_ms(1000);
 	clear();
-	for (int i=0; i < numItems; i++)
-	{
-	
-	
+	for (int i=0; i < *numItems; i++)
+	{		
 	lcd_goto_xy(0, 1);
-	print_hex(orderX[i]);
+	print_long(orderX[i]);
 	delay_ms(1000);
 	lcd_goto_xy(0,0);
-	print_hex(orderY[i]);
+	print_long(orderY[i]);
 	delay_ms(1000);
 	clear();
-	}
-	*/
-
+	}	
 }
 
 /* OBSOLETE!!!!!
@@ -156,52 +152,12 @@ void wirManual(){//manual mode init
 	int speed = 50;
 	
 	while (data[0] != 'S'){//loop as long as emergency stop is depressed
-		data[0] = 'e'; //reset data.
 		serial_receive( data, 1 );
-		
+		clear();
+		data[0] = 'e'; //reset data.		
+		print_character(data);
 		wirMove(data[0]);//parse data
-		delay_ms(1);//undocumented delay
 	}
 	set_motors( 0, 0 );
 	serial_cancel_receive();
-}
-
-
-
-
-char *functions[3] = {"Handm.","WirC.","Volger"}; //menu texts
-/*MOV this to main FC's*/
-void menu(){
-
-	lcd_init_printf();
-	unsigned char button = (button_is_pressed(ANY_BUTTON)); //wait for user input
-	
-	switch(button)
-	{
-		case (BUTTON_A) :
-		clear();
-		selected--;
-		display(selected);
-		play_frequency(400, 100, 15);// Beep
-		delay_ms(200);
-		break;
-		case (BUTTON_B) :
-		play_frequency(660, 100, 15);// Beep
-		delay_ms(150);
-		play_frequency(660, 100, 15);
-		delay_ms(50);
-		//run(selected);
-		break;
-		
-		case (BUTTON_C) :
-		clear();
-		selected++;
-		display(selected);
-		play_frequency(800, 100, 15);// Beep
-		delay_ms(200);
-		break;
-		
-		default:
-		break;
-	}
 }

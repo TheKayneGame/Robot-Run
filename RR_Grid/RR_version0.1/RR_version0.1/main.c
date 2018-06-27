@@ -31,66 +31,60 @@ Y = motor 2
 
 int main(){
 	initialize();
+	//warehouseMode();	
 	
-	int orderX[sizeOfOrder] ={4, 1, 4, 2, 4};
-	int orderY[sizeOfOrder] ={4, 3, 1, 1, 0};
+	while(1){
+		menu();
+	}
+}
 
-	int xCoordinate = 0, yCoordinate = 0, x = 0;
-	direction directionCurrent = N;
-	direction directionLast;
-	
-	//wirOrder(&orderX, &orderY);
-	//Hoi
-	
-	sortOrder(orderX, orderY);
-	
-	int routes[5][8];
-	int intersectNum = 0;
-	readGrid(routes);
-	
-	int orderNum = 0;
-	
-	while (orderNum != sizeOfOrder)
+char *functions[3] = {"Handm.","WirC.","Volger"}; //menu texts
+
+
+void run(int i){
+	switch(i){
+		case 0:
+		wirManual();
+		break;
+		case 1:
+		warehouseMode();
+		break;
+		case 2:
+		break;
+
+	}
+}
+void menu(){
+
+	unsigned char button = (button_is_pressed(ANY_BUTTON));
+
+	switch(button)
 	{
-		
-		read_line_sensors(sensors,IR_EMITTERS_ON);
+		case (BUTTON_A) :
+		clear();
 
-		if (checkAfslag() != 1 && productCollectedFlag == 0){
-			//checkDistance();
-			followLine();
-			followLineFlag = 1;
+		if(--selected < 0){selected = 2;}
+		print(functions[selected]);
+		play_frequency(400, 100, 15);// Beep
+		delay_ms(200);
+		break;
+		case (BUTTON_B) :
+		play_frequency(660, 100, 15);// Beep
+		delay_ms(150);
+		play_frequency(660, 100, 15);
+		delay_ms(50);
+		run(selected);
+		break;
 
-		}
-		
-		if (endOfRouteFlag == 0 && checkAfslag() == 1){
+		case (BUTTON_C) :
+		clear();
+		if(++selected > 2){selected = 0;}
+		print(functions[selected]);
+		play_frequency(800, 100, 15);// Beep
+		delay_ms(200);
+		break;
 
-			driveRoute(routes, 0, &intersectNum);
-			
-		}
-		
-		if ((endOfRouteFlag == 1 && checkAfslag() == 1) || productCollectedFlag == 1){
-			
-			getProduct(orderX, orderY, &orderNum, &xCoordinate, &yCoordinate, &x, &directionCurrent, &directionLast);
-
-		}
+		default:
+		break;
 	}
-
-	homeFlag = 0;
-	intersectNum = 0;
-	
-	while (homeFlag != 1){
-
-		read_line_sensors(sensors,IR_EMITTERS_ON);		
-
-		if (checkAfslag() != 1){
-			//checkDistance();
-			followLine();
-
-		}
-		else if (checkAfslag() == 1){
-			driveRoute(routes, 3, &intersectNum);
-		}
-
-	}
-	
 }

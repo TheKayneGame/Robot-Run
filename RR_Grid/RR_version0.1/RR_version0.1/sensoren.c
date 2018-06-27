@@ -66,6 +66,8 @@ void initialize()
 	
 	wait_for_button_release(BUTTON_B);										//button B is pressed
 	clear();																//clear LCD
+	
+	serial_set_baud_rate(9600);
 
 }
 
