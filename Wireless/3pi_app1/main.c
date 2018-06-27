@@ -9,6 +9,60 @@
 */
 
 #include <pololu/3pi.h>
+char *functions[3]{
+	{"Handmatig"},
+	{"Volger"},
+	{"WirCoord"}
+};
+
+int main()
+{
+	play_from_program_space(PSTR(">g32>>c32"));  // Play welcoming notes.
+
+	
+}
+
+void menu(){
+
+	lcd_init_printf();
+	static unsigned char selected = 0;
+	static unsigned char button = wait_for_button_press(ANY_BUTTON);
+	
+	switch(button)
+	{
+		case (BUTTON_A) :
+		clear();
+		selected--;
+		display(selected);
+		play_frequency(400, 100, 15);// Beep
+		delay_ms(200);
+		break;
+		case (BUTTON_B) :
+		play_frequency(660, 100, 15);// Beep
+		delay_ms(150);
+		play_frequency(660, 100, 15);
+		delay_ms(50);
+		run(selected);
+		break;
+		
+		case (BUTTON_C) :
+		clear();
+		selected++;
+		display(selected);
+		play_frequency(800, 100, 15);// Beep
+		delay_ms(200);
+		break;
+		
+		default:
+		break;
+	}
+}
+
+void display(unsigned char i){
+	clear();
+	printf("%s",functions[i]);
+}
+
 
 int wirMain()
 {
@@ -51,37 +105,46 @@ void wirOrder(){
 }
 
 void wirManual(){
-	unsigned char data[2]={};
-		int status = 1;
-		char charBuff = 0;
-	do {
-		
-		serial_receive(data,2);
-		while(!serial_receive_buffer_full());
-		
-		switch (charBuff)
-		{
-		case 'w':
-		
-		break;
-		case 'a':
-		
-		break;
-		case 's':
-		
-		break;
-		case 'd':
-		
-		break;
-		case 'p':
-		status = 0;
-		break;
-		default:
-		break;
+	char bufferRichting[10]="";
+	int links = 0;
+	int recht = 0;
+	print("Manual Control");
+	int run = 1;
+	while(run){
+		serial_receive_blocking(bufferRichting, 10, 50);
+		if(strcmp("w", bufferRichting) == 0){
+			links += 10;
+			recht += 10;
 		}
-		
-		serial_receive(data,2);
-		while(!serial_receive_buffer_full());
-		
-	} while(status)
+		if(strcmp("a", bufferRichting) == 0){
+			links -= 10;
+			recht -= 10;
+		}
+		if(strcmp("s", bufferRichting) == 0){
+			links += 10;
+			recht -= 10;
+		}
+		if(strcmp("d", bufferRichting) == 0){
+			links -= 10;
+			recht += 10;
+		}
+		if(strcmp("s", bufferRichting) == 0){
+			links = 0;
+			recht = 0;
+		}
+		if(strcmp("p", bufferRichting) == 0){
+			run = 0;
+			links = 0;
+			recht = 0;
+			clear();
+		}
+		if(links > 255){
+			links = 250;
+		}
+		if(recht > 255){
+			recht = 250;
+		}
+		set_motors(links,recht);
+		bufferRichting="";
+	}
 }

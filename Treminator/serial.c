@@ -105,7 +105,7 @@ void sendData(char *lpBuffer, HANDLE hComm) {
 void receiveData(HANDLE hComm) {
 	DWORD dwEventMask;                     // Event mask to trigger
 	char TempChar;                        // Temporary Buffer Character
-	char SerialBuffer[10];               // Buffer Containing Rxed Data
+	char SerialBuffer[255];               // Buffer Containing Rxed Data
 	DWORD NoBytesRead;                     // Bytes read by ReadFile()
 	int i = 0;
 
@@ -197,9 +197,7 @@ void receive(char port[16]) {
 			hComm = openPort(port);
 			receiveData(hComm);
 			closePort(hComm);
-			if ((getch()==KEY_ESC)){
-				return;
-			}
+
 		}
 	}
 

@@ -21,8 +21,8 @@ int main() {
 				">3< Orders inladen\n"
 				">4< COM Port\n"
 				">5< Debug Monitor\n"
-				">6< Batterij Status"
-				">6< Exit program\n"
+				">6< Batterij Status\n"
+				">7< Exit program\n"
 				"=======================================================\n\n");
 		if (status != OK) {
 			printf("Foute Actie\n");
@@ -53,7 +53,7 @@ int main() {
 			break;
 		case 6:
 			status = OK;
-			receive(currPort);
+			retrieveBatteryStatus(currPort);
 			break;
 
 		case 7:

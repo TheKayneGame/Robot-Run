@@ -59,7 +59,7 @@ void inputOrder(char port[16], int mode) {
 
 	}
 	printf("Orders versturen");
-	for (tel = 0; tel < ((int)items * 2 + 1); tel++) {
+	for (tel = 0; tel < ((int) items * 2 + 1); tel++) {
 		data_to_send[0] = data[tel];
 		if (portAlive(port)) {
 			hComm = openPort(port);
@@ -106,32 +106,52 @@ void orderManual(char *data, int size) {
 	}
 }
 
+int firstLine = TRUE;
+void fixLine(char* line) {
+	if (firstLine == TRUE) {
+		for (int c = 0; c < sizeof(&line); c++) {
+			if (c == sizeof(&line) - 1) {
+				line[c] = 0;
+			} else {
+				line[c] = line[c + 3];
+			}
+		}
+	}
+	firstLine = FALSE;
+}
+
 void orderFile(char *data, int size) {
-	printfln("reading input.csv");
+	printf("reading input.csv\n");
 	fflush(stdout);
 	FILE* stream = fopen("input.csv", "r");
 	int coordIndex = 0;
 	char line[1024];
 	char buffX;
 	char buffY;
-	while (fgets(line, 1024, stream)) {
-		char* tmp = strdup(line);
+	if (stream != NULL) {
+		while (fgets(line, 1024, stream)) {
+			char* tmp = _strdup(line);
 
-		buffX = atoi(getfield(tmp, 1));
-		buffY = atoi(getfield(tmp, 2));
+			fixLine(tmp);
+			buffX = atoi(getfield(tmp, 1));
+			tmp = _strdup(line);
+			fixLine(tmp);
+			buffY = atoi(getfield(tmp, 2));
 
-		data[coordIndex + 1] = buffX + '0';
-		coordIndex++;
-		data[coordIndex + 1] = buffY + '0';
-		coordIndex++;
+			data[coordIndex + 1] = buffX + '0';
+			coordIndex++;
+			data[coordIndex + 1] = buffY + '0';
+			coordIndex++;
 
-		printfln("X: %d; Y: %d", buffX, buffY);
-		free(tmp);
+			printf("X: %d; Y: %d\n", buffX, buffY);
+			free(tmp);
+		}
+		fclose(stream);
+		char key[1];
+		fgets(key, 1, stdin);
+		printf("Bestand gesloten");
+		return;
 	}
-
-	fclose(stream);
-	char key[1];
-	fgets(key, 1, stdin);
-	printf("Bestand gesloten");
+	printf("*breathes in* boi");
 }
 

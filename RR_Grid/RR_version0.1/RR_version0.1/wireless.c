@@ -34,12 +34,9 @@ void wirMain(int orderX[], int orderY[]){
 }*/
 
 //start accepting DATA  for coords
-void wirCoord(){
+void wirCoord(int orderX[], int orderY[], int *numItems){
 	clear();
 	//declare working values
-	unsigned char orderX[8];
-	unsigned char orderY[8];
-	int numItems = 0;
 	int numItemCount = 0;
 	
 	//start loop
@@ -77,7 +74,7 @@ void wirCoord(){
 		orderX[numItemCount] = x; //loads value after acquisition
 		orderY[numItemCount] = y; //loads value after acquisition
 		numItemCount++;
-	}while(numItemCount < numItems);
+	}while(numItemCount < *numItems);
 	
 	//debug
 	/*
@@ -138,10 +135,10 @@ void wirMove( char data){//parse data to moving command
 		set_motors( speed, -speed );//right
 		break;
 		case '[':
-		speed--;//decrease sped
+		speed+=10;//decrease sped
 		break;
 		case ']':
-		speed++;// inscrease speed
+		speed+=10;// inscrease speed
 		break;
 		case 'S':
 		set_motors( 0, 0 );//emergency stop
@@ -166,17 +163,18 @@ void wirManual(){//manual mode init
 		delay_ms(1);//undocumented delay
 	}
 	set_motors( 0, 0 );
+	serial_cancel_receive();
 }
 
 
 
 
-char functions [3][8] = {{"Handm."},{"WeerC."},{"Volger"}}; //menu texts
+char *functions[3] = {"Handm.","WirC.","Volger"}; //menu texts
 /*MOV this to main FC's*/
 void menu(){
 
 	lcd_init_printf();
-	unsigned char button = (wait_for_button_press(ANY_BUTTON)); //wait for user input
+	unsigned char button = (button_is_pressed(ANY_BUTTON)); //wait for user input
 	
 	switch(button)
 	{

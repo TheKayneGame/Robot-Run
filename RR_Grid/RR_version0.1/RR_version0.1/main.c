@@ -34,9 +34,20 @@ int main(){
 	
 	int orderX[sizeOfOrder] ={4, 1, 4, 2};
 	int orderY[sizeOfOrder] ={4, 3, 1, 1};
+	int itemsCount;
+	wirCoord(orderX, orderY, &itemsCount);
+	for (int i=0; i < itemsCount; i++)
+	{
 		
-	//wirOrder(&orderX, &orderY);
-	
+		
+		lcd_goto_xy(0, 1);
+		print_hex(orderX[i]);
+		delay_ms(1000);
+		lcd_goto_xy(0,0);
+		print_hex(orderY[i]);
+		delay_ms(1000);
+		clear();
+	}
 	//sortOrder(orderX, orderY);
 	
 	int routes[5][8];
