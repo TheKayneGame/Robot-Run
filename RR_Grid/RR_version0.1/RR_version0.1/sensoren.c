@@ -18,7 +18,6 @@ int last_proportional;
 int proportional;
 int derivative;
 
-
 void initialize()
 {
 	
@@ -112,29 +111,6 @@ void followLine(){
 	set_motors(max+power_difference, max);
 	else
 	set_motors(max, max-power_difference);
-}
-
-int checkDecision()
-{
-	int decision = LOW, turn, resultTemp = 0;
-	do{
-		turn = 0;
-		checkAfslag();
-		for(int i = 0; i < 3; i++){
-			if(situations[i] == HIGH){                                                     //Counts number of possible turns
-				turn++;
-			}
-		}
-		followLine();
-		//	checkDistance();
-	}while(checkAfslag() == 0);                                                           //Keep following the line if the sensor does not detect any intersections
-	
-	resultTemp = turn;                                                                    //If there is more than one option, the robot has to make a decision
-	if(resultTemp > 1){
-		decision = HIGH;
-	}
-	delay(100);
-	return decision;
 }
 
 int checkDistance()

@@ -9,14 +9,11 @@
 #ifndef SENSOREN_H_
 #define SENSOREN_H_
 
-
 void followLine();
 void initialize();
 void moveObject();
 int checkDistance();
 int checkAfslag();
-int checkDecision();
-
 
 unsigned int sensors[5];
 unsigned int sensorValues[20];
@@ -35,12 +32,6 @@ int sensorDistance2;
 #define SENSOR_C_C sensors[2]
 #define SENSOR_C_R sensors[3]
 #define SENSOR_R sensors[4]
-
-#define STOP 0
-#define SPEED 60
-#define ALTER 0.5
-#define SLOW SPEED - ALTER
-#define FAST SPEED + ALTER
 
 extern int situations[3];
 

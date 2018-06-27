@@ -96,9 +96,6 @@ int main(){
 				intersectnum++;
 				break;
 				case 5:
-				//motorControl(0, 'F', 0.40);
-				green_led(1);                            //Robot has reached destination
-				//play_from_program_space(PSTR(">f32>>a32"));
 				set_motors(0,0);
 				delay_ms(1000);
 				endOfRoute = 1;
@@ -127,8 +124,6 @@ int main(){
 				productCollectedFlag = 0;
 			}
 			
-			//delay_ms(2000);
-			
 			if((orderX[orderNum] != xCoordinate) && (x == 0)){
 				if(orderX[orderNum] > xCoordinate){
 
@@ -144,7 +139,6 @@ int main(){
 					print_long(xCoordinate);
 					lcd_goto_xy(0,1);
 					print_long(yCoordinate);
-					//delay_ms(1000);
 
 
 				}
@@ -161,11 +155,8 @@ int main(){
 					print_long(xCoordinate);
 					lcd_goto_xy(0,1);
 					print_long(yCoordinate);
-					//delay_ms(1000);
-
 
 				}
-				//followStraightLine(&xCoordinate, orderX[orderNum]);
 			}
 			if(orderX[orderNum] == xCoordinate){
 				x = 1;
@@ -184,7 +175,6 @@ int main(){
 					print_long(xCoordinate);
 					lcd_goto_xy(0,1);
 					print_long(yCoordinate);
-					//delay_ms(1000);
 
 
 				}
@@ -201,11 +191,9 @@ int main(){
 					print_long(xCoordinate);
 					lcd_goto_xy(0,1);
 					print_long(yCoordinate);
-					//delay_ms(1000);
 
 
 				}
-				//followStraightLine(&yCoordinate, orderY[orderNum]);
 			}
 			if((orderX[orderNum] == xCoordinate) && (orderY[orderNum] == yCoordinate)){
 				set_motors(0,0);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
