@@ -40,6 +40,7 @@ int main(){
 	direction directionLast;
 	
 	//wirOrder(&orderX, &orderY);
+	//Hoi
 	
 	sortOrder(orderX, orderY);
 	
