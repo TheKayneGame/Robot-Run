@@ -7,13 +7,18 @@
 #ifndef GRID_H_
 
 #define GRID_H_
-#define sizeOfOrder 4                            //replace with size of order 
+#define sizeOfOrder 5                            //replace with size of order 
+
+extern int followLineFlag;
+extern int productCollectedFlag;
+extern int endOfRouteFlag;
+extern int homeFlag;
 
 void wirOrder();
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue);
 void sortOrder(int X[sizeOfOrder], int Y[sizeOfOrder]);
-void swapOne(float *firstValue, float *secondValue);
-void driveRoute(int route[5][8], int flag);
+void swapOne(int *firstValue, int *secondValue);
+void driveRoute(int routes[5][8], int route, int *intersectNum);
 void fetchOrder(int OrderX[sizeOfOrder], int orderY[sizeOfOrder], int route[5][8]);
 void readGrid(int routes[5][8]);
 
@@ -27,4 +32,6 @@ void setDirection(direction directionDesired, direction *directionCurrent);
 
 void fetchOrder3(int OrderX[sizeOfOrder], int orderY[sizeOfOrder], int route[5][8]);
 void followStraightLine(int *coordinate, int coordinateDesired);
+
+void getProduct(int orderX[sizeOfOrder], int orderY[sizeOfOrder], int *orderNum, int *xCoordinate, int *yCoordinate, int *x, direction *directionCurrent, direction *directionLast);
 #endif

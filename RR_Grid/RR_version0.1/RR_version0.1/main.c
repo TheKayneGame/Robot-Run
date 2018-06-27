@@ -32,180 +32,64 @@ Y = motor 2
 int main(){
 	initialize();
 	
-	int orderX[sizeOfOrder] ={4, 1, 4, 2};
-	int orderY[sizeOfOrder] ={4, 3, 1, 1};
-		
+	int orderX[sizeOfOrder] ={4, 1, 4, 2, 4};
+	int orderY[sizeOfOrder] ={4, 3, 1, 1, 0};
+
+	int xCoordinate = 0, yCoordinate = 0, x = 0;
+	direction directionCurrent = N;
+	direction directionLast;
+	
 	//wirOrder(&orderX, &orderY);
 	
-	//sortOrder(orderX, orderY);
+	sortOrder(orderX, orderY);
 	
 	int routes[5][8];
+	int intersectNum = 0;
 	readGrid(routes);
 	
-	int intersectnum = 0, endOfRoute = 0, orderNum = 0, xCoordinate = 0, yCoordinate = 0, x = 0;
-	direction directionCurrent = N;
-	
-	int followLineFlag = 0;
-	int productCollectedFlag = 0;
-	
+	int orderNum = 0;
 	
 	while (orderNum != sizeOfOrder)
 	{
 		
 		read_line_sensors(sensors,IR_EMITTERS_ON);
-		
+
 		if (checkAfslag() != 1 && productCollectedFlag == 0){
-			checkDistance();
+			//checkDistance();
 			followLine();
 			followLineFlag = 1;
+
 		}
 		
-		if (endOfRoute == 0 && checkAfslag() == 1){
+		if (endOfRouteFlag == 0 && checkAfslag() == 1){
 
+			driveRoute(routes, 0, &intersectNum);
 			
-			switch(routes[0][intersectnum]){
-				case 1:
-				set_motors(60,60);
-				play_from_program_space(PSTR(">f32>>a32"));
-				delay_ms(170);
-				set_motors(0,0);
-				
-				motorControl(60, 'R', 0.25);
-				
-// 				set_motors(60,-60);
-// 				delay_ms(270);
-// 				set_motors(0,0);
-				
-				intersectnum++;
-				break;
-				case 2:
-				set_motors(60,60);
-				play_from_program_space(PSTR(">f32>>a32"));
-				delay_ms(170);
-				set_motors(0,0);
-				
-				motorControl(60, 'L', 0.25);
-				
-// 				set_motors(-60,60);
-// 				delay_ms(270);
-// 				set_motors(0,0);
-				
-				intersectnum++;
-				break;
-				case 3:
-				motorControl(60, 'F', 0.89);
-				intersectnum++;
-				break;
-				case 5:
-				set_motors(0,0);
-				delay_ms(1000);
-				endOfRoute = 1;
-				followLineFlag = 0;
-				break;
-			}
 		}
 		
-		if ((endOfRoute == 1 && checkAfslag() == 1) || productCollectedFlag == 1){
-
-			clear();
-			lcd_goto_xy(0,0);
-			print_long(xCoordinate);
-			lcd_goto_xy(0,1);
-			print_long(yCoordinate);
+		if ((endOfRouteFlag == 1 && checkAfslag() == 1) || productCollectedFlag == 1){
 			
-			if (productCollectedFlag == 0){
-				set_motors(60,60);
-				play_from_program_space(PSTR(">f32>>a32"));
-				delay_ms(170);
-				set_motors(0,0);
-			}
+			getProduct(orderX, orderY, &orderNum, &xCoordinate, &yCoordinate, &x, &directionCurrent, &directionLast);
 
-			
-			if (productCollectedFlag == 1){
-				productCollectedFlag = 0;
-			}
-			
-			if((orderX[orderNum] != xCoordinate) && (x == 0)){
-				if(orderX[orderNum] > xCoordinate){
-
-					setDirection(W, &directionCurrent);
-
-					if (followLineFlag == 1){
-						xCoordinate++;
-						followLineFlag = 0;
-					}
-					
-					clear();
-					lcd_goto_xy(0,0);
-					print_long(xCoordinate);
-					lcd_goto_xy(0,1);
-					print_long(yCoordinate);
-
-
-				}
-				if(orderX[orderNum] < xCoordinate){
-
-					setDirection(E, &directionCurrent);
-					
-					if (followLineFlag == 1){
-						xCoordinate--;
-						followLineFlag = 0;
-					}
-					clear();
-					lcd_goto_xy(0,0);
-					print_long(xCoordinate);
-					lcd_goto_xy(0,1);
-					print_long(yCoordinate);
-
-				}
-			}
-			if(orderX[orderNum] == xCoordinate){
-				x = 1;
-			}
-			if((orderY[orderNum] != yCoordinate) && (x == 1)){
-				if(orderY[orderNum] > yCoordinate){
-
-					setDirection(N, &directionCurrent);
-					
-					if (followLineFlag == 1){
-						yCoordinate++;
-						followLineFlag = 0;
-					}
-					clear();
-					lcd_goto_xy(0,0);
-					print_long(xCoordinate);
-					lcd_goto_xy(0,1);
-					print_long(yCoordinate);
-
-
-				}
-				if(orderY[orderNum] < yCoordinate){
-
-					setDirection(S, &directionCurrent);
-					
-					if (followLineFlag == 1){
-						yCoordinate--;
-						followLineFlag = 0;
-					}
-					clear();
-					lcd_goto_xy(0,0);
-					print_long(xCoordinate);
-					lcd_goto_xy(0,1);
-					print_long(yCoordinate);
-
-
-				}
-			}
-			if((orderX[orderNum] == xCoordinate) && (orderY[orderNum] == yCoordinate)){
-				set_motors(0,0);               //moeten we nog even naar kijken, hij moet gelijk stilstaan
-				clear();
-				print("Product");
-				orderNum++;
-				play_from_program_space(PSTR(">f32>>a32"));
-				delay(3000);
-				x = 0;
-				productCollectedFlag = 1;
-			}
 		}
 	}
+
+	homeFlag = 0;
+	intersectNum = 0;
+	
+	while (homeFlag != 1){
+
+		read_line_sensors(sensors,IR_EMITTERS_ON);		
+
+		if (checkAfslag() != 1){
+			//checkDistance();
+			followLine();
+
+		}
+		else if (checkAfslag() == 1){
+			driveRoute(routes, 3, &intersectNum);
+		}
+
+	}
+	
 }
