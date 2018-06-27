@@ -34,7 +34,9 @@ int main(){
 	
 	int orderX[sizeOfOrder] ={4, 1, 4, 2};
 	int orderY[sizeOfOrder] ={4, 3, 1, 1};
-	//wirMain(orderX, orderY);
+		
+	//wirOrder(&orderX, &orderY);
+	
 	//sortOrder(orderX, orderY);
 	
 	int routes[5][8];
@@ -49,12 +51,11 @@ int main(){
 	
 	while (orderNum != sizeOfOrder)
 	{
-		//checkDistance();
 		
 		read_line_sensors(sensors,IR_EMITTERS_ON);
+		
 		if (checkAfslag() != 1 && productCollectedFlag == 0){
-			clear();
-			print("Line!");
+			checkDistance();
 			followLine();
 			followLineFlag = 1;
 		}
