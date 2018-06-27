@@ -10,7 +10,7 @@
 #include "sensoren.h"
 #include "motoren.h"
 
-int situations[2]={LOW, LOW};
+int situations[2]={LOW,LOW};
 
 void initialize()
 {
@@ -19,9 +19,9 @@ void initialize()
 	unsigned int counter;
 	pololu_3pi_init(2000);								//initialize sensor value from 0 to 2000
 	
-	while(!button_is_pressed(BUTTON_B))					//this function is activated until button B is pressed. 
+	while(!button_is_pressed(BUTTON_B))					//this function is activated until button B is pressed.
 	{
-		int bat = read_battery_millivolts();			
+		int bat = read_battery_millivolts();
 		clear();
 		print_long(bat);								//print battery voltage in millivolts on the LCD
 		print("mV");
@@ -43,20 +43,20 @@ void initialize()
 		delay_ms(20);
 	}
 	
-	set_motors(0,0);									
+	set_motors(0,0);
 	
 	while(!button_is_pressed(BUTTON_B))										//function is activated until button B is pressed
 	{
 		unsigned int position = read_line(sensors,IR_EMITTERS_ON);			//reading the sensors to determine the position of the robot
 		clear();															//clear LCD
-		print("  ");														
+		print("  ");
 		print_long(position);												//print position of the robot compared to the line
 		delay_ms(100);
 	}
 	
 	wait_for_button_release(BUTTON_B);										//button B is pressed
 	clear();																//clear LCD
-	print("Go!");										
+	print("Go!");
 
 }
 
@@ -70,9 +70,9 @@ void followLine()
 
 	clear();																//clear display
 	
-	if(pos < 1950)															
+	if(pos < 1950)
 	{
-																			
+		
 		green_led(1);
 
 		if(pos < 1800)														//We are far to the right of the line: turn left.
@@ -86,7 +86,7 @@ void followLine()
 		
 	}
 	
-	else if (pos > 2050)													
+	else if (pos > 2050)
 	{
 		// We are far to the left of the line: turn right.
 		red_led(1);
@@ -116,7 +116,7 @@ int checkAfslag(){
 	read_line_sensors(sensors,IR_EMITTERS_ON);								//read line sensors
 	int rangeHigh = 800;													//set high range to 1000
 	
-	if(SENSOR_L > rangeHigh){												
+	if(SENSOR_L > rangeHigh){
 		situations[0] = HIGH;
 		flag = 1;															//sensor left is high, flag = 1
 	}
@@ -137,8 +137,8 @@ int checkAfslag(){
 	print_long(flag);														//print flag to LCD
 	lcd_goto_xy(0,1);
 	print_long(situations[0]);												//print sensor data (0/1) to LCD
-	print_long(situations[1]);												
-	print_long(situations[2]);
+	print_long(situations[1]);
+
 	clear();																//clear LCD
 	return turn;
 }
@@ -149,10 +149,10 @@ int checkDistance()
 {
 	
 	sensorDistance = analog_read(ADCH5);									//write sensor data to sensorDistance
-	sensorDistance2 = analog_read(ADCH7);									//write sensor data to sensorDistance2
+	//sensorDistance2 = analog_read(ADCH7);									//write sensor data to sensorDistance2
 	
 	distance = (2076/(sensorDistance - 11));								//convert sensor data to distance in cm
-	distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
+	/distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
 	
 	clear();																//clear LCD
 	
@@ -163,15 +163,16 @@ int checkDistance()
 		play_from_program_space(PSTR(">g32>>c32"));							//sound warning
 		print("dichtbij");													//warning on LCD
 		delay_ms(200);
+		set_motors(20,20);
 	}
-	else if(distance < veryClose && distance > 0)							//compares if distance is less than 10 cm 
+	else if(distance < veryClose && distance > 0)							//compares if distance is less than 10 cm
 	{
 		clear();
 		play_from_program_space(PSTR(">f32>>a32"));							//sound warning
 		print("heeeel");													//warning on LCD
 		lcd_goto_xy(0,1);
 		print("dichtbij");
-		motorControl(STOP,'F',0.89);										//robot brakes 
+		set_motors(0,0);										//robot brakes
 		moveObject();														//function that waits until the oject is removed
 	}
 
@@ -182,9 +183,10 @@ int checkDistance()
 
 void moveObject()
 {
-	while(!button_is_pressed(BUTTON_B))										
+	while(!button_is_pressed(BUTTON_B))
 	{
 		clear();
+		play_from_program_space(PSTR(">f32>>a32"));
 		print("druk op");													//print instruction to LCD
 		lcd_goto_xy(0,1);
 		print("B knop");

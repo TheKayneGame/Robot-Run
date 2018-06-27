@@ -40,7 +40,7 @@ int sensorDistance2;
 #define SLOW SPEED - ALTER
 #define FAST SPEED + ALTER
 
-extern int situations[3];
+extern int situations[2];
 
 
 
