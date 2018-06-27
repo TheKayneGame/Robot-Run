@@ -62,7 +62,6 @@ void initialize()
 	
 	wait_for_button_release(BUTTON_B);										//button B is pressed
 	clear();																//clear LCD
-	print("Go!");
 
 }
 
@@ -103,7 +102,7 @@ void followLine(){
 	
 	// Compute the actual motor settings.  We never set either motor
 	// to a negative value.
-	const int max = 70;
+	const int max = 60;
 	if(power_difference > max)
 	power_difference = max;
 	if(power_difference < -max)
@@ -142,10 +141,10 @@ int checkDistance()
 {
 	
 	sensorDistance = analog_read(ADCH5);									//write sensor data to sensorDistance
-	sensorDistance2 = analog_read(ADCH7);									//write sensor data to sensorDistance2
+	//sensorDistance2 = analog_read(ADCH7);									//write sensor data to sensorDistance2
 	
 	distance = (2076/(sensorDistance - 11));								//convert sensor data to distance in cm
-	distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
+	//distance2 = (2076/(sensorDistance2 - 11));								//convert sensor data to distance in cm
 	
 	clear();																//clear LCD
 	
@@ -153,17 +152,15 @@ int checkDistance()
 	{
 		clear();
 		play_from_program_space(PSTR(">g32>>c32"));							//sound warning
-		print("dichtbij");													//warning on LCD
-		delay_ms(200);
+
 	}
 	else if(distance < veryClose && distance > 0)						    //compares if distance is less than 10 cm
 	{
 		clear();
 		play_from_program_space(PSTR(">f32>>a32"));							//sound warning
-		print("heeeel");													//warning on LCD
-		lcd_goto_xy(0,1);
-		print("dichtbij");
-		motorControl(STOP,'F',0.89);										//robot brakes
+		
+		set_motors(0,0);
+											//robot brakes
 		moveObject();														//function that waits until the oject is removed
 	}
 

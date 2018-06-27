@@ -11,20 +11,20 @@
 
 void wirOrder();
 void swapTwo( int *firstXValue, int *secondXValue, int *firstYValue, int *secondYValue);
-void sortOrder(int X[], int Y[]);
+void sortOrder(int X[sizeOfOrder], int Y[sizeOfOrder]);
 void swapOne(float *firstValue, float *secondValue);
-void driveRoute(int route[4][8], int flag);
-void fetchOrder(int OrderX[], int orderY[], int route[4][8]);
-void readGrid(int routes[4][8]);
+void driveRoute(int route[5][8], int flag);
+void fetchOrder(int OrderX[sizeOfOrder], int orderY[sizeOfOrder], int route[5][8]);
+void readGrid(int routes[5][8]);
 
 typedef enum { T, R, L, X} rotation;
 typedef enum { N, E, S, W} direction;
 
-void fetchOrder2(int OrderX[], int orderY[], int route[4][8]);
+void fetchOrder2(int OrderX[sizeOfOrder], int orderY[sizeOfOrder], int route[5][8]);
 void getInstructionsX(int gridZero, int orderX);
 void getInstructionsY(int gridZero, int orderY);
-void setDirection(direction directionDesired, direction directionCurrent);
+void setDirection(direction directionDesired, direction *directionCurrent);
 
-void fetchOrder3(int OrderX[], int orderY[], int route[4][8]);
+void fetchOrder3(int OrderX[sizeOfOrder], int orderY[sizeOfOrder], int route[5][8]);
 void followStraightLine(int *coordinate, int coordinateDesired);
 #endif

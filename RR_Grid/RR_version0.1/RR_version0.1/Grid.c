@@ -36,7 +36,7 @@ void swapOne(float *firstValue, float *secondValue) {                           
 	*firstValue = temp;
 }
 
-void sortOrder(int X[], int Y[]) {                                                                   //Sorting algorithm, this sorts the coordinates of the given order
+void sortOrder(int X[sizeOfOrder], int Y[sizeOfOrder]) {                                                                   //Sorting algorithm, this sorts the coordinates of the given order
 	int firstDistanceValue, secondDistanceValue, check = 0, orderCorrect;
 	float Distance[sizeOfOrder];
 
@@ -70,7 +70,7 @@ void sortOrder(int X[], int Y[]) {                                              
 
 
 
-void readGrid(int routes[4][8]){
+void readGrid(int routes[5][8]){
 	
 	routes[0][0] = 2;                                                                         //Home to grid
 	routes[0][1] = 1;
@@ -118,16 +118,16 @@ void readGrid(int routes[4][8]){
 // 	set_motors(0,0);
 // 	delay_ms(10000);
 // }
-// 
+//
 // void fetchOrder3(int orderX[], int orderY[], int route[4][8]){
 // 	clear();
 // 	do{
 // 		read_line_sensors(sensors,IR_EMITTERS_ON);
 // 		followLine();
 // 	}while(!checkAfslag());
-// 	
+//
 // 	int xCoordinate = 0, yCoordinate = 0;
-// 
+//
 // 	for(int orderNum = 0; orderNum < sizeOfOrder; orderNum++){
 // 		clear();
 // 		if(orderX[orderNum] != xCoordinate){
@@ -173,21 +173,24 @@ void followStraightLine(int *coordinate, int coordinateDesired){
 		}while(!checkAfslag());
 		if(biggerThan == 1){
 			*coordinate = *coordinate + 1;
-			print_long(*coordinate);
-			play_from_program_space(PSTR(">f32>>a32"));
 			//print_long(*coordinate);
-			delay(200);
-			clear();
+			//play_from_program_space(PSTR(">f32>>a32"));
+			//print_long(*coordinate);
+			//delay(200);
+			//clear();
 		}
 		else if(biggerThan == 0){
 			*coordinate = *coordinate - 1;
-			print_long(*coordinate);
-			play_from_program_space(PSTR(">f32>>a32"));
 			//print_long(*coordinate);
-			delay(200);
-			clear();
+			//play_from_program_space(PSTR(">f32>>a32"));
+			//print_long(*coordinate);
+			//delay(200);
+			//clear();
 		}
-		motorControl(50, 'F', 0.30);      //moet korte stoot geven zodat de robot over kruispunt heen komt, nog kijken hoe hard / lang
+		set_motors(60,60);
+		play_from_program_space(PSTR(">f32>>a32"));
+		delay_ms(170);
+		set_motors(0,0);      //moet korte stoot geven zodat de robot over kruispunt heen komt, nog kijken hoe hard / lang
 	}
 }
 
@@ -252,26 +255,45 @@ void followStraightLine(int *coordinate, int coordinateDesired){
 // 	}
 // }
 
-void setDirection(direction directionDesired, direction directionCurrent){
+void setDirection(direction directionDesired, direction *directionCurrent){
 	rotation orientation[4][4] ={{X, R, T, L},
 	{L, X, R, T},
 	{T, L, X, R},
 	{R, T, L, X}};
 	
-	if(directionCurrent != directionDesired){
-		switch(orientation[directionDesired][directionCurrent]){
+	if(*directionCurrent != directionDesired){
+		switch(orientation[directionDesired][*directionCurrent]){
 			case R:
-			motorControl(60, 'R', 0.25);
-			directionCurrent = directionDesired;
+			set_motors(60,-60);
+			delay_ms(270);
+			set_motors(0,0);
+			
+			//motorControl(60, 'R', 0.25);
+			//clear();
+			//print("Right!");
+			*directionCurrent = directionDesired;
 			break;
 			case L:
-			motorControl(60, 'L', 0.25);
-			directionCurrent = directionDesired;
+			set_motors(-60,60);
+			delay_ms(270);
+			set_motors(0,0);
+			
+			//motorControl(60, 'L', 0.25);
+			//clear();
+			//print("Left!");
+			*directionCurrent = directionDesired;
 			break;
 			case T:
-			motorControl(60, 'R', 0.25);
-			motorControl(60, 'R', 0.25);
-			directionCurrent = directionDesired;
+			set_motors(60,-60);
+			delay_ms(540);
+			set_motors(0,0);
+			
+			//motorControl(60, 'R', 0.25);
+			//delay_ms(2000);
+			//motorControl(60, 'R', 0.25);
+			//clear();
+			//print("Turn!");
+			*directionCurrent = directionDesired;
 			break;
 			default:
 			break;
