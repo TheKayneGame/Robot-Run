@@ -54,7 +54,7 @@ void wirCoord(int orderX[], int orderY[], int *numItems){
 			
 			if(numItems == 0 && data[0] != 'e'){//first byte is number items
 				
-				numItems = data[0];
+				*numItems = data[0];
 				data[0] = 'e'; //reset value
 				continue;
 			}
@@ -167,21 +167,35 @@ void wirManual(){//manual mode init
 }
 
 
+void run(int i){
+	switch(i){
+		case 0:
+		wirManual()
+		break;
+		case 1:
+		
+		break;
+		case 2:
+		break;
+		
+	}
+}
 
 
-char *functions[3] = {"Handm.","WirC.","Volger"}; //menu texts
 /*MOV this to main FC's*/
+char *functions[3] = {"Handm.","WirC.","Volger"}; //menu texts
 void menu(){
 
 	lcd_init_printf();
-	unsigned char button = (button_is_pressed(ANY_BUTTON)); //wait for user input
+	unsigned char button = (button_is_pressed(ANY_BUTTON));
 	
 	switch(button)
 	{
 		case (BUTTON_A) :
 		clear();
-		selected--;
-		display(selected);
+		
+		if(--selected < 0){selected = 2}
+		printf("%s",functions[selected]);
 		play_frequency(400, 100, 15);// Beep
 		delay_ms(200);
 		break;
@@ -195,8 +209,8 @@ void menu(){
 		
 		case (BUTTON_C) :
 		clear();
-		selected++;
-		display(selected);
+		if(++selected > 2){selected = 0}
+		printf("%s",functions[selected]);
 		play_frequency(800, 100, 15);// Beep
 		delay_ms(200);
 		break;
@@ -205,3 +219,4 @@ void menu(){
 		break;
 	}
 }
+

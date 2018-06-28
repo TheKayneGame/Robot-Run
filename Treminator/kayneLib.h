@@ -31,7 +31,7 @@
 #define KEY_RIGHT		77
 #define KEY_S			115
 #define KEY_BRACKET_O	91
-#define KEY_BRACKET_C	92
+#define KEY_BRACKET_C	93
 
 #define OK				0x0
 #define IN_NULL			0x1

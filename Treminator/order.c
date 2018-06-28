@@ -93,13 +93,13 @@ void orderManual(char *data, int size) {
 		printf("Item >%d<\n", item);
 
 		printf("\nX [%d]: ", item);
-		buffer = leesInteger();
+		buffer = leesInteger() + '0';
 
 		data[coordIndex + 1] = buffer;
 		coordIndex++;
 
 		printf("\nY [%d]: ", item);
-		buffer = leesInteger();
+		buffer = leesInteger() + '0';
 
 		data[coordIndex + 1] = buffer;
 		coordIndex++;
