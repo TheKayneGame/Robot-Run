@@ -44,7 +44,7 @@ int keyboard() {
 				break;
 
 			case KEY_S:
-				return 'S';
+				return 's';
 				break;
 			case KEY_ESC:
 				return 'p';

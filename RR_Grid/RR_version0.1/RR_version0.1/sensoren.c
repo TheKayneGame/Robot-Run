@@ -20,7 +20,12 @@ int derivative;
 
 void initialize()
 {
-	
+	productCollectedFlag = 0;
+	followLineFlag = 0;
+	endOfRouteFlag = 0;
+	homeFlag = 0;
+
+
 	unsigned int counter;
 	pololu_3pi_init(2000);								//initialize sensor value from 0 to 2000
 	
@@ -61,6 +66,8 @@ void initialize()
 	
 	wait_for_button_release(BUTTON_B);										//button B is pressed
 	clear();																//clear LCD
+	
+	serial_set_baud_rate(9600);
 
 }
 
@@ -70,7 +77,7 @@ int checkAfslag(){
 		flag = 0;
 	}
 	else{
-		 flag = 1;
+		flag = 1;
 	}
 	return flag;
 }
@@ -136,7 +143,7 @@ int checkDistance()
 		play_from_program_space(PSTR(">f32>>a32"));							//sound warning
 		
 		set_motors(0,0);
-											//robot brakes
+		//robot brakes
 		moveObject();														//function that waits until the oject is removed
 	}
 
